@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health care website</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="jquery.js">
+    <style>
+        .contact{
+            background-color:rgb(44, 43, 43);
+            padding:40px;
+            margin-top:200px;
+            margin-bottom: 20px;  
+        }
+        .fa-map-marker-alt,.fa-phone-alt,.fa-envelope,.fa-facebook,.fa-twitter,.fa-pinterest,.fa-linkedin,.fa-instagram-square{
+            font-size:30px;
+            padding:10px;
+            color:white;
+            position: relative;
+        }
+        img{
+            object-fit:cover;   
+        }
+        h2,label,h3{
+            color:white;
+        }
+        h3{
+            text-align: center;
+        }
+        .align{
+            float:right;
+        }
+        .center{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: right;
+            background-color:#e5eeee;
+            position: relative;
+        }
+        .d{
+            background-color:rgb(86, 102, 241);
+            padding:40px;
+            width:600px;
+            margin:-100px;
+            position: absolute;
+            margin-right: 50px;
+        }
+    </style>
+    <script> 
+        $(document).ready(function(){
+          $("button").click(function(){
+            $(".center").animate({left: '250px'});
+          });
+        });
+        </script> 
+</head>
+<body>
+
+<!--header section start-->
+
+<div class="container-fluid">
+    <p class="logo"><span>H</span>ealth<span>C</span>are.</p>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="facility.html">Facility</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="post.html">Post</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!--picture-->
+<div>
+    <div>
+        <img src="../project/com.jpeg" height="500px" width="100%">
+
+    </div>
+</div>
+
+<!--form-->
+<div class="center">
+    <div class="d">
+        <h3>Contact Me</h3>
+    <form>
+        <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+        <button type="submit" name="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+    </div>
+</div>
+
+
+
+<!--contact-->
+<div class="contact">
+        <h2>Contact US</h2>
+        <i class="fas fa-map-marker-alt"></i><span style="color:white">Unum Debitis Pro id</span><br>
+        <i class="fas fa-phone-alt"></i><span style="color:white">123-456-7878</span><br>
+        <i class="far fa-envelope"></i><span style="color:white">info@gmail.com</span><br>
+        <div class="align">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-pinterest"></i>
+            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-instagram-square"></i>
+        </div>
+        <br>
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

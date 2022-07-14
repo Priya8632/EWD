@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--boostrap link-->
+    <link href="bootstrap.min.css" rel="stylesheet">
+<!--font-icon link-->
+    <link href="fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet">
+<!--css link-->
+    <link rel="stylesheet" href="style.css">
+    <title>Health care website</title>
+    <style>
+        .footer{
+            background-color: rgb(26, 25, 25);
+            padding:20px;
+            margin-top:30px;
+        }
+    </style>
+
+</head>
+<body>
+    <!--header section start-->
+    
+    <div class="container-fluid">
+        <p class="logo"><span>H</span>ealth<span>C</span>are.</p>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="post.html">Post</a></li>
+            </ul>
+        </nav>
+    </div>
+
+<!-- print information about doctors through ajax -->
+    <div class="demo">
+        <h2>INFORMATION ABOUT DOCTORS</h2>
+        <button type="button" onclick="loadDoc()">Change Content</button>
+    </div>
+
+    <!-- data print through ajax  -->
+    <script>
+        function loadDoc() {
+          const xhttp = new XMLHttpRequest();
+          xhttp.onload = function() {
+            document.getElementById("demo").innerHTML =
+            this.responseText;
+          }
+          xhttp.open("GET", "ajax_info.txt");
+          xhttp.send();
+        }
+    </script>
+    
+</body>
+</html>
