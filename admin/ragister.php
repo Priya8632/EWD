@@ -66,6 +66,8 @@ elseif(empty($_POST['gender'])){
     $genderarr = "gender is required";}
 elseif(empty($_POST['age'])){
     $agearr = "age is required";}
+elseif(!preg_match("/[0-9]/",$_POST['age'])){
+    $agearr = "only number are allowed";}
 elseif(empty($_POST['dob'])){
     $dojarr = "dob is required";}    
  else{
@@ -87,8 +89,15 @@ elseif(empty($_POST['dob'])){
         ('$fname','$lname','$email','$mob','$pw','$cw','$gender','$age','$dob')";
     
         if(mysqli_query($conn,$insert)){
+            $_SESSION['status'] = "registered successfully";
+            $_SESSION['status_code'] = "success"; 
             header('location:login.php');
         } 
+        // else{
+        //     $_SESSION['status'] = "Do not Registered";
+        //     $_SESSION['status_code'] = "error";
+        //     header('location:ragister.php');
+        // }
 
 
     }
@@ -105,10 +114,10 @@ elseif(empty($_POST['dob'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ragister</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"/>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         h2{
@@ -140,9 +149,10 @@ elseif(empty($_POST['dob'])){
     <nav class="navbar navbar-light bg-light shadow-sm">
         <div class="container-lg">
             <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
         <ul class="nav jastify-content-end">
           <li class="nav-item"><a class="nav-link text-success" href="home.php">Home</a></li>
           <li class="nav-item"><a class="nav-link text-success" href="#">AboutUs</a></li>
@@ -219,7 +229,6 @@ elseif(empty($_POST['dob'])){
         </form>
         </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 

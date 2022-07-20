@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>navbar</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="../css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"/>
@@ -116,9 +117,9 @@
     <header>
       <a href="#" class="logo">Health</a>
       <nav class="navbar navbar-expand-lg ">
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> -->
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link  text-light fs-5" href="#">Home</a></li>
@@ -139,7 +140,7 @@
             <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, mollitia.
                 Lorem ipsum dolor sitectetur adipisicing elit. Qu or sitectetur adipisicing elit. 
                 or sitectetur adipisicing elit. or sitectetur adipisicing elit. or sitectetur adipisicing elit. </h5>
-            <button class="btn btn-success">Appointment</button>   
+            <button class="btn btn-success" href="login.php">Appointment</button>   
             <button class="btn btn-light">More info</button>            
       </div>
     </section>
@@ -228,7 +229,7 @@
         header.classList.toggle("sticky", window.scrollY > 0);
       });
     </script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   
   </body>
 </html>
