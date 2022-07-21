@@ -2,7 +2,7 @@
 include 'config.php';
 
 
-$query = "SELECT * FROM pati";
+$query = "SELECT * FROM users";
 $result = mysqli_query($conn,$query);
 if(!$result){
 
@@ -21,8 +21,9 @@ if(!$result){
     <!-- <link rel="stylesheet" href="../css/sidebar.css"> -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"/> -->
@@ -153,7 +154,7 @@ if(!$result){
           <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
             <i class="fa-solid fa-star-of-life me-2"></i>Specialization
           </a>
-          <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+          <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
             <i class="fa-solid fa-user me-2"></i>Users
           </a>
           <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
@@ -181,24 +182,28 @@ if(!$result){
         <div class="col-lg-6">
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-success" type="submit">Search</button>
         </form> 
         </div>
     </div>
 </div>
-<!-- <div class="container mx-auto">
+<!-- <div class="container mx-auto"> -->
 <div class="table-responsive mx-auto">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Users Records </h2>
+        </div>
+        <div class="col-md-6">
+          <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:30px;margin-left:450px;"></i>
+        </div>
+    </div>
         <table class="table table-hover">
-            <thead class="thead-dark">
+            <thead class="table table-dark">
                 <tr>
-                    <th>PID</th>
+                    <th>ID</th>
                     <th>FNAME</th>
                     <th>LNAME</th>
                     <th>EMAIL</th>
-                    <th>MOBILE</th>
-                    <th>AGE</th>
-                    <th>GENDER</th>
-                    <th>BIRTHDATE</th>
                     <th>PASSWORD</th>
                     <th>OPERATION</th>
                 </tr>
@@ -206,16 +211,12 @@ if(!$result){
             <tbody id="rows">
                 <?php while ($data = mysqli_fetch_assoc($result)) { ?>
                     <tr>
-                        <td><?php echo $data['pid']; ?></td>
+                        <td><?php echo $data['id']; ?></td>
                         <td><?php echo $data['firstName']; ?></td>
                         <td><?php echo $data['lastName']; ?></td>
                         <td><?php echo $data['Email']; ?></td>
-                        <td><?php echo $data['Mobile']; ?></td>
-                        <td><?php echo $data['Age']; ?></td>
-                        <td><?php echo $data['Gender']; ?></td>
-                        <td><?php echo $data['Dob']; ?></td>
                         <td><?php echo $data['Password']; ?></td>
-                        <td><a href="update.php?update=<?php echo $data['pid']; ?>"><i class="fa-solid fa-pen-to-square text-success" style="font-size:20px;margin-right:30px;"></i>
+                        <td><a href="#"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#update" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i>
                             <a href="delete.php?delete=<?php echo $data['pid']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;"></i></a></td>
                     </tr>
                 <?php } ?>
@@ -240,6 +241,48 @@ if(!$result){
 
 
 <!-- crud section end -->
+
+
+<!-- add user modal -->
+
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end -->
+
+<!-- update modal -->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end -->
 
 
 </body>

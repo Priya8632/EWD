@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
 
     else {
 
-    $sql = "SELECT * FROM patient WHERE email='$email'";
+    $sql = "SELECT * FROM users WHERE email='$email'";
     $query = mysqli_query($conn, $sql);
     $arr = mysqli_fetch_assoc($query);
     $row = mysqli_num_rows($query);
@@ -135,7 +135,7 @@ if(isset($_POST['submit'])){
 
         <?php
 
-         include 'alert.php';
+        //  include 'alert.php';
 
          ?>
         

@@ -2,26 +2,22 @@
 
 include 'config.php';
 
-$fnamearr = $lnamearr =$pwarr = $cwarr = $genderarr = $agearr = $dobarr  = $mobarr = $emailarr ="";
+$fnamearr = $lnamearr =$pwarr = $cwarr = $emailarr ="";
 $error = $createTable ="";
-$fname = $lname = $email = $mob = $gender = $age = $dob = $pw = $cw ="";
+$fname = $lname = $email = $pw = $cw ="";
 
 
 
-$query = "SELECT * FROM patient";
+$query = "SELECT * FROM users";
 
 if(isset($_REQUEST['submit'])){
     if(!mysqli_query($conn,$query)){
 
-    $createTable = "CREATE TABLE PATIENT(
-        pid int(10) auto_increment primary key,
+    $createTable = "CREATE TABLE USERS(
+        id int(10) auto_increment primary key,
         firstName text,
         lastName text,
         Email text,
-        Mobile int,
-        Age int(3),
-        Gender text,
-        Dob date,
         Password varchar(30),
         Confirm_Password varchar(30)
        
@@ -46,10 +42,6 @@ elseif(empty($_POST['email'])){
     $emailarr = "email is required";}
 elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
     $emailarr = "invaild formet";}
-elseif(empty($_POST['mob'])){
-    $mobarr = "mobile is required";}
-elseif(!preg_match("/[0-9]/",$_POST['mob'])){
-    $mobarr = "only number are allowed";}
 elseif(empty($_POST['p_word'])){
     $pwarr = "password is required"; }
 elseif(!preg_match("/[a-z'@,!,#,$,%,^,&,*,+']+/",$_POST['p_word'])){
@@ -62,31 +54,20 @@ elseif(strlen($_POST['p_word']) > 8 || strlen($_POST['p_word']) < 8 ){
     $pwarr = "8 length is required";}
 elseif($_POST['c_word'] != $_POST['p_word']){
     $cwarr = "both password is not same..";}
-elseif(empty($_POST['gender'])){
-    $genderarr = "gender is required";}
-elseif(empty($_POST['age'])){
-    $agearr = "age is required";}
-elseif(!preg_match("/[0-9]/",$_POST['age'])){
-    $agearr = "only number are allowed";}
-elseif(empty($_POST['dob'])){
-    $dojarr = "dob is required";}    
+    
  else{
 
     
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
-    $mob = $_POST['mob'];
     $pw = base64_encode($_POST['p_word']);
     $cw = base64_encode($_POST['c_word']);
-    $gender = $_POST['gender'];
-    $age = $_POST['age'];
-    $dob = $_POST['dob'];
 
     
-    $insert = "INSERT INTO patient
-        (`firstName`,`lastName`,`Email`,`Mobile`,`Password`,`Confirm_Password`,`Gender`,`Age`,`Dob`) VALUES 
-        ('$fname','$lname','$email','$mob','$pw','$cw','$gender','$age','$dob')";
+    $insert = "INSERT INTO users
+        (`firstName`,`lastName`,`Email`,`Password`,`Confirm_Password`) VALUES 
+        ('$fname','$lname','$email','$pw','$cw')";
     
         if(mysqli_query($conn,$insert)){
             $_SESSION['status'] = "registered successfully";
@@ -149,9 +130,9 @@ elseif(empty($_POST['dob'])){
     <nav class="navbar navbar-light bg-light shadow-sm">
         <div class="container-lg">
             <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> -->
 
         <ul class="nav jastify-content-end">
           <li class="nav-item"><a class="nav-link text-success" href="home.php">Home</a></li>
@@ -186,17 +167,7 @@ elseif(empty($_POST['dob'])){
                 <span class="error">* <?php echo $emailarr;?></span>
             </div>
 
-            <div class="row">
-            <div class="form-group col-md-6">
-                    <input type="text" name="mob" class="form-control" placeholder="mobile no" value="<?php if(isset($_POST['mob'])) { echo $_POST['mob'];}?>">
-                    <span class="error">*<?php echo $mobarr; ?></span>
-            </div>
-            
-                <div class="form-group col-md-6">
-                    <input type="text" name="age" class="form-control" placeholder="age" value="<?php if(isset($_POST['age'])) { echo $_POST['age'];}?>">
-                    <span class="error">*<?php echo $agearr; ?></span>
-                </div>
-            </div>
+          
 
             <div class="form-group">
                 <input type="password" name="p_word" class="form-control" placeholder="password" value="<?php if(isset($_POST['p_word'])) { echo $_POST['p_word'];} ?>">
@@ -208,19 +179,6 @@ elseif(empty($_POST['dob'])){
                 <span class="error">* <?php echo $cwarr;?></span>
             </div>
 
-            <div class="form-group">
-                <label>Gender :</label>
-                <input type="radio" name="gender" value="male" <?php if(isset($_POST['gender']) == 'male') { echo 'checked';}?>>MALE
-                <input type="radio" name="gender" value="female" <?php if(isset($_POST['gender']) == 'female') { echo 'checked';}?>>FEMALE
-                <span class="error">*<?php echo $genderarr; ?></span>
-            </div>
-                
-            <div class="form-group">
-                <label>Dath Of Birth:</label>
-                <span class="error">*<?php echo $dobarr; ?></span>
-                <input type="date" name="dob" placeholder="birthdate" class="form-control" value="<?php if(isset($_POST['dob'])) { echo $_POST['dob'];}?>"><br>
-            </div>
-            
             <div class="form-group">
                 <p class="login-register-text">Alredy have an account?<a href="login.php">Login here</a></p>
                 <button type="submit" class="btn btn-success btn-block" name="submit">SUBMIT</button>
