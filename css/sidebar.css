@@ -19,7 +19,7 @@
   .rounded-full{
     border-radius: 100%;
   }
-  #wrapper{
+  /* #wrapper{
     overflow-x: hidden;
     background-image: linear-gradient(
       to right,
@@ -29,7 +29,7 @@
       #d4f8ea,
       #ddfaef
       );
-  }
+  } */
   #sidebar-wrapper{
     min-height:100vh;
     margin-left:-15rem;

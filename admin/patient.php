@@ -2,7 +2,7 @@
 include 'config.php';
 
 
-$query = "SELECT * FROM pati";
+$query = "SELECT * FROM users";
 $result = mysqli_query($conn,$query);
 if(!$result){
 
@@ -16,9 +16,9 @@ if(!$result){
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ragister</title>
+    <title>Patient</title>
 
-    <!-- <link rel="stylesheet" href="../css/sidebar.css"> -->
+    <link rel="stylesheet" href="../css/sidebar.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
@@ -27,76 +27,10 @@ if(!$result){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"/> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
-
-    <style>
-     .table-responsive.mx-auto {
-        width: 80%;
-        position: absolute;
-        top:25%;
-        right: 30px;
-        background-color:white;
-        padding:30px;
-    }
-    h2{
-        margin-bottom:30px;
-    }
-    :root{
-    --main-bg-color:green;
-    --main-text-color:green;
-    --second-text-color:gray;
-    --second-bg-color:#c1efde;
-  }
-  .primary-text{
-    color:var(--main-text-color);
-  }
-  .second-text{
-    color:var(--second-text-color);
-  }
-  .primary-bg{
-    background-color: var(--main-bg-color);
-  }
-  .secondary-bg{
-    background-color: var(--second-bg-color);
-  }
-  .rounded-full{
-    border-radius: 100%;
-  }
-  #wrapper{
-    overflow-x: hidden;
-    background-image: linear-gradient(
-      to right,
-      #baf3d7,
-      #c2f5de,
-      #cbf7e4,
-      #d4f8ea,
-      #ddfaef
-      );
-      position: relative;
-  }
-  #sidebar-wrapper{
-    min-height:100vh;
-    margin-left:-15rem;
-    transition: margin 0.25s ease-out;
-  }
-  #sidebar-wrapper .sidebar-heading{
-    padding:0.875rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  #sidebar-wrapper .list-group{
-    width:15rem;
-  }
-  #page-content-wrapper{
-    min-width:100vw;
-  }
-  #wrapper.toggled #sidebar-wrapper{
-    margin-left:0;
-  }
-  #menu-toggle{
-    cursor: pointer;
-  }
+<style>
   .list-group-item{
-    border: none;
     padding: 20px 30px;
+    border: none;
   }
   .list-group-item.active{
     background-color:transparent;
@@ -104,22 +38,6 @@ if(!$result){
     font-weight: bold;
     border: none;
   }
-  @media(min-width:768px){
-      #sidebar-wrapper{
-        margin-left: 0;
-      }
-      #page-content-wrapper{
-        min-width: 0;
-        width:100%;
-      }
-      #wrapper-toggled #sidebar-wrapper{
-        margin-left: -15rem;
-      }
-  }
-  
- 
-  
- 
 </style>
 
 </head>
@@ -163,7 +81,7 @@ if(!$result){
 
       </div>
 
-<div class="container justify-content-end p-3">
+<!-- <div class="container justify-content-end p-3">
 
    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -185,7 +103,7 @@ if(!$result){
         </form> 
         </div>
     </div>
-</div>
+</div> -->
 <!-- <div class="container mx-auto">
 <div class="table-responsive mx-auto">
         <table class="table table-hover">

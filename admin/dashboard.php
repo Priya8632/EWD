@@ -17,6 +17,8 @@ if(!$result){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ragister</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> -->
@@ -96,6 +98,50 @@ if(!$result){
     </nav>
     <!-- navbar end -->
 
+
+
+  
+        <!-- pie chart canvas element -->
+        <canvas id="countries" width="600" height="400"></canvas>
+        <script>
+
+            var pieData = [
+                {
+                    value: 20,
+                    color:"#878BB6"
+                },
+                {
+                    value : 40,
+                    color : "#4ACAB4"
+                },
+                {
+                    value : 10,
+                    color : "#FF8153"
+                },
+                {
+                    value : 30,
+                    color : "#FFEA88"
+                },
+                {
+                    value : 16,
+                    color : 'red'
+
+                }
+            ];
+            // pie chart options
+            var pieOptions = {
+                 segmentShowStroke : false,
+                 animateScale : true
+            }
+            // get pie chart canvas
+            var countries= document.getElementById("countries").getContext("2d");
+            // draw pie chart
+            new Chart(countries).Pie(pieData, pieOptions);
+            
+        </script>
+
+
+<!-- 
     <div class="table-responsive mx-auto">
     <div class="row">
         <div class="col-md-6">
@@ -131,7 +177,7 @@ if(!$result){
             </tbody>
         </table>
 
-  </div>
+  </div> -->
 </div>
 
 
