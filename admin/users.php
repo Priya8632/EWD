@@ -100,7 +100,7 @@ if (!$result) {
 
     </div>
 
-  
+
     <div class="container justify-content-end p-3">
 
       <!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
@@ -116,13 +116,13 @@ if (!$result) {
       </nav> -->
 
       <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand"><i class="fas fa-user me-2"></i>john doe</a>
-        <form class="">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
-        </form>
-      </div>
+        <div class="container-fluid">
+          <a class="navbar-brand"><i class="fas fa-user me-2"></i>john doe</a>
+          <form class="">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+          </form>
+        </div>
       </nav>
 
       <!-- <div class="d-flex flex-row-reverse">
@@ -135,201 +135,174 @@ if (!$result) {
       </div>
     </div> -->
 
-    <!-- <div class="container mx-auto"> -->
-    <div class="table-responsive mx-auto">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Users Records </h2>
+      <!-- <div class="container mx-auto"> -->
+      <div class="table-responsive mx-auto">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Users Records </h2>
+          </div>
+          <div class="col-md-6">
+            <!-- <button class="btn btn-primary" style="margin-left:500px;" data-bs-target="#add" data-bs-toggle="modal">Add</button> -->
+            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
+          </div>
         </div>
-        <div class="col-md-6">
-          <!-- <button class="btn btn-primary" style="margin-left:500px;" data-bs-target="#add" data-bs-toggle="modal">Add</button> -->
-          <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
-        </div>
-      </div>
 
-      <table class="table table-hover">
-        <thead class="table table-dark">
-          <tr>
-            <th>ID</th>
-            <th>FNAME</th>
-            <th>LNAME</th>
-            <th>EMAIL</th>
-            <th>OPERATION</th>
-          </tr>
-        </thead>
-        <tbody id="rows">
-          <?php while ($data = mysqli_fetch_assoc($result)) { ?>
+        <table class="table table-hover">
+          <thead class="table table-dark">
             <tr>
-              <td class="user_id"><?php echo $data['id']; ?></td>
-              <td><?php echo $data['firstName']; ?></td>
-              <td><?php echo $data['lastName']; ?></td>
-              <td><?php echo $data['Email']; ?></td>
-              <!-- <td><?php echo $data['Password']; ?></td> -->
-              <td>
-                <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                <a href="delete.php?delete=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
-                <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+              <th>ID</th>
+              <th>FNAME</th>
+              <th>LNAME</th>
+              <th>EMAIL</th>
+              <th>OPERATION</th>
             </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+          </thead>
+          <tbody id="rows">
+            <?php while ($data = mysqli_fetch_assoc($result)) { ?>
+              <tr>
+                <td class="user_id"><?php echo $data['id']; ?></td>
+                <td><?php echo $data['firstName']; ?></td>
+                <td><?php echo $data['lastName']; ?></td>
+                <td><?php echo $data['Email']; ?></td>
+                <!-- <td><?php echo $data['Password']; ?></td> -->
+                <td>
+                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="delete.php?delete=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <!-- crud section end -->
+    <!-- crud section end -->
 
 
-  <!-- add user modal -->
+    <!-- add user modal -->
 
-  <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container p-5 text-dark mx-auto bg-light">
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-5 text-dark mx-auto bg-light">
 
-            <form action="code.php" method="POST" enctype="multipart/form-data">
-              <div class="row">
-                <div class="form-group col-md-6 p-2">
-                  <label>first name</label>
-                  <input type="text" name="fname" class="form-control" placeholder="first name" value="">
+              <form action="code.php" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="form-group col-md-6 p-2">
+                    <label>first name</label>
+                    <input type="text" name="fname" class="form-control" placeholder="first name" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>last name</label>
+                    <input type="text" name="lname" class="form-control" placeholder="last name" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>email</label>
+                    <input type="text" name="email" class="form-control" placeholder="email" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>password</label>
+                    <input type="password" name="p_word" class="form-control" placeholder="password" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>confirm password</label>
+                    <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
+                  </div>
                 </div>
+              </form>
 
-                <div class="form-group col-md-6 p-2">
-                  <label>last name</label>
-                  <input type="text" name="lname" class="form-control" placeholder="last name" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>email</label>
-                  <input type="text" name="email" class="form-control" placeholder="email" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>password</label>
-                  <input type="password" name="p_word" class="form-control" placeholder="password" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>confirm password</label>
-                  <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
-                </div>
-              </div>
-            </form>
-
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- end -->
+    <!-- end -->
 
-  <!-- edit modal -->
+    <!-- edit modal -->
 
-  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container p-5 text-dark mx-auto bg-light">
-
-            <form action="" method="POST" enctype="multipart/form-data">
-              <div class="row">
-                <!-- <input type="hidden" id="update_id" name="update_id"> -->
-                <div class="form-group col-md-6 p-2">
-                  <label>first name</label>
-                  <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="">
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-5 text-dark mx-auto bg-light">
+              <form action="" method="POST" enctype="multipart/form-data">
+                <div id="edit-data">
+                 
                 </div>
-
-                <div class="form-group col-md-6 p-2">
-                  <label>last name</label>
-                  <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>email</label>
-                  <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>password</label>
-                  <input type="password" name="p_word" id="editpw" class="form-control" placeholder="password" value="">
-                </div>
-
-                <div class="form-group p-2">
-                  <label>confirm password</label>
-                  <input type="password" name="c_word" id="editcw" class="form-control" placeholder="confirm" value="">
-                </div>
-
                 <div class="form-group p-2">
                   <button type="submit" class="btn btn-success btn-block" name="edit">edit</button>
                 </div>
-              </div>
-            </form>
+              </form>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- end -->
+    <!-- end -->
 
 
-  <!-- view modal -->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="user_viewing"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+    <!-- view modal -->
+    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="user_viewing"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- end -->
+    <!-- end -->
 
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-  <script>
+    <script>
+      $(document).ready(function() {
+        $('.edit-btn').click(function(e) {
 
-    $(document).ready(function() {
-      $('.edit-btn').click(function(e) {
+          e.preventDefault();
 
-        e.preventDefault();
-        
-        var userid = $(this).closest('tr').find('.user_id').text();
-        // console.log(userid);
-        $.ajax({
-          type: "POST",
-          url: "code.php",
-          data: {
-            'checking_editbtn': true,
-            'user_id': userid,
-          },
-          success: function(response) {
-            
-            alert(response);
-            // console.log(value['firstName']);
-            // $.each(response, function(key, value) {
+          var userid = $(this).closest('tr').find('.user_id').text();
+          // console.log(userid);
+          $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+              'checking_editbtn': true,
+              'user_id': userid,
+            },
+            success: function(response) {
+
+              // alert(response);
+              // console.log(value['firstName']);
+              // $.each(response, function(key, value) {
 
               // $('#editfname').val(value['firstName']);
               // $('#editlname').val(value['lastName']);
@@ -337,38 +310,38 @@ if (!$result) {
               // $('#editpw').val(value['Password']);
               // $('#editcw').val(value['Confirm_Password']);
 
-            // });
+              // });
+              $('#edit-data').html(response);
+              // $('#edit').modal('show');
 
-            $('#edit').modal('show');
+            }
+          });
 
-          }
         });
-
       });
-    });
 
-    $(document).ready(function() {
-      $('.view-btn').click(function(e) {
-        e.preventDefault();
-        var userid = $(this).closest('tr').find('.user_id').text();
-        // console.log(userid);
-        $.ajax({
-          type: "POST",
-          url: "code.php",
-          data: {
-            'checking_viewbtn': true,
-            'user_id': userid,
-          },
-          success: function(response) {
-            //  console.log(response);
-            $('.user_viewing').html(response);
-            $('#view').modal('show');
+      $(document).ready(function() {
+        $('.view-btn').click(function(e) {
+          e.preventDefault();
+          var userid = $(this).closest('tr').find('.user_id').text();
+          // console.log(userid);
+          $.ajax({
+            type: "POST",
+            url: "code.php",
+            data: {
+              'checking_viewbtn': true,
+              'user_id': userid,
+            },
+            success: function(response) {
+              //  console.log(response);
+              $('.user_viewing').html(response);
+              $('#view').modal('show');
 
-          }
+            }
+          });
+
         });
-
       });
-    });
-  </script>
+    </script>
 
 </body>
