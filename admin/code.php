@@ -83,18 +83,45 @@ if (isset($_POST['checking_viewbtn'])) {
 
 // update data
 
+// $id = $_GET['update'];
+// $query = "SELECT * FROM users WHERE id = $id";
+// $result = mysqli_query($conn,$query);
+// $data =mysqli_fetch_assoc($result);
+
+if(isset($_POST['update']))
+{
+    $id = $_POST['user_id'];
+    // $id = $data['id'];
+
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $pw = base64_encode($_POST['p_word']);
+    $cw = base64_encode($_POST['c_word']);
+
+    $update = "UPDATE users SET firstName='$fname',lastName='$lname', Password ='$pw',Email ='$email', Confirm_Password = '$cw' where id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk)
+    {
+        header('location:users.php');
+
+    }
+    else{
+        echo '<script>alert("data not updated")</script>';}
+}
+
+
+// edit data
+
 if (isset($_POST['checking_editbtn'])) {
     $id = $_POST['user_id'];
-    // echo $return = $id;
-    // $result_array = [];
 
     $query = "SELECT * FROM users where id = '$id'";
     $q_run = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($q_run) > 0) {
-         
-$fetchData = mysqli_fetch_array($q_run);
- 
+    $fetchData = mysqli_fetch_array($q_run);
+    
          ?>
             <div class="row">
     
@@ -128,3 +155,4 @@ $fetchData = mysqli_fetch_array($q_run);
         echo $return = "<h3>no records found</h3>";
     }
 }
+?>

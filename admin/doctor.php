@@ -2,7 +2,9 @@
 
 include 'config.php';
 
-$query = "SELECT * FROM users";
+$query = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+          where d.specialization_id = s.specialization_id ";
+// $query = "select * from doctor ";
 $result = mysqli_query($conn, $query);
 if (!$result) {
 
@@ -78,19 +80,19 @@ if (!$result) {
         <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active">
           <i class="fas fa-tachometer-alt me-2"></i>Dashboard
         </a>
-        <a href="doctor.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-user-doctor me-2"></i>Doctors
         </a>
         <a href="patient.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-bed me-2"></i>Patients
         </a>
-        <a href="appointment.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="appointments.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-clipboard-user me-2"></i>Appointments
         </a>
         <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-star-of-life me-2"></i>Specialization
         </a>
-        <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-user me-2"></i>Users
         </a>
         <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
@@ -116,7 +118,7 @@ if (!$result) {
       <div class="table-responsive mx-auto">
         <div class="row">
           <div class="col-md-6">
-            <h2>Users Records </h2>
+            <h2>Doctors Records </h2>
           </div>
           <div class="col-md-6">
             <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
@@ -127,19 +129,24 @@ if (!$result) {
           <thead class="table table-dark">
             <tr>
               <th>ID</th>
-              <th>FNAME</th>
-              <th>LNAME</th>
+              <th>NAME</th>
               <th>EMAIL</th>
+              <th>MOBILE</th>
+              <th>GENDER</th>
+              <th>SPECIALIZATION</th>
               <th>OPERATION</th>
             </tr>
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
               <tr>
-                <td class="user_id"><?php echo $data['id']; ?></td>
-                <td><?php echo $data['firstName']; ?></td>
-                <td><?php echo $data['lastName']; ?></td>
+                <td class="user_id"><?php echo $data['Doctor_Id']; ?></td>
+                <td class="user_id"><?php echo $data['Doctor_name']; ?></td>
                 <td><?php echo $data['Email']; ?></td>
+                <td><?php echo $data['mobile']; ?></td>
+                <td><?php echo $data['gender']; ?></td>
+                <td><?php echo $data['specialization']; ?></td>
+
                 <td>
                   <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="delete.php?delete=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>

@@ -2,10 +2,10 @@
 
 include 'config.php';
 
-// $id = $_GET['update'];
-// $query = "SELECT * FROM users WHERE id = $id";
-// $result = mysqli_query($conn,$query);
-// $data =mysqli_fetch_assoc($result);
+$id = $_GET['update'];
+$query = "SELECT * FROM users WHERE id = $id";
+$result = mysqli_query($conn,$query);
+$data =mysqli_fetch_assoc($result);
 
 // $error ="";
 // $fnamearr = $lnamearr = $emailarr = $pwarr = $cwarr = $genderarr = $agearr = $dojarr = $deptarr = $salarr = $imgarr= "";
@@ -53,9 +53,6 @@ if(isset($_POST['update'])){
     $chk = mysqli_query($conn,$update);
     if($chk){
 
-        // $insert = "INSERT INTO users
-        // (`firstName`,`lastName`,`Email`,`Password`,`Confirm_Password`) VALUES 
-        // ('$fname','$lname','$email','$pw','$cw')";
         echo '<script>alert("data updated")</script>';
         header('location:users.php');
     }
