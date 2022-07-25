@@ -4,7 +4,6 @@ include 'config.php';
 
 $query = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
           where d.specialization_id = s.specialization_id ";
-// $query = "select * from doctor ";
 $result = mysqli_query($conn, $query);
 if (!$result) {
 
@@ -174,33 +173,34 @@ if (!$result) {
 
               <form action="code.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                  <div class="form-group col-md-6 p-2">
-                    <label>first name</label>
-                    <input type="text" name="fname" class="form-control" placeholder="first name" value="">
-                  </div>
-
-                  <div class="form-group col-md-6 p-2">
-                    <label>last name</label>
-                    <input type="text" name="lname" class="form-control" placeholder="last name" value="">
+                  <div class="form-group p-2">
+                    <label>Doctor name</label>
+                    <input type="text" name="fname" class="form-control" placeholder="fname" value="">
                   </div>
 
                   <div class="form-group p-2">
-                    <label>email</label>
+                    <label>Email</label>
                     <input type="text" name="email" class="form-control" placeholder="email" value="">
                   </div>
 
                   <div class="form-group p-2">
-                    <label>password</label>
-                    <input type="password" name="p_word" class="form-control" placeholder="password" value="">
+                    <label>Mobile</label>
+                    <input type="text" name="mobile" class="form-control" placeholder="mobile" value="">
                   </div>
 
                   <div class="form-group p-2">
-                    <label>confirm password</label>
-                    <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
+                    <label>Gender</label>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="female">feMale
                   </div>
 
                   <div class="form-group p-2">
-                    <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
+                    <label>Specialization</label>
+                    <input type="text" name="specialization_id" class="form-control" placeholder="specialization_id" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <button type="submit" class="btn btn-success btn-block" name="doctor">Add</button>
                   </div>
                 </div>
               </form>

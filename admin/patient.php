@@ -3,7 +3,7 @@
 include 'config.php';
 
 $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
- where p.patient_id = d.doctor_id";
+ where p.doctor_id = d.doctor_id";
 $result = mysqli_query($conn, $query);
 if (!$result) {
 
@@ -175,14 +175,9 @@ if (!$result) {
 
               <form action="code.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                  <div class="form-group col-md-6 p-2">
-                    <label>first name</label>
+                  <div class="form-group p-2">
+                    <label>Patient name</label>
                     <input type="text" name="fname" class="form-control" placeholder="first name" value="">
-                  </div>
-
-                  <div class="form-group col-md-6 p-2">
-                    <label>last name</label>
-                    <input type="text" name="lname" class="form-control" placeholder="last name" value="">
                   </div>
 
                   <div class="form-group p-2">
@@ -190,18 +185,29 @@ if (!$result) {
                     <input type="text" name="email" class="form-control" placeholder="email" value="">
                   </div>
 
-                  <div class="form-group p-2">
-                    <label>password</label>
-                    <input type="password" name="p_word" class="form-control" placeholder="password" value="">
+                  <div class="form-group col-md-6 p-2">
+                    <label>Age</label>
+                    <input type="text" name="age" class="form-control" placeholder="age" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>Mobile</label>
+                    <input type="text" name="mobile" class="form-control" placeholder="mobile" value="">
                   </div>
 
                   <div class="form-group p-2">
-                    <label>confirm password</label>
-                    <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
+                    <label>Gender</label>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="female">feMale
                   </div>
 
                   <div class="form-group p-2">
-                    <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
+                    <label>Doctor</label>
+                    <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <button type="submit" class="btn btn-success btn-block" name="patient">Add</button>
                   </div>
                 </div>
               </form>

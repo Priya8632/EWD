@@ -142,7 +142,7 @@ if (!$result) {
                 <td><?php echo $data['Email']; ?></td>
                 <td>
                   <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  <a href="delete.php?delete=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="delete.php?users=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
             <?php } ?>
@@ -259,6 +259,7 @@ if (!$result) {
 
     <script>
       $(document).ready(function() {
+
         $('.edit-btn').click(function(e) {
 
           e.preventDefault();
@@ -278,11 +279,9 @@ if (!$result) {
 
             }
           });
-
         });
-      });
 
-      $(document).ready(function() {
+        
         $('.view-btn').click(function(e) {
           e.preventDefault();
           var userid = $(this).closest('tr').find('.user_id').text();
@@ -301,9 +300,10 @@ if (!$result) {
 
             }
           });
-
         });
+
       });
+
     </script>
 
 </body>
