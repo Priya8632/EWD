@@ -47,7 +47,6 @@ if (isset($_REQUEST['add'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:users.php');
         }
-
     }
 }
 
@@ -58,24 +57,24 @@ $doctor = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , 
 if (isset($_REQUEST['doctor'])) {
 
     if (empty($_POST['fname'])) {
-        $fnamearr = "fname is required";} 
-    elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
-        $fnamearr = "only character and letter "; } 
-    elseif (empty($_POST['email'])) {
-        $emailarr = "email is required";} 
-    elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = "invaild formet";}
-    elseif(empty($_POST['gender'])){
-        $genderarr = "gender is required";}
-    elseif (empty($_POST['specialization_id'])) {
-        $specializationarr = "field is required";}
-    elseif (!preg_match("/^[0-9]*$/", $_POST['specialization_id'])) {
-        $specializationarr = "only number "; }
-    elseif (empty($_POST['mobile'])) {
-        $mobilearr = "field is required";}
-    elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
-        $mobilearr = "length 10 is required";}
-     else {
+        $fnamearr = "fname is required";
+    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
+        $fnamearr = "only character and letter ";
+    } elseif (empty($_POST['email'])) {
+        $emailarr = "email is required";
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailarr = "invaild formet";
+    } elseif (empty($_POST['gender'])) {
+        $genderarr = "gender is required";
+    } elseif (empty($_POST['specialization_id'])) {
+        $specializationarr = "field is required";
+    } elseif (!preg_match("/^[0-9]*$/", $_POST['specialization_id'])) {
+        $specializationarr = "only number ";
+    } elseif (empty($_POST['mobile'])) {
+        $mobilearr = "field is required";
+    } elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
+        $mobilearr = "length 10 is required";
+    } else {
 
         $fname = $_POST['fname'];
         $email = $_POST['email'];
@@ -92,7 +91,6 @@ if (isset($_REQUEST['doctor'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:doctor.php');
         }
-
     }
 }
 
@@ -103,26 +101,26 @@ $patient = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d
 if (isset($_REQUEST['patient'])) {
 
     if (empty($_POST['fname'])) {
-        $fnamearr = "fname is required";} 
-    elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
-        $fnamearr = "only character and letter "; } 
-    elseif (empty($_POST['email'])) {
-        $emailarr = "email is required";} 
-    elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = "invaild formet";}
-    elseif(empty($_POST['gender'])){
-        $genderarr = "gender is required";}
-    elseif (empty($_POST['doctor_id'])) {
-        $specializationarr = "field is required";}
-    elseif (!preg_match("/^[0-9]*$/", $_POST['doctor_id'])) {
-        $specializationarr = "only number "; }
-    elseif (empty($_POST['mobile'])) {
-        $mobilearr = "field is required";}
-    elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
-        $mobilearr = "length 10 is required";}
-    elseif(empty($_POST['age'])){
-        $agearr = "field is required";}
-     else {
+        $fnamearr = "fname is required";
+    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
+        $fnamearr = "only character and letter ";
+    } elseif (empty($_POST['email'])) {
+        $emailarr = "email is required";
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailarr = "invaild formet";
+    } elseif (empty($_POST['gender'])) {
+        $genderarr = "gender is required";
+    } elseif (empty($_POST['doctor_id'])) {
+        $specializationarr = "field is required";
+    } elseif (!preg_match("/^[0-9]*$/", $_POST['doctor_id'])) {
+        $specializationarr = "only number ";
+    } elseif (empty($_POST['mobile'])) {
+        $mobilearr = "field is required";
+    } elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
+        $mobilearr = "length 10 is required";
+    } elseif (empty($_POST['age'])) {
+        $agearr = "field is required";
+    } else {
 
         $fname = $_POST['fname'];
         $email = $_POST['email'];
@@ -140,25 +138,22 @@ if (isset($_REQUEST['patient'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:patient.php');
         }
-
     }
 }
 
 // insert specialization data
 $specialization = "SELECT * FROM specialization";
 
-if(isset($_REQUEST['speciality']))
-{
-    if(empty($_POST['specialization_id'])){
-        $idarr = "feild is required";}
-    elseif (empty($_POST['specialization'])) {
-        $specializationarr = "feild is required";} 
+if (isset($_REQUEST['speciality'])) {
+    if (empty($_POST['specialization_id'])) {
+        $idarr = "feild is required";
+    } elseif (empty($_POST['specialization'])) {
+        $specializationarr = "feild is required";
+    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['specialization'])) {
+        $fnamearr = "only character and letter ";
+    } else {
 
-    elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['specialization'])) {
-        $fnamearr = "only character and letter "; } 
-    else{
-
-        $specialization_id= $_POST['specialization_id'];
+        $specialization_id = $_POST['specialization_id'];
         $specialization = $_POST['specialization'];
 
         $insert = "INSERT INTO specialization
@@ -169,80 +164,70 @@ if(isset($_REQUEST['speciality']))
             // $_SESSION['status_code'] = "success"; 
             header('location:specialization.php');
         }
-
     }
 }
 
 // insert appointment data
-$appointment= "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+$appointment = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
-  
-  if (isset($_REQUEST['appointment'])) {
 
-        $app_number = $_POST['app_number'];
-        $patient_id = $_POST['patient_id'];
-        $doctor_id = $_POST['doctor_id'];
-        $specialization_id = $_POST['specialization_id'];
-        $fees = $_POST['fees'];
-        $app_date = $_POST['app_date'];
-        $app_time = $_POST['app_time'];
+if (isset($_REQUEST['appointment'])) {
 
-        $insert = "INSERT INTO appointment
+    $app_number = $_POST['app_number'];
+    $patient_id = $_POST['patient_id'];
+    $doctor_id = $_POST['doctor_id'];
+    $specialization_id = $_POST['specialization_id'];
+    $fees = $_POST['fees'];
+    $app_date = $_POST['app_date'];
+    $app_time = $_POST['app_time'];
+
+    $insert = "INSERT INTO appointment
         (`app_number`,`patient_id`,`doctor_id`,`specialization_id`,`fees`,`app_date`,`app_time`) VALUES 
         ('$app_number','$patient_id','$doctor_id','$specialization_id','$fees','$app_date','$app_time')";
 
-        if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
-            header('location:appointments.php');
-
+    if (mysqli_query($conn, $insert)) {
+        // $_SESSION['status'] = "registered successfully";
+        // $_SESSION['status_code'] = "success"; 
+        header('location:appointments.php');
     }
 }
 
 // delete specialization data
-if(isset($_POST['delete']))
-{
+if (isset($_POST['delete'])) {
     $sid = $_POST['specialization_id'];
     $query = "DELETE FROM specialization WHERE specialization_id = $sid";
-    $result = mysqli_query($conn,$query);
-    if($result)
-    {
+    $result = mysqli_query($conn, $query);
+    if ($result) {
         header('location:specialization.php');
     }
 }
 
 // delete doctor data
-if(isset($_POST['delete']))
-{
+if (isset($_POST['delete'])) {
     $did = $_POST['doctor_id'];
     $query = "DELETE FROM doctor WHERE doctor_id = $did";
-    $result = mysqli_query($conn,$query);
-    if($result)
-    {
+    $result = mysqli_query($conn, $query);
+    if ($result) {
         header('location:doctor.php');
     }
 }
 
 // delete patient data
-if(isset($_POST['delete']))
-{
+if (isset($_POST['delete'])) {
     $pid = $_POST['patient_id'];
     $query = "DELETE FROM patient WHERE patient_id = $pid";
-    $result = mysqli_query($conn,$query);
-    if($result)
-    {
+    $result = mysqli_query($conn, $query);
+    if ($result) {
         header('location:patient.php');
     }
 }
 
 // delete appointment data
-if(isset($_POST['delete']))
-{
+if (isset($_POST['delete'])) {
     $aid = $_POST['appointment_id'];
     $query = "DELETE FROM appointment WHERE appointment_id = $aid";
-    $result = mysqli_query($conn,$query);
-    if($result)
-    {
+    $result = mysqli_query($conn, $query);
+    if ($result) {
         header('location:appointments.php');
     }
 }
@@ -272,6 +257,9 @@ if (isset($_POST['checking_viewbtn'])) {
     // echo $return = $id;
 
     $query = "SELECT * FROM appointment where appointment_id = '$id'";
+    $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+           where a.appointment = $id ";
+
     $q_run = mysqli_query($conn, $query);
     if (mysqli_num_rows($q_run) > 0) {
 
@@ -372,26 +360,31 @@ if (isset($_POST['checking_viewbtn'])) {
 // $result = mysqli_query($conn,$query);
 // $data =mysqli_fetch_assoc($result);
 
-if(isset($_POST['update']))
-{
+if (isset($_POST['update'])) {
     $id = $_POST['user_id'];
     // $id = $data['id'];
+?>
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $pw = base64_encode($_POST['p_word']);
-    $cw = base64_encode($_POST['c_word']);
+    <script>
+        alert('updated')
+    </script>
 
-    $update = "UPDATE users SET firstName='$fname',lastName='$lname', Password ='$pw',Email ='$email', Confirm_Password = '$cw' where id=$id";
-    $chk = mysqli_query($conn,$update);
-    if($chk)
-    {
-        header('location:users.php');
+    <?php
+    // $fname = $_POST['fname'];
+    // $lname = $_POST['lname'];
+    // $email = $_POST['email'];
+    // $pw = base64_encode($_POST['p_word']);
+    // $cw = base64_encode($_POST['c_word']);
 
-    }
-    else{
-        echo '<script>alert("data not updated")</script>';}
+    // $update = "UPDATE users SET firstName='$fname',lastName='$lname', Password ='$pw',Email ='$email', Confirm_Password = '$cw' where id=$id";
+    // $chk = mysqli_query($conn,$update);
+    // if($chk)
+    // {
+    //     header('location:users.php');
+
+    // }
+    // else{
+    //     echo '<script>alert("data not updated")</script>';}
 }
 
 
@@ -404,11 +397,14 @@ if (isset($_POST['checking_editbtn'])) {
     $q_run = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($q_run) > 0) {
-    $fetchData = mysqli_fetch_array($q_run);
-    
-         ?>
+        $fetchData = mysqli_fetch_array($q_run);
+
+    ?>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+
             <div class="row">
-    
+
                 <div class="form-group col-md-6 p-2">
                     <label>first name</label>
                     <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="<?= $fetchData['firstName'] ?>">
@@ -433,7 +429,13 @@ if (isset($_POST['checking_editbtn'])) {
                     <label>confirm password</label>
                     <input type="password" name="c_word" id="editcw" class="form-control" placeholder="confirm" value="<?= $fetchData['Confirm_Password'] ?>">
                 </div>
-            </div>  
+            </div>
+            <div class="form-group p-2">
+                <button type="button" class="btn btn-secondary btn-block">close</button>
+                <button type="submit" class="btn btn-success btn-block" name="update">update</button>
+
+            </div>
+        </form>
 <?php
     } else {
         echo $return = "<h3>no records found</h3>";

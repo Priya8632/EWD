@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
         *{
             box-sizing:border-box;
         }
-        h2{
+        h3{
             color:rgb(43, 49, 43);
         }
         body{
@@ -108,9 +108,10 @@ if(isset($_POST['submit'])){
 <!-- navbar end -->
 
 <div class="container p-5 text-dark mx-auto bg-light w-50">
+
         <form action="" method="POST" enctype="multipart/form-data">
             <!-- <span class="error">* <?php echo $error; ?></span> -->
-            <h2 class="p-2">Login</h2>
+            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>login</h3>
             <hr>
 
             <div class="form-group">

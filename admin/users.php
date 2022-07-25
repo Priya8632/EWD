@@ -219,16 +219,9 @@ if (!$result) {
           </div>
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="" method="POST" enctype="multipart/form-data">
-                <div id="edit-data">
-
-                </div>
-                <div class="form-group p-2">
-                  <button type="button" class="btn btn-secondary btn-block">close</button>
-                  <button type="submit" class="btn btn-success btn-block" name="update">update</button>
-
-                </div>
-              </form>
+              <div id="edit-data">
+              
+            </div>
 
             </div>
           </div>
