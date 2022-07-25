@@ -93,9 +93,9 @@ if(isset($_POST['submit'])){
     <nav class="navbar navbar-light bg-light shadow-sm">
         <div class="container-lg">
             <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
         <ul class="nav jastify-content-end">
           <li class="nav-item"><a class="nav-link text-success" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link text-success" href="#">AboutUs</a></li>

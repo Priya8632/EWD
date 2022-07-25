@@ -33,12 +33,15 @@ if (!$result) {
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
+    body{
+      background-color:rgb(146, 234, 153);
+    }
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
       top: 15%;
       right: 30px;
-      background-color: white;
+      /* background-color:lightblue; */
       padding: 30px;
     }
 
@@ -113,7 +116,7 @@ if (!$result) {
       </nav>
 
       <!-- <div class="container mx-auto"> -->
-      <div class="table-responsive mx-auto">
+      <div class="table-responsive mx-auto bg-light">
         <div class="row">
           <div class="col-md-6">
             <h2>Users Records </h2>

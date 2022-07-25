@@ -33,6 +33,9 @@ if (!$result) {
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
+     body{
+      background-color:rgb(146, 234, 153);
+    }
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
@@ -41,16 +44,13 @@ if (!$result) {
       background-color: white;
       padding: 30px;
     }
-
     h2 {
       margin-bottom: 30px;
     }
-
     .list-group-item {
       border: none;
       padding: 20px 30px;
     }
-
     .list-group-item.active {
       background-color: transparent;
       color: var(--main-text-color);
