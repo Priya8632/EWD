@@ -84,7 +84,7 @@ if (!$result) {
         <a href="patient.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-bed me-2"></i>Patients
         </a>
-        <a href="appointment.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="appointments.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-clipboard-user me-2"></i>Appointments
         </a>
         <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">

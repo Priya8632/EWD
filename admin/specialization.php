@@ -251,7 +251,7 @@ if (!$result) {
               <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
             <button type="submit" name="delete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
           </div>
           </form>

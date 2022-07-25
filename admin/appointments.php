@@ -91,7 +91,7 @@ if (!$result) {
         <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-star-of-life me-2"></i>Specialization
         </a>
-        <a href="user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-user me-2"></i>Users
         </a>
         <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
@@ -289,7 +289,7 @@ if (!$result) {
               <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
             <button type="submit" name="delete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
           </div>
           </form>
@@ -335,9 +335,7 @@ if (!$result) {
           });
 
         });
-      });
 
-      $(document).ready(function() {
         $('.view-btn').click(function(e) {
           e.preventDefault();
           var userid = $(this).closest('tr').find('.user_id').text();
@@ -356,9 +354,9 @@ if (!$result) {
 
             }
           });
+        });
 
         });
-      });
     </script>
 
 </body>

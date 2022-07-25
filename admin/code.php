@@ -211,6 +211,42 @@ if(isset($_POST['delete']))
     }
 }
 
+// delete doctor data
+if(isset($_POST['delete']))
+{
+    $did = $_POST['doctor_id'];
+    $query = "DELETE FROM doctor WHERE doctor_id = $did";
+    $result = mysqli_query($conn,$query);
+    if($result)
+    {
+        header('location:doctor.php');
+    }
+}
+
+// delete patient data
+if(isset($_POST['delete']))
+{
+    $pid = $_POST['patient_id'];
+    $query = "DELETE FROM patient WHERE patient_id = $pid";
+    $result = mysqli_query($conn,$query);
+    if($result)
+    {
+        header('location:patient.php');
+    }
+}
+
+// delete appointment data
+if(isset($_POST['delete']))
+{
+    $aid = $_POST['appointment_id'];
+    $query = "DELETE FROM appointment WHERE appointment_id = $aid";
+    $result = mysqli_query($conn,$query);
+    if($result)
+    {
+        header('location:appointments.php');
+    }
+}
+
 // view specialization data 
 if (isset($_POST['checking_viewbtn'])) {
     $id = $_POST['user_id'];
@@ -227,18 +263,6 @@ if (isset($_POST['checking_viewbtn'])) {
                 <h5> specialization : ' . $data['specialization'] . '</h5>
             ';
         }
-    }
-}
-
-// delete appointment data
-if(isset($_POST['delete']))
-{
-    $aid = $_POST['appointment_id'];
-    $query = "DELETE FROM appointment WHERE appointment_id = $aid";
-    $result = mysqli_query($conn,$query);
-    if($result)
-    {
-        header('location:appointments.php');
     }
 }
 
@@ -267,7 +291,52 @@ if (isset($_POST['checking_viewbtn'])) {
     }
 }
 
+// view doctor data
+if (isset($_POST['checking_viewbtn'])) {
+    $id = $_POST['user_id'];
+    // echo $return = $id;
 
+    $query = "SELECT * FROM doctor where doctor_id = '$id'";
+    $q_run = mysqli_query($conn, $query);
+    if (mysqli_num_rows($q_run) > 0) {
+
+        foreach ($q_run as $data) {
+
+            echo $return = '
+                <h5> Dcotor_ID : ' . $data['doctor_id'] . '</h5>
+                <h5> Doctor_name : ' . $data['doctor_name'] . '</h5>
+                <h5> Email : ' . $data['email'] . '</h5>
+                <h5> Mobile : ' . $data['mobile'] . '</h5>
+                <h5> Gender : ' . $data['gender'] . '</h5>
+                <h5> Specialization_id : ' . $data['specialization_id'] . '</h5>
+            ';
+        }
+    }
+}
+
+// view patient data
+if (isset($_POST['checking_viewbtn'])) {
+    $id = $_POST['user_id'];
+    // echo $return = $id;
+
+    $query = "SELECT * FROM patient where patient_id = '$id'";
+    $q_run = mysqli_query($conn, $query);
+    if (mysqli_num_rows($q_run) > 0) {
+
+        foreach ($q_run as $data) {
+
+            echo $return = '
+                <h5> patient_ID : ' . $data['patient_id'] . '</h5>
+                <h5> patient_name : ' . $data['patient_name'] . '</h5>
+                <h5> Email : ' . $data['email'] . '</h5>
+                <h5> Mobile : ' . $data['mobile'] . '</h5>
+                <h5> Gender : ' . $data['gender'] . '</h5>
+                <h5> Age : ' . $data['age'] . '</h5>
+                <h5> Doctor_id : ' . $data['doctor_id'] . '</h5>
+            ';
+        }
+    }
+}
 
 // view user data
 if (isset($_POST['checking_viewbtn'])) {
@@ -289,6 +358,11 @@ if (isset($_POST['checking_viewbtn'])) {
         }
     }
 }
+
+
+
+
+
 
 
 // update data

@@ -91,7 +91,7 @@ if (!$result) {
         <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-star-of-life me-2"></i>Specialization
         </a>
-        <a href="user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+        <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-user me-2"></i>Users
         </a>
         <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
@@ -150,7 +150,7 @@ if (!$result) {
 
                 <td>
                   <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  <a href="delete.php?delete=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
             <?php } ?>
@@ -268,11 +268,45 @@ if (!$result) {
     </div>
     <!-- end -->
 
+    <!-- delete modal -->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="code.php" method="POST">
+          <div class="modal-body">
+              <input type="text" id="delete_id" name="patient_id">
+              <h4>Are you sure,you want to delete this data?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            <button type="submit" name="delete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
     <script>
       $(document).ready(function() {
+
+          $('.delete-btn').click(function(e)
+          {
+              e.preventDefault();
+
+              var sid = $(this).closest('tr').find('.user_id').text();
+              $('#delete_id').val(sid);
+              $('#delete').modal('show');
+
+          });
+
         $('.edit-btn').click(function(e) {
 
           e.preventDefault();
@@ -294,9 +328,7 @@ if (!$result) {
           });
 
         });
-      });
 
-      $(document).ready(function() {
         $('.view-btn').click(function(e) {
           e.preventDefault();
           var userid = $(this).closest('tr').find('.user_id').text();
@@ -315,9 +347,9 @@ if (!$result) {
 
             }
           });
+        });
 
         });
-      });
     </script>
 
 </body>
