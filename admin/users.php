@@ -4,11 +4,15 @@ include 'config.php';
 
 $query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
-if (!$result) {
 
-  echo mysqli_error($conn);
+if (isset($_SESSION['id'])) {
+  $_SESSION['id'] = $_COOKIE['id'];
 }
 
+$id = $_SESSION['id'];
+$query1 = "SELECT * FROM users where id=$id";
+$result1 = mysqli_query($conn,$query1);
+$data = mysqli_fetch_array($result1);
 
 ?>
 
@@ -108,7 +112,7 @@ if (!$result) {
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i>john doe</a>
+          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $data['Email']; ?></a>
           <form class="">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </form>
@@ -138,14 +142,14 @@ if (!$result) {
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr>
-                <td class="user_id"><?php echo $data['id']; ?></td>
-                <td><?php echo $data['firstName']; ?></td>
-                <td><?php echo $data['lastName']; ?></td>
-                <td><?php echo $data['Email']; ?></td>
+              <tr id="<?php echo $data['id'];?>">
+                <td class="id"><?php echo $data['id']; ?></td>
+                <td data-target="firstName"><?php echo $data['firstName']; ?></td>
+                <td data-target="lastName"><?php echo $data['lastName']; ?></td>
+                <td data-target="Email"><?php echo $data['Email']; ?></td>
                 <td>
-                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  <a href="delete.php?users=<?php echo $data['id']; ?>"><i class="fa-solid fa-trash-can text-danger" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="update" data-id="<?php echo $data['id'];?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
             <?php } ?>
@@ -217,19 +221,50 @@ if (!$result) {
             <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <form action="" method="POST">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
-              <div id="edit-data">
-              
-            </div>
 
+              <div class="row">
+
+                <input type="text" id="userId" name="userId">
+
+                <div class="form-group col-md-6 p-2">
+                    <label>first name</label>
+                    <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="">
+                </div>
+
+                <div class="form-group col-md-6 p-2">
+                    <label>last name</label>
+                    <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
+                </div>
+
+                <div class="form-group p-2">
+                    <label>email</label>
+                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                </div>
+
+                <!-- <div class="form-group p-2">
+                    <label>password</label>
+                    <input type="password" name="p_word" id="editpw" class="form-control" placeholder="password" value="">
+                </div>
+
+                <div class="form-group p-2">
+                    <label>confirm password</label>
+                    <input type="password" name="c_word" id="editcw" class="form-control" placeholder="confirm" value="">
+                </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="submit" id="save" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+              </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>
     <!-- end -->
-
 
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -250,44 +285,55 @@ if (!$result) {
     </div>
     <!-- end -->
 
+    <!-- delete modal -->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="code.php" method="POST">
+          <div class="modal-body">
+              <input type="text" id="delete_id" name="id">
+              <h4>Are you sure,you want to delete this data?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+            <button type="submit" name="userdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
     <script>
       $(document).ready(function() {
 
-        $('.edit-btn').click(function(e) {
-
+        $('.delete-btn').click(function(e){
           e.preventDefault();
 
-          var userid = $(this).closest('tr').find('.user_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_editbtn': true,
-              'user_id': userid,
-            },
-            success: function(response) {
-              $('#edit-data').html(response);
-              $('#edit').modal('show');
+          var sid = $(this).closest('tr').find('.id').text();
+          $('#delete_id').val(sid);
+          $('#delete').modal('show');
 
-            }
-          });
         });
 
         
         $('.view-btn').click(function(e) {
           e.preventDefault();
-          var userid = $(this).closest('tr').find('.user_id').text();
+          var id = $(this).closest('tr').find('.id').text();
           // console.log(userid);
           $.ajax({
             type: "POST",
             url: "code.php",
             data: {
-              'checking_viewbtn': true,
-              'user_id': userid,
+              'checking_userbtn': true,
+              'id': id,
             },
             success: function(response) {
               //  console.log(response);
@@ -297,6 +343,47 @@ if (!$result) {
             }
           });
         });
+
+        $(document).on('click','a[data-role=update]',function(){
+            // append values in input feilds
+            var id = $(this).data('id');
+            var firstName = $('#'+id).children('td[data-target=firstName]').text(); 
+            var lastName = $('#'+id).children('td[data-target=lastName]').text(); 
+            var email = $('#'+id).children('td[data-target=Email]').text(); 
+
+            $('#userId').val(id);
+            $('#editfname').val(firstName);
+            $('#editlname').val(lastName);
+            $('#editemail').val(email);
+            $('#edit').modal('toggle');
+
+
+          });
+
+          // update data
+
+          $('#save').click(function()
+          {
+              var id = $('#userId').val();
+              var firstName = $('#editfname').val();
+              var lastName = $('#editlname').val();
+              var email = $('#editemail').val();
+
+              $.ajax({
+                url:'code.php',
+                method:'POST',
+                data:{firstName:firstName,lastName:lastName,email:email,id:id},
+                success:function(response)
+                {
+                    $('#'+id).children('td[data-target=firstName]').text(firstName);
+                    $('#'+id).children('td[data-target=lastName]').text(lastName);
+                    $('#'+id).children('td[data-target=Email]').text(email);
+
+                    $('#edit').modal('toggle');
+                }
+
+                });
+          });
 
       });
 

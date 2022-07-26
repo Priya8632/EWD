@@ -193,8 +193,8 @@ if (isset($_REQUEST['appointment'])) {
 }
 
 // delete specialization data
-if (isset($_POST['delete'])) {
-    $sid = $_POST['specialization_id'];
+if (isset($_POST['specializationdelete'])) {
+    $sid = $_POST['s_id'];
     $query = "DELETE FROM specialization WHERE specialization_id = $sid";
     $result = mysqli_query($conn, $query);
     if ($result) {
@@ -203,7 +203,7 @@ if (isset($_POST['delete'])) {
 }
 
 // delete doctor data
-if (isset($_POST['delete'])) {
+if (isset($_POST['doctordelete'])) {
     $did = $_POST['doctor_id'];
     $query = "DELETE FROM doctor WHERE doctor_id = $did";
     $result = mysqli_query($conn, $query);
@@ -213,7 +213,8 @@ if (isset($_POST['delete'])) {
 }
 
 // delete patient data
-if (isset($_POST['delete'])) {
+if (isset($_POST['patientdelete'])) {
+
     $pid = $_POST['patient_id'];
     $query = "DELETE FROM patient WHERE patient_id = $pid";
     $result = mysqli_query($conn, $query);
@@ -223,8 +224,9 @@ if (isset($_POST['delete'])) {
 }
 
 // delete appointment data
-if (isset($_POST['delete'])) {
-    $aid = $_POST['appointment_id'];
+if (isset($_POST['appdelete'])) {
+
+    $aid = $_POST['app_id'];
     $query = "DELETE FROM appointment WHERE appointment_id = $aid";
     $result = mysqli_query($conn, $query);
     if ($result) {
@@ -232,9 +234,21 @@ if (isset($_POST['delete'])) {
     }
 }
 
+// delete users data
+if (isset($_POST['userdelete'])) {
+
+    $uid = $_POST['id'];
+    $query = "DELETE FROM users WHERE id = $uid";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        header('location:users.php');
+    }
+}
+
 // view specialization data 
-if (isset($_POST['checking_viewbtn'])) {
-    $id = $_POST['user_id'];
+if (isset($_POST['checking_specializationbtn'])) {
+    
+    $id = $_POST['s_id'];
     // echo $return = $id;
 
     $query = "SELECT * FROM specialization where specialization_id = '$id'";
@@ -252,13 +266,13 @@ if (isset($_POST['checking_viewbtn'])) {
 }
 
 // view appointment details
-if (isset($_POST['checking_viewbtn'])) {
-    $id = $_POST['user_id'];
+if (isset($_POST['checking_appbtn'])) {
+    $id = $_POST['app_id'];
     // echo $return = $id;
 
     $query = "SELECT * FROM appointment where appointment_id = '$id'";
-    $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
-           where a.appointment = $id ";
+    // $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+    //        where a.appointment = $id ";
 
     $q_run = mysqli_query($conn, $query);
     if (mysqli_num_rows($q_run) > 0) {
@@ -280,8 +294,8 @@ if (isset($_POST['checking_viewbtn'])) {
 }
 
 // view doctor data
-if (isset($_POST['checking_viewbtn'])) {
-    $id = $_POST['user_id'];
+if (isset($_POST['checking_doctorbtn'])) {
+    $id = $_POST['doctor_id'];
     // echo $return = $id;
 
     $query = "SELECT * FROM doctor where doctor_id = '$id'";
@@ -303,8 +317,8 @@ if (isset($_POST['checking_viewbtn'])) {
 }
 
 // view patient data
-if (isset($_POST['checking_viewbtn'])) {
-    $id = $_POST['user_id'];
+if (isset($_POST['checking_patientbtn'])) {
+    $id = $_POST['patient_id'];
     // echo $return = $id;
 
     $query = "SELECT * FROM patient where patient_id = '$id'";
@@ -327,8 +341,8 @@ if (isset($_POST['checking_viewbtn'])) {
 }
 
 // view user data
-if (isset($_POST['checking_viewbtn'])) {
-    $id = $_POST['user_id'];
+if (isset($_POST['checking_userbtn'])) {
+    $id = $_POST['id'];
     // echo $return = $id;
 
     $query = "SELECT * FROM users where id = '$id'";
@@ -348,97 +362,25 @@ if (isset($_POST['checking_viewbtn'])) {
 }
 
 
-
-
-
-
-
-// update data
-
-// $id = $_GET['update'];
-// $query = "SELECT * FROM users WHERE id = $id";
-// $result = mysqli_query($conn,$query);
-// $data =mysqli_fetch_assoc($result);
-
-if (isset($_POST['update'])) {
-    $id = $_POST['user_id'];
-    // $id = $data['id'];
-?>
-
-    <script>
-        alert('updated')
-    </script>
-
-    <?php
-    // $fname = $_POST['fname'];
-    // $lname = $_POST['lname'];
-    // $email = $_POST['email'];
-    // $pw = base64_encode($_POST['p_word']);
-    // $cw = base64_encode($_POST['c_word']);
-
-    // $update = "UPDATE users SET firstName='$fname',lastName='$lname', Password ='$pw',Email ='$email', Confirm_Password = '$cw' where id=$id";
-    // $chk = mysqli_query($conn,$update);
-    // if($chk)
-    // {
-    //     header('location:users.php');
-
-    // }
-    // else{
-    //     echo '<script>alert("data not updated")</script>';}
-}
-
-
 // edit data
+if(isset($_POST['update']))
+{
+    $id = $_POST['id'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
 
-if (isset($_POST['checking_editbtn'])) {
-    $id = $_POST['user_id'];
 
-    $query = "SELECT * FROM users where id = '$id'";
-    $q_run = mysqli_query($conn, $query);
+    $update = "UPDATE users SET firstName='$fname',lastName='$lname',Email ='$email' where id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk){
 
-    if (mysqli_num_rows($q_run) > 0) {
-        $fetchData = mysqli_fetch_array($q_run);
-
-    ?>
-
-        <form action="" method="POST" enctype="multipart/form-data">
-
-            <div class="row">
-
-                <div class="form-group col-md-6 p-2">
-                    <label>first name</label>
-                    <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="<?= $fetchData['firstName'] ?>">
-                </div>
-
-                <div class="form-group col-md-6 p-2">
-                    <label>last name</label>
-                    <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="<?= $fetchData['lastName'] ?>">
-                </div>
-
-                <div class="form-group p-2">
-                    <label>email</label>
-                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="<?= $fetchData['Email'] ?>">
-                </div>
-
-                <div class="form-group p-2">
-                    <label>password</label>
-                    <input type="password" name="p_word" id="editpw" class="form-control" placeholder="password" value="<?= $fetchData['Password'] ?>">
-                </div>
-
-                <div class="form-group p-2">
-                    <label>confirm password</label>
-                    <input type="password" name="c_word" id="editcw" class="form-control" placeholder="confirm" value="<?= $fetchData['Confirm_Password'] ?>">
-                </div>
-            </div>
-            <div class="form-group p-2">
-                <button type="button" class="btn btn-secondary btn-block">close</button>
-                <button type="submit" class="btn btn-success btn-block" name="update">update</button>
-
-            </div>
-        </form>
-<?php
-    } else {
-        echo $return = "<h3>no records found</h3>";
+        header('location:users.php');
     }
 }
+
+
 ?>
+
+           
+

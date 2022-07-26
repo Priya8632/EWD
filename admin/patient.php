@@ -5,10 +5,15 @@ include 'config.php';
 $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
  where p.doctor_id = d.doctor_id";
 $result = mysqli_query($conn, $query);
-if (!$result) {
 
-  echo mysqli_error($conn);
+if (isset($_SESSION['id'])) {
+  $_SESSION['id'] = $_COOKIE['id'];
 }
+
+$id = $_SESSION['id'];
+$query1 = "SELECT * FROM users where id=$id";
+$result1 = mysqli_query($conn,$query1);
+$data = mysqli_fetch_array($result1);
 
 
 ?>
@@ -106,7 +111,7 @@ if (!$result) {
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i>john doe</a>
+          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $data['Email'];?></a>
           <form class="">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </form>
@@ -140,7 +145,7 @@ if (!$result) {
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
               <tr>
-                <td class="user_id"><?php echo $data['patient_id']; ?></td>
+                <td class="patient_id"><?php echo $data['patient_id']; ?></td>
                 <td><?php echo $data['patient_name']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td><?php echo $data['mobile']; ?></td>
@@ -283,7 +288,7 @@ if (!$result) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-            <button type="submit" name="delete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            <button type="submit" name="patientdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
           </div>
           </form>
         </div>
@@ -301,7 +306,7 @@ if (!$result) {
           {
               e.preventDefault();
 
-              var sid = $(this).closest('tr').find('.user_id').text();
+              var sid = $(this).closest('tr').find('.patient_id').text();
               $('#delete_id').val(sid);
               $('#delete').modal('show');
 
@@ -331,14 +336,14 @@ if (!$result) {
 
         $('.view-btn').click(function(e) {
           e.preventDefault();
-          var userid = $(this).closest('tr').find('.user_id').text();
+          var patientid = $(this).closest('tr').find('.patient_id').text();
           // console.log(userid);
           $.ajax({
             type: "POST",
             url: "code.php",
             data: {
-              'checking_viewbtn': true,
-              'user_id': userid,
+              'checking_patientbtn': true,
+              'patient_id': patientid,
             },
             success: function(response) {
               //  console.log(response);

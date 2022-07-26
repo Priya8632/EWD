@@ -1,12 +1,19 @@
 <?php
 
 include 'config.php';
-$query = "SELECT * FROM users";
-$result = mysqli_query($conn,$query);
-if(!$result){
 
-  echo mysqli_error($conn);
+
+if (!isset($_SESSION['id'])) {
+    header('location:login.php');
 }
+if (!isset($_SESSION['id'])) {
+    $_SESSION['id'] = $_COOKIE['id'];
+}
+
+$id = $_SESSION['id'];
+$query = "SELECT * FROM users where id=$id";
+$result = mysqli_query($conn,$query);
+$data = mysqli_fetch_array($result);
 
 ?>
 
@@ -62,7 +69,7 @@ if(!$result){
           <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
             <i class="fa-solid fa-user me-2"></i>Users
           </a>
-          <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+          <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
             <i class="fas fa-project-diagram me-2"></i>logout
           </a>
         </div>
@@ -89,7 +96,7 @@ if(!$result){
                 <li class="nav-item">
                   <a class="nav-link second-text fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                    
-                    <i class="fas fa-user me-2"></i>john doe
+                    <i class="fas fa-user me-2"></i><?php echo $data['Email'];?>
                   </a>
                  
                 </li>

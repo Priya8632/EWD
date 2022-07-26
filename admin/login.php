@@ -2,6 +2,10 @@
 
 include 'config.php';
 
+if (isset($_SESSION['id']) || isset($_COOKIE['id'])) {    
+    header('location:dashboard.php');
+}
+
 $pwarr = $emailarr = "";
 
 if(isset($_POST['submit'])){
@@ -30,8 +34,10 @@ if(isset($_POST['submit'])){
 
     if ($row) {
         if($arr['Password'] == base64_encode($password)){
-            $_SESSION['status'] = "login successfully";
-            $_SESSION['status_code'] = "success"; 
+            // $_SESSION['status'] = "login successfully";
+            // $_SESSION['status_code'] = "success"; 
+            $_SESSION['id'] = $arr['id'];
+            setcookie('id',$arr['id'],time() + 60*10);
             header('location:dashboard.php');
              }else {
                 
