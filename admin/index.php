@@ -104,6 +104,48 @@
             margin-top:30px;
             text-align: center;
         }
+        .fa-bolt-lightning,.fa-clock,.fa-users,.fa-bookmark,.fa-heart-pulse,.fa-user-doctor,.fa-truck-medical
+        ,.fa-stethoscope,.fa-briefcase-medical,.fa-flask{
+          font-size:50px;
+          padding:40px;
+        }
+        span{
+          text-align: center;  
+        }
+        .flex-container {
+          display: flex;
+          justify-content: center;
+          background-color:white;
+        }
+        .flex-container > div {
+          background-color:rgb(84, 220, 96);
+          width: 700px;
+          margin: 10px;
+          text-align: center;
+          padding: 30px;
+        }
+        .grid-container {
+          margin:60px;
+          display: grid;
+          grid-template-columns: auto auto auto auto;
+          gap: 10px;
+          /* padding: 10px; */
+        }
+        .grid-container > div {
+          padding:20px;
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 1px solid black;
+          text-align: center;
+        }
+        .container-fluid {
+            display: flex;
+            padding: 60px;
+        }
+        .card {
+            margin: 30px;
+            text-align: center;
+            border:1px solid green;
+        }
 
       @media only screen and (max-width: 600px) {
         header.stiky {
@@ -124,9 +166,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link  text-light fs-5" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#">Contact</a></li>
-            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#">Team</a></li>
+            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#team">Team</a></li>
+            <li class="nav-item"><a class="nav-link  text-light fs-5" href="#contact">Contact</a></li>
             <li class="nav-item"><a class="nav-link  text-light fs-5" href="admin_login.php">SignIn</a></li>
           </ul>
         </div>
@@ -173,7 +215,7 @@
 <!-- about end -->
 
 <!-- image -->
-<div class="container-fluid py-5">
+<!-- <div class="container-fluid py-5">
   <div class="row justify-content-center mr-auto">
 
     <div class="col-md-4 p-3">
@@ -210,8 +252,201 @@
     </div>
 
 </div>
-</div>
+</div> -->
 <!-- image -->
+
+<!-- about section start -->
+
+<section class="about py-5 bg-white" id="about">
+    <div class="container">
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h2 class="fw-bold mb-3">ABOUT US</h2>
+            <!-- <hr style="background-color:green;height:4px;border-radius:18px;"> -->
+            <!-- <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, aliquam!</span> -->
+          </div>
+        </div>  
+      </div>
+
+      <div class="flex-container py-4">
+
+        <div>
+          <i class="fa-solid fa-bolt-lightning"></i><br>
+          <span>Advanced Technology</span>
+        </div>
+        
+        <div>
+          <i class="fa-solid fa-clock"></i><br>
+          <span>24 Hours Services</span>
+        </div>
+        
+        <div>
+          <i class="fa-solid fa-users"></i><br>
+          <span>All Experts Staffs</span>
+        </div>
+
+        <div>
+          <i class="fa-solid fa-bookmark"></i><br>
+          <span>Extensive History</span>
+        </div>
+
+      </div>
+    
+    </div>
+</section>
+
+<section>
+  <h2 class="fw-bold mb-3 text-center">OUR SERVICES</h2>
+  <div class="grid-container">
+        <div>
+          <i class="fa-solid fa-heart-pulse"></i>
+          <h5>Mother Care</h5>
+          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+
+        <div>
+          <i class="fa-solid fa-user-doctor"></i>
+          <h5>Child Care</h5>
+          <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+
+        <div>
+          <i class="fa-solid fa-truck-medical"></i>
+          <h5>Parent Care</h5>
+          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit
+          Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+  </div>
+  <div class="grid-container">
+        <div>
+          <i class="fa-solid fa-stethoscope"></i>
+          <h5>Critical Treatments</h5>
+          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+
+        <div>
+          <i class="fa-solid fa-briefcase-medical"></i>
+          <h5>All Major Tests</h5>
+          <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+
+        <div>
+          <i class="fas fa-flask"></i>
+          <h5>Modern Laboratory</h5>
+          <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet Reprehenderit, itaque.
+          </span>
+        </div>
+  </div> 
+</section>
+
+<!-- team ection -->
+
+<section id="team">
+  
+<h2 class="fw-bold text-center">EXPERT DOCTORS</h2>
+<div class="container-fluid">
+
+<div class="card" style="width: 18rem;">
+  <img src="../img/d3.jfif" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">ROBERT SMITH</h5>
+    <p class="card-text">Neurology</p>
+    <a href="#" class="btn btn-success">Read More</a>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="../img/d3.jfif" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">BRENT GRUNDY</h5>
+    <p class="card-text">Arthology</p>
+    <a href="#" class="btn btn-success">Read More</a>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="../img/d3.jfif" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">JEFT BENSON</h5>
+    <p class="card-text">Cardiology</p>
+    <a href="#" class="btn btn-success">Read More</a>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="../img/d3.jfif" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">DANNY ASHTON</h5>
+    <p class="card-text">Medicine</p>
+    <a href="#" class="btn btn-success">Read More</a>
+  </div>
+</div>
+
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- footer -->
 <div class="footer">
