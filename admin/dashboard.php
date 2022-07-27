@@ -3,18 +3,6 @@
 include 'config.php';
 
 
-if (!isset($_SESSION['id'])) {
-    header('location:login.php');
-}
-if (!isset($_SESSION['id'])) {
-    $_SESSION['id'] = $_COOKIE['id'];
-}
-
-$id = $_SESSION['id'];
-$query = "SELECT * FROM users where id=$id";
-$result = mysqli_query($conn,$query);
-$data = mysqli_fetch_array($result);
-
 ?>
 
 <!DOCTYPE html>

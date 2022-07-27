@@ -6,14 +6,7 @@ $query = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s
           where d.specialization_id = s.specialization_id ";
 $result = mysqli_query($conn, $query);
 
-if (isset($_SESSION['id'])) {
-  $_SESSION['id'] = $_COOKIE['id'];
-}
 
-$id = $_SESSION['id'];
-$query1 = "SELECT * FROM users where id=$id";
-$result1 = mysqli_query($conn,$query1);
-$data = mysqli_fetch_array($result1);
 
 ?>
 

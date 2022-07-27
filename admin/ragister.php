@@ -70,8 +70,8 @@ elseif($_POST['c_word'] != $_POST['p_word']){
         ('$fname','$lname','$email','$pw','$cw')";
     
         if(mysqli_query($conn,$insert)){
-            $_SESSION['status'] = "registered successfully";
-            $_SESSION['status_code'] = "success"; 
+            // $_SESSION['status'] = "registered successfully";
+            // $_SESSION['status_code'] = "success"; 
             header('location:login.php');
         } 
         // else{

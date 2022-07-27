@@ -6,14 +6,7 @@ include 'config.php';
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
 $result = mysqli_query($conn, $query);
 
-if (isset($_SESSION['id'])) {
-  $_SESSION['id'] = $_COOKIE['id'];
-}
 
-$id = $_SESSION['id'];
-$query1 = "SELECT * FROM users where id=$id";
-$result1 = mysqli_query($conn,$query1);
-$data = mysqli_fetch_array($result1);
 
 ?>
 

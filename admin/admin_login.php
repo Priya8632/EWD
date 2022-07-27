@@ -2,54 +2,56 @@
 
 include 'config.php';
 
-// if (isset($_SESSION['id']) || isset($_COOKIE['id'])) {    
+// if (isset($_SESSION['aid']) || isset($_COOKIE['aid'])) {    
 //     header('location:dashboard.php');
 // }
 
-$pwarr = $emailarr = "";
+$selectTable = "SELECT * FROM admin";
+$tblQuery = mysqli_query($conn,$selectTable) ;
 
-if(isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $password = $_POST['p_word'];
+if (!$tblQuery) {
+    $createTable = "CREATE TABLE  admin ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email varchar(20) NOT NULL, password varchar(10) NOT NULL )";
+
+    if(!mysqli_query($conn,$createTable)){
+       echo mysqli_errno($conn); 
+    }
+}
+
+$adminarr = $pwarr = $error = $emailarr ="";
+
+if(isset($_REQUEST['adsubmit'])){
+
+    $email = $_POST['admin'];
+    $password = $_POST['pw'];
 
     if (empty($email)) {
-        $emailarr = " email required";}
+        $emailarr = "email required";}
     elseif (empty($password)) {
         $passarr = "password required";} 
-    elseif(!preg_match("/[a-z'@,!,#,$,%,^,&,*,+']+/",$_POST['p_word'])){
+    elseif(!preg_match("/[a-z'@,!,#,$,%,^,&,*,+']+/",$_POST['pw'])){
         $pwarr = "minimum 1 small";    }
-    elseif(!preg_match("/[A-Z]+/",$_POST['p_word'])){
+    elseif(!preg_match("/[A-Z]+/",$_POST['pw'])){
         $pwarr = "minum 1 capital"; }
-    elseif(!preg_match("/[0-9]/",$_POST['p_word'])){
+    elseif(!preg_match("/[0-9]/",$_POST['pw'])){
         $pwarr = "1 number";}
-    elseif(strlen($_POST['p_word']) > 8 || strlen($_POST['p_word']) < 8 ){
+    elseif(strlen($_POST['pw']) > 8 || strlen($_POST['pw']) < 8 ){
         $pwarr = "8 length is required";}
-
-    else {
-
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $query = mysqli_query($conn, $sql);
-    $arr = mysqli_fetch_assoc($query);
-    $row = mysqli_num_rows($query);
-
-    if ($row) {
-        if($arr['Password'] == base64_encode($password)){
-            // $_SESSION['status'] = "login successfully";
-            // $_SESSION['status_code'] = "success"; 
-            // $_SESSION['id'] = $arr['id'];
-            // setcookie('id',$arr['id'],time() + 60*10);
-            // header('location:dashboard.php');
-             }else {
-                
-                echo "invalid  password";
-            }
-    }    
-    else{
-        echo "invalid email";
-    }
-    }
     
+    else{
+    
+    
+    $fetch_array = mysqli_fetch_assoc($tblQuery);
+    
+    if ($email== $fetch_array['email'] && $password == $fetch_array['password']  ) {
+        $_SESSION['aid'] = $fetch_array['admin_id'];
+        setcookie('aid',$fetch_array['admin_id'],time() + 60*10);
+        header('location:dashboard.php');
+        
+    }
 }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +60,7 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>admin Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
@@ -104,10 +106,6 @@ if(isset($_POST['submit'])){
         </button> -->
         <ul class="nav jastify-content-end">
           <li class="nav-item"><a class="nav-link text-success" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">AboutUs</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Contact</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="ragister.php">Registar</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Login</a></li>
         </ul>
     </div>
   </nav>
@@ -121,18 +119,20 @@ if(isset($_POST['submit'])){
             <hr>
 
             <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                <label for="">Username</label>
+                <input type="text" name="admin" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
                 <span class="error">* <?php echo $emailarr;?></span>
             </div>
 
             <div class="form-group">
-                <input type="password" name="p_word" class="form-control" placeholder="password" value="<?php if(isset($_POST['p_word'])) { echo $_POST['p_word'];} ?>">
+                <label for="">Email</label>
+                <input type="password" name="pw" class="form-control" placeholder="password" value="<?php if(isset($_POST['pw'])) { echo $_POST['pw'];} ?>">
                 <span class="error">* <?php echo $pwarr; ?></span>
             </div>
 
             <div class="form-group">
-                <p class="login-register-text">Don't have an account?<a href="ragister.php">Registar here</a></p>
-                <button type="submit" class="btn btn-success btn-block" name="submit">SUBMIT</button>
+                <p class="login-register-text"><a href="#">Forgot Your Password</a></p>
+                <button type="submit" class="btn btn-success btn-block" name="adsubmit">SUBMIT</button>
             </div>
 
         </form>
