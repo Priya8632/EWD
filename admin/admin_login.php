@@ -61,6 +61,7 @@ if(isset($_REQUEST['adsubmit'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>admin Login</title>
+    <script src="../js/jquery.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
@@ -93,10 +94,17 @@ if(isset($_REQUEST['adsubmit'])){
         .error{
             color:red;
         }
+        .eyes{
+            position: absolute;
+            right:15px;
+
+        }
     </style>
 </head>
 
 <body>
+
+
     <!--navbar start  -->
     <nav class="navbar navbar-light bg-light shadow-sm">
         <div class="container-lg">
@@ -115,18 +123,27 @@ if(isset($_REQUEST['adsubmit'])){
 
         <form action="" method="POST" enctype="multipart/form-data">
             <!-- <span class="error">* <?php echo $error; ?></span> -->
-            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>login</h3>
+            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Sign in</h3>
             <hr>
 
             <div class="form-group">
                 <label for="">Username</label>
-                <input type="text" name="admin" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                <div class="input-group">
+                    <input type="text" name="admin" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                </div>
                 <span class="error">* <?php echo $emailarr;?></span>
             </div>
 
             <div class="form-group">
                 <label for="">Email</label>
-                <input type="password" name="pw" class="form-control" placeholder="password" value="<?php if(isset($_POST['pw'])) { echo $_POST['pw'];} ?>">
+                <div class="input-group">
+                    <input type="password" name="pw" id="pass" class="form-control" placeholder="password" data-toggle="password" value="<?php if(isset($_POST['pw'])) { echo $_POST['pw'];} ?>">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <a href="#" class="text-dark" id="icon-click"><i class="fas fa-eye" id="icon"></i></a>
+                        </div>
+                    </div>
+                </div>
                 <span class="error">* <?php echo $pwarr; ?></span>
             </div>
 
@@ -137,9 +154,25 @@ if(isset($_REQUEST['adsubmit'])){
 
         </form>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#icon-click').click(function()
+                {
+                    $('#icon').toggleClass('fa-eye-slash');
+                    var input = $('#pass');
+                    if(input.attr('type') === 'password'){
+                        input.attr('type','text');
+                    }
+                    else{
+                        input.attr('type','password');
+                    }
+                });
+            });
 
-
-
+        </script>
         <?php
 
         //  include 'alert.php';

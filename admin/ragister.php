@@ -135,10 +135,7 @@ elseif($_POST['c_word'] != $_POST['p_word']){
             </button> -->
 
         <ul class="nav jastify-content-end">
-          <li class="nav-item"><a class="nav-link text-success" href="home.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">AboutUs</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Contact</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Registar</a></li>
+          <li class="nav-item"><a class="nav-link text-success" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link text-success" href="login.php">Login</a></li>
         </ul>
     </div>

@@ -6,6 +6,18 @@ $query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
 
 
+if(!isset($_SESSION['aid'])){
+  header('location:admin_login.php');
+}
+if (!isset($_SESSION['aid'])) {
+  $_SESSION['aid'] = $_COOKIE['aid'];
+}
+
+
+$id = $_SESSION['aid'];
+$sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
+$result1 = mysqli_query($conn,$sql);
+$mydata = mysqli_fetch_assoc($result1);
 
 ?>
 
@@ -93,7 +105,7 @@ $result = mysqli_query($conn, $query);
         <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
           <i class="fa-solid fa-user me-2"></i>Users
         </a>
-        <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+        <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
           <i class="fas fa-project-diagram me-2"></i>logout
         </a>
       </div>
@@ -105,7 +117,7 @@ $result = mysqli_query($conn, $query);
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $data['Email']; ?></a>
+          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
           <form class="">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </form>

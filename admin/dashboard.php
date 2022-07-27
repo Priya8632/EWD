@@ -2,6 +2,18 @@
 
 include 'config.php';
 
+if(!isset($_SESSION['aid'])){
+  header('location:admin_login.php');
+}
+if (!isset($_SESSION['aid'])) {
+  $_SESSION['aid'] = $_COOKIE['aid'];
+}
+
+
+$id = $_SESSION['aid'];
+$sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
+$result1 = mysqli_query($conn,$sql);
+$mydata = mysqli_fetch_assoc($result1);
 
 ?>
 
@@ -84,7 +96,7 @@ include 'config.php';
                 <li class="nav-item">
                   <a class="nav-link second-text fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                    
-                    <i class="fas fa-user me-2"></i><?php echo $data['Email'];?>
+                    <i class="fas fa-user me-2"></i><?php echo $mydata['email'];?>
                   </a>
                  
                 </li>

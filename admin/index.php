@@ -190,7 +190,7 @@
   <div class="col-md-4 p-3">
     <div class="data bg-success">
         <i class="fa-solid fa-user-group"></i>
-        <h3 class="text-light">PROGRAMS</h3>
+        <h3 class="text-light">SERVICES</h3>
         <h6 class="text-light p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam assumenda illum repellat
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam assumenda illum repellaLorem ipsum dol
         </h6><br>
@@ -201,7 +201,7 @@
     <div class="col-md-4 p-3">
       <div class="data bg-light">
       <i class="fa-brands fa-accessible-icon"></i>
-        <h3 class="text-success">PROGRAMS</h3>
+        <h3 class="text-success">PATIENTS</h3>
         <h6 class="p-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam assumenda illum repellat
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam assumenda illum repellaLorem ipsum dol
         </h6><br>

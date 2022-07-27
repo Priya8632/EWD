@@ -33,19 +33,19 @@ if(isset($_POST['submit'])){
     $row = mysqli_num_rows($query);
 
     if ($row) {
-        if($arr['Password'] == base64_encode($password)){
+        if($arr['Email'] == $email){
             // $_SESSION['status'] = "login successfully";
             // $_SESSION['status_code'] = "success"; 
             // $_SESSION['id'] = $arr['id'];
             // setcookie('id',$arr['id'],time() + 60*10);
-            // header('location:dashboard.php');
+            header('location:user_dashboard.php');
              }else {
                 
                 echo "invalid  password";
             }
     }    
     else{
-        echo "invalid email";
+        echo "invalid email please ragister first";
     }
     }
     
@@ -104,10 +104,7 @@ if(isset($_POST['submit'])){
         </button> -->
         <ul class="nav jastify-content-end">
           <li class="nav-item"><a class="nav-link text-success" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">AboutUs</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Contact</a></li>
           <li class="nav-item"><a class="nav-link text-success" href="ragister.php">Registar</a></li>
-          <li class="nav-item"><a class="nav-link text-success" href="#">Login</a></li>
         </ul>
     </div>
   </nav>
@@ -121,13 +118,24 @@ if(isset($_POST['submit'])){
             <hr>
 
             <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                <label for="">User Name</label>
+                <div class="input-group">
+                    <input type="text" name="email" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                </div>
                 <span class="error">* <?php echo $emailarr;?></span>
             </div>
 
             <div class="form-group">
-                <input type="password" name="p_word" class="form-control" placeholder="password" value="<?php if(isset($_POST['p_word'])) { echo $_POST['p_word'];} ?>">
-                <span class="error">* <?php echo $pwarr; ?></span>
+                <label for="">Password</label>
+                <div class="input-group">
+                    <input type="password" id="pass" name="p_word" class="form-control" placeholder="password" value="<?php if(isset($_POST['p_word'])) { echo $_POST['p_word'];} ?>">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <a href="#" class="text-dark" id="icon-click"><i class="fa fa-eye" id="icon"></i></a>                       
+                        </div>
+                    </div>
+                </div>
+                    <span class="error">* <?php echo $pwarr; ?></span>
             </div>
 
             <div class="form-group">
@@ -137,7 +145,25 @@ if(isset($_POST['submit'])){
 
         </form>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $('#icon-click').click(function()
+                {
+                    $('#icon').toggleClass('fa-eye-slash');
+                    var input = $('#pass');
+                    if(input.attr('type') === 'password'){
+                        input.attr('type','text');
+                    }
+                    else{
+                        input.attr('type','password');
+                    }
+                });
+            });
 
+        </script>
 
 
         <?php
