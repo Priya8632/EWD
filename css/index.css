@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+
+  body {
+    min-height: 200vh;
+  }
+   /* ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+
+  /* ul li {
+    position: relative;
+    list-style: none;
+  } */
+
+   ul li a {
+    margin: 0px 5px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 300px;
+    font-size:larger;
+  }
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    background: url(../img/piron-guillaume-U4FyCp3-KzY-unsplash.jpg);
+    background-size: cover;
+    text-align: center;
+  }
+
+  .center {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+
+  }
+
+  .text {
+    margin-top: 60px;
+  }
+
+  .data {
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .fa-hand-holding-medical,
+  .fa-accessible-icon,
+  .fa-user-group {
+    font-size: 50px;
+    color: green;
+    padding: 30px;
+  }
+
+  .fa-user-group {
+    color: white;
+  }
+
+  .footer {
+    background-color: rgb(25, 31, 27);
+    padding: 10px;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .fa-bolt-lightning,
+  .fa-clock,
+  .fa-users,
+  .fa-bookmark,
+  .fa-heart-pulse,
+  .fa-user-doctor,
+  .fa-truck-medical,
+  .fa-stethoscope,
+  .fa-briefcase-medical,
+  .fa-flask {
+    font-size: 50px;
+    padding: 40px;
+  }
+
+  span {
+    text-align: center;
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+  }
+
+  .flex-container>div {
+    background-color: rgb(84, 220, 96);
+    width: 700px;
+    margin: 10px;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .grid-container {
+    margin: 60px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    /* padding: 10px; */
+  }
+
+  .grid-container>div {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .container-fluid {
+    display: flex;
+    padding: 60px;
+  }
+  .card {
+    margin: 30px;
+    text-align: center;
+    border: 1px solid green;
+  }
+
+  @media only screen and (max-width: 600px) {
+    header.stiky {
+      margin: 0;
+    }
+  }
+

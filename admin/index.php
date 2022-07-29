@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>index</title>
-  <link rel="stylesheet" href="../css/contact.css">
+  <link rel="stylesheet" href="../css/index.css">
   <!-- <link href="../css/bootstrap.min.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -15,7 +15,6 @@
   <style>
     ion-icon{
         font-size:xx-large;
-        /* padding-right: 10px; */
     }
   </style>
 </head>
@@ -26,7 +25,7 @@
     <div class="container-lg">
 
       <a class="navbar-brand text-success" href="#">
-          <i class="fa-solid fa-mortar-pestle"></i>
+          <i class="fa-solid fa-heart-circle-plus"></i>
           HEALTH
         </a>
       <!-- <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a> -->
@@ -224,7 +223,7 @@
     <div class="container-fluid">
 
       <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="../img/d3.jfif" class="card-img-top" alt="...">
+        <img src="../img/d1.jpg" class="card-img-top" alt="..." height="400px">
         <div class="card-body">
           <h5 class="card-title">ROBERT SMITH</h5>
           <p class="card-text">Neurology</p>
@@ -233,7 +232,7 @@
       </div>
 
       <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="../img/d3.jfif" class="card-img-top" alt="...">
+        <img src="../img/d3.jfif" class="card-img-top" alt="..." height="400px">
         <div class="card-body">
           <h5 class="card-title">BRENT GRUNDY</h5>
           <p class="card-text">Arthology</p>
@@ -242,7 +241,7 @@
       </div>
 
       <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="../img/d3.jfif" class="card-img-top" alt="...">
+        <img src="../img/d4.jpg" class="card-img-top" alt="..." height="400px">
         <div class="card-body">
           <h5 class="card-title">JEFT BENSON</h5>
           <p class="card-text">Cardiology</p>
@@ -251,7 +250,7 @@
       </div>
 
       <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="../img/d3.jfif" class="card-img-top" alt="...">
+        <img src="../img/d2.jpg" class="card-img-top" alt="..." height="400px">
         <div class="card-body">
           <h5 class="card-title">DANNY ASHTON</h5>
           <p class="card-text">Medicine</p>
@@ -262,110 +261,94 @@
     </div>
   </section>
 
-
-  <!-- contact section -->
-  <div class="back" id="contact">
-
-    <div class="contactUs">
-      <div class="title">
-        <h2>Get in Touch</h2>
+  <!-- contact section start -->
+<section class="contact py-5" id="contact">
+<div class="container-lg py-4">
+  
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="section-title text-center">
+        <h2 class="fw-bold mb-5">Get In Touch</h2>
       </div>
-      <div class="box">
-        <!-- form -->
-        <div class="contact form">
-          <h3>Send a Message</h3>
-          <form action="">
+    </div>  
+  </div>
 
-            <div class="formbox">
-              <div class="row50">
-                <div class="inputbox">
-                  <span>First Name</span>
-                  <input type="text" placeholder="first name">
-                </div>
-                <div class="inputbox">
-                  <span>Last Name</span>
-                  <input type="text" placeholder="last name">
-                </div>
-              </div>
+  <div class="row">
 
-              <div class="row50">
-                <div class="inputbox">
-                  <span>Email</span>
-                  <input type="text" placeholder="email">
-                </div>
-                <div class="inputbox">
-                  <span>Mobile</span>
-                  <input type="text" placeholder="mobile">
-                </div>
-              </div>
+    <div class="col-md-5">
 
-              <div class="row100">
-                <div class="inputbox">
-                  <span>Message</span>
-                  <textarea placeholder="type here...."></textarea>
-                </div>
-              </div>
-
-              <div class="row100">
-                <div class="inputbox">
-                  <input type="submit" value="send">
-                </div>
-              </div>
-
-            </div>
-          </form>
+      <div class="contact-item d-flex mb-3">
+        <!-- <div class="icon fs-4 text-danger">
+          <i class="fas fa-envelope"></i>
+        </div> -->
+        <div class="text  ms-3">
+          <h3 class="fs-5">Email</h3>
+          <p class="text-muted">example@gmail.com</p>
         </div>
+      </div>
 
-        <!-- info -->
-        <div class="contact info">
-          <h3>Contact Info</h3>
-          <div class="infobox">
-            <div>
-              <span>
-                <ion-icon name="location"></ion-icon>
-              </span>
-              <p>192 , saragam park society <br>SURAT</p>
+      <div class="contact-item d-flex mb-3">
+        <!-- <div class="icon fs-4 text-danger">
+          <i class="fas fa-phone"></i>
+        </div> -->
+        <div class="text ms-3">
+          <h3 class="fs-5">Phone</h3>
+          <p class="text-muted">91 9654 293 ***</p>
+        </div>
+      </div>
+
+      <div class="contact-item d-flex mb-3">
+        <!-- <div class="icon fs-4 text-danger">
+          <i class="fas fa-map-marked-alt"></i>
+        </div> -->
+        <div class="text ms-3">
+          <h3 class="fs-5">visit</h3>
+          <p class="text-muted">Surat,Gujarat - 395010</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-7">
+      <div class="contact-form">
+
+        <form action="">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+                <input type="text" placeholder="first name" class="form-control form-control-lg fs-6 border-0 shadow-sm">
             </div>
-            <div>
-              <span>
-                <ion-icon name="mail"></ion-icon>
-              </span>
-              <a href="mailto:Lorem@gmail.com">Lorem@gmail.com</a>
+            <div class="col-lg-6 mb-4">
+              <input type="text" placeholder="last name" class="form-control form-control-lg fs-6 border-0 shadow-sm">
             </div>
-            <div>
-              <span>
-                <ion-icon name="call"></ion-icon>
-              </span>
-              <a href="tel:+9178678656">8946643782</a>
-            </div>
-            <ul class="sci">
-              <li><a href="#">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a></li>
-              <li><a href="#">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                </a></li>
-              <li><a href="#">
-                  <ion-icon name="logo-linkedin"></ion-icon>
-                </a></li>
-              <li><a href="#">
-                  <ion-icon name="logo-instagram"></ion-icon>
-                </a></li>
-            </ul>
           </div>
-        </div>
-
-
-        <!-- map -->
-        <div class="contact map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.831970336151!2d72.8456436147579!3d21.
-          238510685960854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04ed71aca8757%3A0x10eab773a707daf9!2sAmroli%20Char%20Rasta%2C%20Amroli%2C%20Surat%2C%20Gujarat%20394107!5e0!3m2!1sen!2sin!4v1658992851411!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <input type="text" placeholder="email" class="form-control form-control-lg fs-6 border-0 shadow-sm">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <textarea placeholder="your message" rows="5" class="form-control form-control-lg fs-6 border-0 shadow-sm"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="submit" class="btn btn-danger px-3">Send Message</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
   </div>
 
+</div>
+</section>
+<!-- contact section end -->
+
+
+
+ 
   <!-- footer -->
   <div class="footer">
     <p class="text-light">Copyright © HealthCare Department Website</p>

@@ -141,12 +141,13 @@ $mydata = mysqli_fetch_assoc($result1);
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr>
+
+              <tr id="<?php echo $data['specialization_id']; ?>">
                 <td class="s_id"><?php echo $data['specialization_id']; ?></td>
-                <td><?php echo $data['specialization']; ?></td>
+                <td data-target="specialization"><?php echo $data['specialization']; ?></td>
 
                 <td>
-                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id'];?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
@@ -205,27 +206,33 @@ $mydata = mysqli_fetch_assoc($result1);
             <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <form action="code.php" method="POST">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="" method="POST" enctype="multipart/form-data">
-                <div id="edit-data">
 
-                </div>
-                <div class="form-group p-2">
-                  <button type="button" class="btn btn-secondary btn-block">close</button>
-                  <button type="submit" class="btn btn-success btn-block" name="update">update</button>
+              <div class="row">
 
+                <input type="text" id="s_id" name="s_id">
+
+                <div class="form-group col-md-6 p-2">
+                    <label>Specialization</label>
+                    <input type="text" name="specialization" id="editspecialization" class="form-control" placeholder="specialization" value="">
                 </div>
-              </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                <button type="submit" name="specialization_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+              </div>
 
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>
     <!-- end -->
-
-
+ 
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -285,29 +292,6 @@ $mydata = mysqli_fetch_assoc($result1);
 
       });
 
-
-        $('.edit-btn').click(function(e) {
-
-          e.preventDefault();
-
-          var userid = $(this).closest('tr').find('.user_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_editbtn': true,
-              'user_id': userid,
-            },
-            success: function(response) {
-              $('#edit-data').html(response);
-              $('#edit').modal('show');
-
-            }
-          });
-
-        });
-
         $('.view-btn').click(function(e) {
           e.preventDefault();
           var sid = $(this).closest('tr').find('.s_id').text();
@@ -328,6 +312,41 @@ $mydata = mysqli_fetch_assoc($result1);
           });
 
         });
+
+         // edit value
+         $(document).on('click','a[data-role=specializationupdate]',function(){
+            // append values in input feilds
+            // var id = $(this).data('specialization_id');
+            alert($(this).data('specialization_id'));
+            // var specialization = $('#'+id).children('td[data-target=specialization]').text(); 
+
+            // $('#s_id').val(id);
+            // $('#editspecialization').val(specialization);
+            // $('#edit').modal('toggle');
+
+
+          });
+
+           // update data
+
+          // $('#save').click(function()
+          // {
+          //     var id = $('#s_id').val();
+          //     var specialization = $('#editspecialization').val();
+
+          //     $.ajax({
+          //       url:'code.php',
+          //       method:'POST',
+          //       data:{ specialization: specialization},
+          //       success:function(response)
+          //       {
+          //           $('#'+id).children('td[data-target=specialization]').text(specialization);
+
+          //           $('#edit').modal('toggle');
+          //       }
+
+          //       });
+          // });
       });
 
     </script>

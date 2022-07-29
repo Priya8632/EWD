@@ -226,7 +226,7 @@ $mydata = mysqli_fetch_assoc($result1);
             <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="" method="POST">
+          <form action="code.php" method="POST">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
 
@@ -249,19 +249,10 @@ $mydata = mysqli_fetch_assoc($result1);
                     <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
                 </div>
 
-                <!-- <div class="form-group p-2">
-                    <label>password</label>
-                    <input type="password" name="p_word" id="editpw" class="form-control" placeholder="password" value="">
-                </div>
-
-                <div class="form-group p-2">
-                    <label>confirm password</label>
-                    <input type="password" name="c_word" id="editcw" class="form-control" placeholder="confirm" value="">
-                </div> -->
               </div>
               <div class="modal-footer">
-                <button type="submit" id="save" class="btn btn-success" data-bs-dismiss="modal">update</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                <button type="submit" name="update" class="btn btn-success" data-bs-dismiss="modal">update</button>
               </div>
             </div>
           </div>
@@ -349,6 +340,7 @@ $mydata = mysqli_fetch_assoc($result1);
           });
         });
 
+        // edit value
         $(document).on('click','a[data-role=update]',function(){
             // append values in input feilds
             var id = $(this).data('id');
@@ -361,34 +353,35 @@ $mydata = mysqli_fetch_assoc($result1);
             $('#editlname').val(lastName);
             $('#editemail').val(email);
             $('#edit').modal('toggle');
+            // alert($(this).data('id'));
 
 
           });
 
           // update data
 
-          $('#save').click(function()
-          {
-              var id = $('#userId').val();
-              var firstName = $('#editfname').val();
-              var lastName = $('#editlname').val();
-              var email = $('#editemail').val();
+          // $('#save').click(function()
+          // {
+          //     var id = $('#userId').val();
+          //     var firstName = $('#editfname').val();
+          //     var lastName = $('#editlname').val();
+          //     var email = $('#editemail').val();
 
-              $.ajax({
-                url:'code.php',
-                method:'POST',
-                data:{firstName:firstName,lastName:lastName,email:email,id:id},
-                success:function(response)
-                {
-                    $('#'+id).children('td[data-target=firstName]').text(firstName);
-                    $('#'+id).children('td[data-target=lastName]').text(lastName);
-                    $('#'+id).children('td[data-target=Email]').text(email);
+          //     $.ajax({
+          //       url:'code.php',
+          //       method:'POST',
+          //       data:{firstName:firstName,lastName:lastName,email:email,id:id},
+          //       success:function(response)
+          //       {
+          //           // $('#'+id).children('td[data-target=firstName]').text(firstName);
+          //           // $('#'+id).children('td[data-target=lastName]').text(lastName);
+          //           // $('#'+id).children('td[data-target=Email]').text(email);
 
-                    $('#edit').modal('toggle');
-                }
+          //           // $('#edit').modal('toggle');
+          //       }
 
-                });
-          });
+          //       });
+          // });
 
       });
 

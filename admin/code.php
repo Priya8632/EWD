@@ -361,11 +361,45 @@ if (isset($_POST['checking_userbtn'])) {
     }
 }
 
+// doctor update
+if(isset($_POST['doctorupdate']))
+{
+    $id = $_POST['doctorid'];
+    $doctor_name = $_POST['doctor_name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $specialization = $_POST['specialization'];
 
-// edit data
+
+
+    $update = "UPDATE doctor SET doctor_name='$doctor_name',email='$email',mobile='$mobile', specialization='$specialization' where doctor_id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk){
+
+        header('location:doctor.php');
+    }
+}
+
+
+// specialization update
+if(isset($_POST['specialization_update']))
+{
+    $id = $_POST['s_id'];
+    $specialization = $_POST['specialization'];
+
+
+    $update = "UPDATE specialization SET specialization='$specialization' where specialization_id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk){
+
+        header('location:specialization.php');
+    }
+}
+
+// user update
 if(isset($_POST['update']))
 {
-    $id = $_POST['id'];
+    $id = $_POST['userId'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];

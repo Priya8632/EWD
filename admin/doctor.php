@@ -2,7 +2,7 @@
 
 include 'config.php';
 
-$query = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+$query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
           where d.specialization_id = s.specialization_id ";
 $result = mysqli_query($conn, $query);
 
@@ -149,16 +149,16 @@ $mydata = mysqli_fetch_assoc($result1);
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr>
-                <td class="doctor_id"><?php echo $data['Doctor_Id']; ?></td>
-                <td><?php echo $data['Doctor_name']; ?></td>
-                <td><?php echo $data['Email']; ?></td>
-                <td><?php echo $data['mobile']; ?></td>
-                <td><?php echo $data['gender']; ?></td>
-                <td><?php echo $data['specialization']; ?></td>
+              <tr id="<?php echo $data['doctor_id']; ?>">
+                <td class="doctorid"><?php echo $data['doctor_id']; ?></td>
+                <td data-target="doctor_name"><?php echo $data['doctor_name']; ?></td>
+                <td data-target="email"><?php echo $data['email']; ?></td>
+                <td data-target="mobile"><?php echo $data['mobile']; ?></td>
+                <td data-target="gender"><?php echo $data['gender']; ?></td>
+                <td data-target="specialization"><?php echo $data['specialization']; ?></td>
 
                 <td>
-                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="doctorupdate" data-id="<?php echo $data['doctor_id'];?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
@@ -222,35 +222,56 @@ $mydata = mysqli_fetch_assoc($result1);
       </div>
     </div>
     <!-- end -->
+  <!-- edit modal -->
 
-    <!-- edit modal -->
-
-    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <form action="code.php" method="POST">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="" method="POST" enctype="multipart/form-data">
-                <div id="edit-data">
 
+              <div class="row">
+
+                <input type="text" id="doctorid">
+
+                <div class="form-group col-md-6 p-2">
+                    <label>doctor name</label>
+                    <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="doctor name" value="">
                 </div>
+
+                <div class="form-group col-md-6 p-2">
+                    <label>email</label>
+                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                </div>
+
                 <div class="form-group p-2">
-                  <button type="button" class="btn btn-secondary btn-block">close</button>
-                  <button type="submit" class="btn btn-success btn-block" name="update">update</button>
-
+                    <label>mobile</label>
+                    <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
                 </div>
-              </form>
 
+                <div class="form-group p-2">
+                    <label>specialization</label>
+                    <input type="text" name="specialization" id="editspecialization" class="form-control" placeholder="specialization" value="">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                <button type="submit" name="doctorupdate" class="btn btn-success" data-bs-dismiss="modal">update</button>
+              </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </div>
     <!-- end -->
+    
 
 
     <!-- view modal -->
@@ -282,7 +303,7 @@ $mydata = mysqli_fetch_assoc($result1);
           </div>
           <form action="code.php" method="POST">
           <div class="modal-body">
-              <input type="text" id="delete_id" name="doctor_id">
+              <input type="text" id="delete_id">
               <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
@@ -305,37 +326,16 @@ $mydata = mysqli_fetch_assoc($result1);
           {
               e.preventDefault();
 
-              var sid = $(this).closest('tr').find('.doctor_id').text();
+              var sid = $(this).closest('tr').find('.doctorid').text();
               $('#delete_id').val(sid);
               $('#delete').modal('show');
 
           });
 
-        $('.edit-btn').click(function(e) {
-
-          e.preventDefault();
-
-          var userid = $(this).closest('tr').find('.user_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_editbtn': true,
-              'user_id': userid,
-            },
-            success: function(response) {
-              $('#edit-data').html(response);
-              $('#edit').modal('show');
-
-            }
-          });
-
-        });
 
         $('.view-btn').click(function(e) {
           e.preventDefault();
-          var doctorid = $(this).closest('tr').find('.doctor_id').text();
+          var doctorid = $(this).closest('tr').find('.doctorid').text();
           // console.log(userid);
           $.ajax({
             type: "POST",
@@ -353,6 +353,30 @@ $mydata = mysqli_fetch_assoc($result1);
           });
 
         });
+
+        // edit value
+        $(document).on('click','a[data-role=doctorupdate]',function(){
+            // append values in input feilds
+            alert($(this).data('doctor_id'));
+            var did = $(this).data('doctor_id');
+            var doctor_name = $('#'+did).children('td[data-target=doctor_name]').text(); 
+            var email = $('#'+did).children('td[data-target=email]').text(); 
+            var mobile = $('#'+did).children('td[data-target=mobile]').text(); 
+            var specialization = $('#'+did).children('td[data-target=specialization]').text(); 
+
+
+            $('#doctorid').val(did);
+            $('#editdoctorname').val(doctor_name);
+            $('#editemail').val(email);
+            $('#editmobile').val(mobile);
+            $('#editspecialization').val(specialization);
+            $('#edit').modal('toggle');
+
+
+          });
+
+
+         
       });
     </script>
 
