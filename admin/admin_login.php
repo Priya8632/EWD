@@ -29,14 +29,6 @@ if(isset($_REQUEST['adsubmit'])){
         $emailarr = "email required";}
     elseif (empty($password)) {
         $passarr = "password required";} 
-    elseif(!preg_match("/[a-z'@,!,#,$,%,^,&,*,+']+/",$_POST['pw'])){
-        $pwarr = "minimum 1 small";    }
-    elseif(!preg_match("/[A-Z]+/",$_POST['pw'])){
-        $pwarr = "minum 1 capital"; }
-    elseif(!preg_match("/[0-9]/",$_POST['pw'])){
-        $pwarr = "1 number";}
-    elseif(strlen($_POST['pw']) > 8 || strlen($_POST['pw']) < 8 ){
-        $pwarr = "8 length is required";}
     
     else{
     

@@ -6,7 +6,7 @@ $query = "SELECT * FROM users";
 $result = mysqli_query($conn, $query);
 
 
-if(!isset($_SESSION['aid'])){
+if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
 if (!isset($_SESSION['aid'])) {
@@ -16,7 +16,7 @@ if (!isset($_SESSION['aid'])) {
 
 $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-$result1 = mysqli_query($conn,$sql);
+$result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
 ?>
@@ -34,6 +34,7 @@ $mydata = mysqli_fetch_assoc($result1);
   <script src="../js/jquery.js"></script>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> -->
 
@@ -42,9 +43,10 @@ $mydata = mysqli_fetch_assoc($result1);
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
-    body{
-      background-color:rgb(146, 234, 153);
+    body {
+      background-color: rgb(146, 234, 153);
     }
+
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
@@ -118,22 +120,25 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <form class="">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
+          <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;color:blue;"></i>
         </div>
       </nav>
+
+
 
       <!-- <div class="container mx-auto"> -->
       <div class="table-responsive mx-auto bg-light">
         <div class="row">
-          <div class="col-md-6">
-            <h2>Users Records </h2>
-          </div>
-          <div class="col-md-6">
-            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
-          </div>
+            <div class="col-md-6">
+              <h2>Users Records</h2>
+            </div>
+            <div class="col-md-6 w-25">
+              <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+            </div>
         </div>
+        
+        
+        <div id="searchresult">
 
         <table class="table table-hover">
           <thead class="table table-dark">
@@ -147,22 +152,23 @@ $mydata = mysqli_fetch_assoc($result1);
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr id="<?php echo $data['id'];?>">
+              <tr id="<?php echo $data['id']; ?>">
                 <td class="id"><?php echo $data['id']; ?></td>
                 <td data-target="firstName"><?php echo $data['firstName']; ?></td>
                 <td data-target="lastName"><?php echo $data['lastName']; ?></td>
                 <td data-target="Email"><?php echo $data['Email']; ?></td>
                 <td>
-                  <a href="#" data-role="update" data-id="<?php echo $data['id'];?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-              </tr>
+                </td>
+                </tr>
             <?php } ?>
           </tbody>
         </table>
       </div>
     </div>
-
+    
     <!-- crud section end -->
 
     <!-- add user modal -->
@@ -227,35 +233,35 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="code.php" method="POST">
-          <div class="modal-body">
-            <div class="container p-5 text-dark mx-auto bg-light">
+            <div class="modal-body">
+              <div class="container p-5 text-dark mx-auto bg-light">
 
-              <div class="row">
+                <div class="row">
 
-                <input type="text" id="userId" name="userId">
+                  <input type="text" id="userId" name="userId">
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>first name</label>
                     <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="">
-                </div>
+                  </div>
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>last name</label>
                     <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
-                </div>
+                  </div>
 
-                <div class="form-group p-2">
+                  <div class="form-group p-2">
                     <label>email</label>
                     <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
-                </div>
+                  </div>
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                <button type="submit" name="update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                  <button type="submit" name="update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                </div>
               </div>
             </div>
-          </div>
           </form>
         </div>
       </div>
@@ -290,14 +296,14 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="code.php" method="POST">
-          <div class="modal-body">
+            <div class="modal-body">
               <input type="text" id="delete_id" name="id">
               <h4>Are you sure,you want to delete this data?</h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-            <button type="submit" name="userdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="userdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            </div>
           </form>
         </div>
       </div>
@@ -306,11 +312,33 @@ $mydata = mysqli_fetch_assoc($result1);
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
       $(document).ready(function() {
 
-        $('.delete-btn').click(function(e){
+          $('#live_search').keyup(function()
+          {
+              var input = $(this).val();
+              if(input != '')
+              {
+                $.ajax(
+                  {
+                    url:'code.php',
+                    method:'POST',
+                    data:{input:input},
+
+                    success:function(data){
+                      $('#searchresult').html(data);
+                      $('#searchresult').css('display','block');
+                    }
+                  });
+              }else{
+                $('#searchresult').css('display','none');
+              }
+          });
+
+        $('.delete-btn').click(function(e) {
           e.preventDefault();
 
           var sid = $(this).closest('tr').find('.id').text();
@@ -319,7 +347,7 @@ $mydata = mysqli_fetch_assoc($result1);
 
         });
 
-        
+
         $('.view-btn').click(function(e) {
           e.preventDefault();
           var id = $(this).closest('tr').find('.id').text();
@@ -341,50 +369,49 @@ $mydata = mysqli_fetch_assoc($result1);
         });
 
         // edit value
-        $(document).on('click','a[data-role=update]',function(){
-            // append values in input feilds
-            var id = $(this).data('id');
-            var firstName = $('#'+id).children('td[data-target=firstName]').text(); 
-            var lastName = $('#'+id).children('td[data-target=lastName]').text(); 
-            var email = $('#'+id).children('td[data-target=Email]').text(); 
+        $(document).on('click', 'a[data-role=update]', function() {
+          // append values in input feilds
+          var id = $(this).data('id');
+          var firstName = $('#' + id).children('td[data-target=firstName]').text();
+          var lastName = $('#' + id).children('td[data-target=lastName]').text();
+          var email = $('#' + id).children('td[data-target=Email]').text();
 
-            $('#userId').val(id);
-            $('#editfname').val(firstName);
-            $('#editlname').val(lastName);
-            $('#editemail').val(email);
-            $('#edit').modal('toggle');
-            // alert($(this).data('id'));
+          $('#userId').val(id);
+          $('#editfname').val(firstName);
+          $('#editlname').val(lastName);
+          $('#editemail').val(email);
+          $('#edit').modal('toggle');
+          // alert($(this).data('id'));
 
 
-          });
+        });
 
-          // update data
+        // update data
 
-          // $('#save').click(function()
-          // {
-          //     var id = $('#userId').val();
-          //     var firstName = $('#editfname').val();
-          //     var lastName = $('#editlname').val();
-          //     var email = $('#editemail').val();
+        // $('#save').click(function()
+        // {
+        //     var id = $('#userId').val();
+        //     var firstName = $('#editfname').val();
+        //     var lastName = $('#editlname').val();
+        //     var email = $('#editemail').val();
 
-          //     $.ajax({
-          //       url:'code.php',
-          //       method:'POST',
-          //       data:{firstName:firstName,lastName:lastName,email:email,id:id},
-          //       success:function(response)
-          //       {
-          //           // $('#'+id).children('td[data-target=firstName]').text(firstName);
-          //           // $('#'+id).children('td[data-target=lastName]').text(lastName);
-          //           // $('#'+id).children('td[data-target=Email]').text(email);
+        //     $.ajax({
+        //       url:'code.php',
+        //       method:'POST',
+        //       data:{firstName:firstName,lastName:lastName,email:email,id:id},
+        //       success:function(response)
+        //       {
+        //           // $('#'+id).children('td[data-target=firstName]').text(firstName);
+        //           // $('#'+id).children('td[data-target=lastName]').text(lastName);
+        //           // $('#'+id).children('td[data-target=Email]').text(email);
 
-          //           // $('#edit').modal('toggle');
-          //       }
+        //           // $('#edit').modal('toggle');
+        //       }
 
-          //       });
-          // });
+        //       });
+        // });
 
       });
-
     </script>
 
 </body>
