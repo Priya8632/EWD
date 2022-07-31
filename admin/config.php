@@ -1,6 +1,6 @@
 <?php 
 
-// session_start();
+session_start();
 $conn = mysqli_connect("localhost","root","");
 if($conn){
 

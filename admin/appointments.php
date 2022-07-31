@@ -6,12 +6,12 @@ include 'config.php';
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
 $result = mysqli_query($conn, $query);
 
-if(!isset($_SESSION['aid'])){
-  header('location:admin_login.php');
-}
-if (!isset($_SESSION['aid'])) {
-  $_SESSION['aid'] = $_COOKIE['aid'];
-}
+// if(!isset($_SESSION['aid'])){
+//   header('location:admin_login.php');
+// }
+// if (!isset($_SESSION['aid'])) {
+//   $_SESSION['aid'] = $_COOKIE['aid'];
+// }
 
 
 $id = $_SESSION['aid'];

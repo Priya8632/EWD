@@ -6,12 +6,12 @@ $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.d
  where p.doctor_id = d.doctor_id";
 $result = mysqli_query($conn, $query);
 
-if(!isset($_SESSION['aid'])){
-  header('location:admin_login.php');
-}
-if (!isset($_SESSION['aid'])) {
-  $_SESSION['aid'] = $_COOKIE['aid'];
-}
+// if(!isset($_SESSION['aid'])){
+//   header('location:admin_login.php');
+// }
+// if (!isset($_SESSION['aid'])) {
+//   $_SESSION['aid'] = $_COOKIE['aid'];
+// }
 
 
 $id = $_SESSION['aid'];
