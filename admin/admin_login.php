@@ -27,10 +27,13 @@ $passarr = $error = $emailarr = "";
 
 if (isset($_POST['adsubmit'])) {
 
-    if(empty($_POST['email']) || empty($_POST['password'])){
+    if(empty($_POST['email'])){
+        $emailarr = "username required";
 
-        $error = "username and password required";
-    }else
+    }elseif(empty($_POST['password'])){
+        $passarr = "password required";
+    }
+    else
     {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -40,6 +43,9 @@ if (isset($_POST['adsubmit'])) {
                         $_SESSION['aid'] = $fetch_array['admin_id'];
                         setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
                         header('location:dashboard.php');
+                    }
+                    else {
+                        $error = "username or password invalid";
                     }
                 }
     }
@@ -123,10 +129,10 @@ if (isset($_POST['adsubmit'])) {
     <div class="container p-5 text-dark mx-auto bg-light w-50">
 
         <form action="" method="POST" enctype="multipart/form-data">
-            <span class="error">* <?php echo $error; ?></span>
             <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Sign in</h3>
             <hr>
-
+            
+            <span class="error">* <?php echo $error; ?></span>
             <div class="form-group">
                 <label for="">User name</label>
                 <div class="input-group">
