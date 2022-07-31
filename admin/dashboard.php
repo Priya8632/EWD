@@ -12,7 +12,7 @@ if (!isset($_SESSION['aid'])) {
 
 $id = $_SESSION['aid'];
 // $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-$sql =  "SELECT * FROM admin WHERE id ='$id'";
+$sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 

@@ -37,10 +37,8 @@ if (isset($_POST['adsubmit'])) {
 
         if ($email == $fetch_array['email'] && $password == $fetch_array['password']) {
 
-            // $_SESSION['aid'] = $fetch_array['admin_id'];
-            // setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
-            $_SESSION['aid'] = $fetch_array['id'];
-            setcookie('aid', $fetch_array['id'], time() + 60 * 10);
+            $_SESSION['aid'] = $fetch_array['admin_id'];
+            setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
             header('location:dashboard.php');
             
         } else {
