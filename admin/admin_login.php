@@ -12,7 +12,6 @@ if (isset($_COOKIE['aid'])) {
 $selectTable = "SELECT * FROM admin";
 $tblQuery = mysqli_query($conn, $selectTable);
 $fetch_array = mysqli_fetch_assoc($tblQuery);
-$row = mysqli_num_rows($tblQuery);
 
 if (!$tblQuery) {
     $createTable = "CREATE TABLE  admin ( admin_id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -27,29 +26,28 @@ $passarr = $error = $emailarr = "";
 
 if (isset($_POST['adsubmit'])) {
 
-    if(empty($_POST['email'])){
+    if (empty($_POST['email'])) {
         $emailarr = "username required";
-
-    }elseif(empty($_POST['password'])){
+    } elseif (empty($_POST['password'])) {
         $passarr = "password required";
-    }
-    else
-    {
+    } else {
+
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        if ($row > 0) {
-                    if ($email == $fetch_array['email'] && $password == $fetch_array['password']) {
-                        $_SESSION['aid'] = $fetch_array['admin_id'];
-                        setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
-                        header('location:dashboard.php');
-                    }
-                    else {
-                        $error = "username or password invalid";
-                    }
-                }
+        if ($email == $fetch_array['email'] && $password == $fetch_array['password']) {
+
+            // $_SESSION['aid'] = $fetch_array['admin_id'];
+            // setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
+            $_SESSION['aid'] = $fetch_array['id'];
+            setcookie('aid', $fetch_array['id'], time() + 60 * 10);
+            header('location:dashboard.php');
+            
+        } else {
+
+            $error = "username or password invalid";
+        }
     }
-  
 }
 
 ?>
@@ -131,7 +129,7 @@ if (isset($_POST['adsubmit'])) {
         <form action="" method="POST" enctype="multipart/form-data">
             <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Sign in</h3>
             <hr>
-            
+
             <span class="error">* <?php echo $error; ?></span>
             <div class="form-group">
                 <label for="">User name</label>
