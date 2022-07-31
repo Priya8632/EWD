@@ -273,67 +273,32 @@
     </div>  
   </div>
 
-  <div class="row">
 
-    <div class="col-md-5">
-
-      <div class="contact-item d-flex mb-3">
-        <!-- <div class="icon fs-4 text-danger">
-          <i class="fas fa-envelope"></i>
-        </div> -->
-        <div class="text  ms-3">
-          <h3 class="fs-5">Email</h3>
-          <p class="text-muted">example@gmail.com</p>
-        </div>
-      </div>
-
-      <div class="contact-item d-flex mb-3">
-        <!-- <div class="icon fs-4 text-danger">
-          <i class="fas fa-phone"></i>
-        </div> -->
-        <div class="text ms-3">
-          <h3 class="fs-5">Phone</h3>
-          <p class="text-muted">91 9654 293 ***</p>
-        </div>
-      </div>
-
-      <div class="contact-item d-flex mb-3">
-        <!-- <div class="icon fs-4 text-danger">
-          <i class="fas fa-map-marked-alt"></i>
-        </div> -->
-        <div class="text ms-3">
-          <h3 class="fs-5">visit</h3>
-          <p class="text-muted">Surat,Gujarat - 395010</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-md-7">
+    <div class="col-md-12">
       <div class="contact-form">
 
         <form action="">
           <div class="row">
-            <div class="col-lg-6 mb-4">
-                <input type="text" placeholder="first name" class="form-control form-control-lg fs-6 border-0 shadow-sm">
+            <div class="col-lg-6">
+                <input type="text" placeholder="first name" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
             </div>
-            <div class="col-lg-6 mb-4">
-              <input type="text" placeholder="last name" class="form-control form-control-lg fs-6 border-0 shadow-sm">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 mb-4">
-              <input type="text" placeholder="email" class="form-control form-control-lg fs-6 border-0 shadow-sm">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 mb-4">
-              <textarea placeholder="your message" rows="5" class="form-control form-control-lg fs-6 border-0 shadow-sm"></textarea>
+            <div class="col-lg-6">
+              <input type="text" placeholder="last name" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <button type="submit" class="btn btn-danger px-3">Send Message</button>
+              <input type="text" placeholder="email" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <textarea placeholder="your message" rows="5" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="submit" class="btn btn-success px-3">Send Message</button>
             </div>
           </div>
         </form>
@@ -346,7 +311,11 @@
 </section>
 <!-- contact section end -->
 
-
+<style>
+  input{
+    background-color: gray;
+  }
+</style>
 
  
   <!-- footer -->

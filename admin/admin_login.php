@@ -10,20 +10,20 @@ $selectTable = "SELECT * FROM admin";
 $tblQuery = mysqli_query($conn,$selectTable) ;
 
 if (!$tblQuery) {
-    $createTable = "CREATE TABLE  admin ( id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email varchar(20) NOT NULL, password varchar(10) NOT NULL )";
+    $createTable = "CREATE TABLE  admin ( admin_id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(50) NOT NULL, password VARCHAR(20) NOT NULL )";
 
     if(!mysqli_query($conn,$createTable)){
        echo mysqli_errno($conn); 
     }
 }
 
-$adminarr = $pwarr = $error = $emailarr ="";
+$adminarr = $passarr = $error = $emailarr ="";
 
 if(isset($_REQUEST['adsubmit'])){
 
-    $email = $_POST['admin'];
-    $password = $_POST['pw'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     if (empty($email)) {
         $emailarr = "email required";}
@@ -34,14 +34,16 @@ if(isset($_REQUEST['adsubmit'])){
     
     
     $fetch_array = mysqli_fetch_assoc($tblQuery);
-    
-    if ($email== $fetch_array['email'] && $password == $fetch_array['password']  ) {
-        $_SESSION['aid'] = $fetch_array['admin_id'];
-        setcookie('aid',$fetch_array['admin_id'],time() + 60*10);
+    $row = mysqli_num_rows($tblQuery);
+    if($row >0 ){
+        if ($email== $fetch_array['email'] && $password == $fetch_array['password']  ) {
+        // $_SESSION['aid'] = $fetch_array['admin_id'];
+        // setcookie('aid',$fetch_array['admin_id'],time() + 60*10);
         header('location:dashboard.php');
         
+            }
+        }
     }
-}
 }
 
 ?>
@@ -119,24 +121,24 @@ if(isset($_REQUEST['adsubmit'])){
             <hr>
 
             <div class="form-group">
-                <label for="">Username</label>
+                <label for="">User name</label>
                 <div class="input-group">
-                    <input type="text" name="admin" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
+                    <input type="text" name="email" class="form-control" placeholder="User name" value="<?php if(isset($_POST['email'])) { echo $_POST['email'];}?>">
                 </div>
                 <span class="error">* <?php echo $emailarr;?></span>
             </div>
 
             <div class="form-group">
-                <label for="">Email</label>
+                <label for="">Password</label>
                 <div class="input-group">
-                    <input type="password" name="pw" id="pass" class="form-control" placeholder="password" data-toggle="password" value="<?php if(isset($_POST['pw'])) { echo $_POST['pw'];} ?>">
+                    <input type="password" name="password" id="pass" class="form-control" placeholder="password" data-toggle="password" value="<?php if(isset($_POST['password'])) { echo $_POST['password'];} ?>">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <a href="#" class="text-dark" id="icon-click"><i class="fas fa-eye" id="icon"></i></a>
                         </div>
                     </div>
                 </div>
-                <span class="error">* <?php echo $pwarr; ?></span>
+                <span class="error">* <?php echo $passarr; ?></span>
             </div>
 
             <div class="form-group">
