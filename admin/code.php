@@ -362,9 +362,9 @@ if (isset($_POST['checking_userbtn'])) {
 }
 
 // doctor update
-if(isset($_POST['doctorupdate']))
+if(isset($_POST['doctor_update']))
 {
-    $id = $_POST['doctorid'];
+    $id = $_POST['doctor_id'];
     $doctor_name = $_POST['doctor_name'];
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
@@ -380,6 +380,45 @@ if(isset($_POST['doctorupdate']))
     }
 }
 
+// appointment update
+if(isset($_POST['appointment_update']))
+{
+    $id = $_POST['app_id'];
+    $app_number = $_POST['app_number'];
+    $patient_id = $_POST['patient_id'];
+    $doctor_id = $_POST['doctor_id'];
+    $specialization_id = $_POST['specialization_id'];
+    $fees = $_POST['fees'];
+    $app_date = $_POST['app_date'];
+    $app_time = $_POST['app_time'];
+
+    
+    $update = "UPDATE appointment SET app_number='$app_number',patient_id='$patient_id',doctor_id='$doctor_id', specialization_id='$specialization_id', fees='$fees',app_date='$app_date',app_time='$app_time'  where appointment_id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk){
+        header('location:appointments.php');
+    }
+
+}
+
+// patient update
+// doctor update
+if(isset($_POST['patient_update']))
+{
+    $id = $_POST['patient_id'];
+    $patient_name = $_POST['patient_name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $age = $_POST['age'];
+    $doctor_name = $_POST['doctor_name'];
+
+    $update = "UPDATE patient SET patient_name='$patient_name',email='$email',mobile='$mobile', age='$age',doctor_id='$doctor_name' where patient_id=$id";
+    $chk = mysqli_query($conn,$update);
+    if($chk){
+
+        header('location:patient.php');
+    }
+}
 
 // specialization update
 if(isset($_POST['specialization_update']))
@@ -395,6 +434,7 @@ if(isset($_POST['specialization_update']))
         header('location:specialization.php');
     }
 }
+
 
 // user update
 if(isset($_POST['update']))
@@ -413,6 +453,7 @@ if(isset($_POST['update']))
     }
 }
 
+// search
 if(isset($_POST['input'])){
 
     $input = $_POST['input'];

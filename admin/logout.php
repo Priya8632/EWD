@@ -3,7 +3,7 @@ session_start();
 setcookie('aid',$_SESSION['aid'],time() - 60*10);
 session_unset();
 session_destroy();
-header('location:index.php');
+header('location:admin_login.php');
 
 
 ?>

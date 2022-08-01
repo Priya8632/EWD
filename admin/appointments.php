@@ -2,11 +2,11 @@
 
 include 'config.php';
 
- $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+$query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
 $result = mysqli_query($conn, $query);
 
-if(!isset($_SESSION['aid'])){
+if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
 if (!isset($_SESSION['aid'])) {
@@ -16,7 +16,7 @@ if (!isset($_SESSION['aid'])) {
 
 $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-$result1 = mysqli_query($conn,$sql);
+$result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
 
@@ -43,9 +43,10 @@ $mydata = mysqli_fetch_assoc($result1);
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
-     body{
-      background-color:rgb(146, 234, 153);
+    body {
+      background-color: rgb(146, 234, 153);
     }
+
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
@@ -54,13 +55,16 @@ $mydata = mysqli_fetch_assoc($result1);
       background-color: white;
       padding: 30px;
     }
+
     h2 {
       margin-bottom: 30px;
     }
+
     .list-group-item {
       border: none;
       padding: 20px 30px;
     }
+
     .list-group-item.active {
       background-color: transparent;
       color: var(--main-text-color);
@@ -149,18 +153,18 @@ $mydata = mysqli_fetch_assoc($result1);
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr>
+              <tr id="<?php echo $data['appointment_id']; ?>">
                 <td class="app_id"><?php echo $data['appointment_id']; ?></td>
-                <td><?php echo $data['app_number']; ?></td>
-                <td><?php echo $data['patient_name']; ?></td>
-                <td><?php echo $data['doctor_name']; ?></td>
-                <td><?php echo $data['specialization']; ?></td>
-                <td><?php echo $data['fees']; ?></td>
-                <td><?php echo $data['app_date']; ?></td>
-                <td><?php echo $data['app_time']; ?></td>
+                <td data-target="app_number"><?php echo $data['app_number']; ?></td>
+                <td data-target="patient_name"><?php echo $data['patient_name']; ?></td>
+                <td data-target="doctor_name"><?php echo $data['doctor_name']; ?></td>
+                <td data-target="specialization"><?php echo $data['specialization']; ?></td>
+                <td data-target="fees"><?php echo $data['fees']; ?></td>
+                <td data-target="app_date"><?php echo $data['app_date']; ?></td>
+                <td data-target="app_time"><?php echo $data['app_time']; ?></td>
 
                 <td>
-                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="appointmentupdate" data-id="<?php echo $data['appointment_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
@@ -244,128 +248,194 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="" method="POST" enctype="multipart/form-data">
-                <div id="edit-data">
+            <div class="container p-3 text-dark mx-auto bg-light">
+              <form action="code.php" method="POST">
+
+                <div class="row">
+
+                  <input type="hidden" id="app_id" name="app_id">
+
+                  <div class="form-group p-2">
+                    <label>Appointment number</label>
+                    <input type="text" name="app_number" id="editapp_number" class="form-control" placeholder="appointment_number" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>Patient</label>
+                    <input type="text" name="patient_id" id="editpatient_id" class="form-control" placeholder="patient_id" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>Doctor</label>
+                    <input type="text" name="doctor_id" id="editdoctor_id" class="form-control" placeholder="doctor_id" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>Specialization</label>
+                    <input type="text" name="specialization_id" id="editspecialization_id" class="form-control" placeholder="specialization_id" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>Fees</label>
+                    <input type="text" name="fees" id="editfees" class="form-control" placeholder="fees" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>Date</label>
+                    <input type="date" name="app_date" id="editapp_date" class="form-control" placeholder="appointment_date" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>Time</label>
+                    <input type="text" name="app_time" id="editapp_time" class="form-control" placeholder="appointment_time" value="">
+                  </div>
 
                 </div>
-                <div class="form-group p-2">
-                  <button type="button" class="btn btn-secondary btn-block">close</button>
-                  <button type="submit" class="btn btn-success btn-block" name="update">update</button>
 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                    <button type="submit" name="appointment_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                  </div>
+
+                </form>
                 </div>
-              </form>
-
-            </div>
-          </div>
+              </div>
         </div>
       </div>
     </div>
-    <!-- end -->
+
+  
+  <!-- end -->
 
 
-    <!-- view modal -->
-    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="user_viewing"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-          </div>
+  <!-- view modal -->
+  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">User records</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="user_viewing"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
         </div>
       </div>
     </div>
-    <!-- end -->
+  </div>
+  <!-- end -->
 
 
-     <!-- delete modal -->
-     <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form action="code.php" method="POST">
+  <!-- delete modal -->
+  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="code.php" method="POST">
           <div class="modal-body">
-              <input type="text" id="delete_id" name="app_id">
-              <h4>Are you sure,you want to delete this data?</h4>
+            <input type="text" id="delete_id" name="app_id">
+            <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
             <button type="submit" name="appdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
           </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
-    <!-- end -->
+  </div>
+  <!-- end -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
 
-    <script>
-      $(document).ready(function() {
+      $('.delete-btn').click(function(e) {
+        e.preventDefault();
 
-          $('.delete-btn').click(function(e)
-          {
-              e.preventDefault();
+        var sid = $(this).closest('tr').find('.app_id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
 
-              var sid = $(this).closest('tr').find('.app_id').text();
-              $('#delete_id').val(sid);
-              $('#delete').modal('show');
+      });
 
-          });
+      $('.edit-btn').click(function(e) {
 
-        $('.edit-btn').click(function(e) {
+        e.preventDefault();
 
-          e.preventDefault();
+        var userid = $(this).closest('tr').find('.user_id').text();
+        // console.log(userid);
+        $.ajax({
+          type: "POST",
+          url: "code.php",
+          data: {
+            'checking_editbtn': true,
+            'user_id': userid,
+          },
+          success: function(response) {
+            $('#edit-data').html(response);
+            $('#edit').modal('show');
 
-          var userid = $(this).closest('tr').find('.user_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_editbtn': true,
-              'user_id': userid,
-            },
-            success: function(response) {
-              $('#edit-data').html(response);
-              $('#edit').modal('show');
-
-            }
-          });
-
+          }
         });
 
-        $('.view-btn').click(function(e) {
-          e.preventDefault();
-          var appid = $(this).closest('tr').find('.app_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_appbtn': true,
-              'app_id': appid,
-            },
-            success: function(response) {
-              //  console.log(response);
-              $('.user_viewing').html(response);
-              $('#view').modal('show');
+      });
 
-            }
-          });
-        });
+      $('.view-btn').click(function(e) {
+        e.preventDefault();
+        var appid = $(this).closest('tr').find('.app_id').text();
+        // console.log(userid);
+        $.ajax({
+          type: "POST",
+          url: "code.php",
+          data: {
+            'checking_appbtn': true,
+            'app_id': appid,
+          },
+          success: function(response) {
+            //  console.log(response);
+            $('.user_viewing').html(response);
+            $('#view').modal('show');
 
+          }
         });
-    </script>
+      });
+
+      // edit value
+      $(document).on('click', 'a[data-role=appointmentupdate]', function() {
+        // append values in input feilds
+
+        var id = $(this).attr('data-id');
+        var app_number = $('#' + id).children('td[data-target=app_number]').text();
+        var patient_id = $('#' + id).children('td[data-target=patient_name]').text();
+        var doctor_id = $('#' + id).children('td[data-target=doctor_name]').text();
+        var specialization_id = $('#' + id).children('td[data-target=specialization]').text();
+        var fees = $('#' + id).children('td[data-target=fees]').text();
+        var app_date = $('#' + id).children('td[data-target=app_date]').text();
+        var app_time = $('#' + id).children('td[data-target=app_time]').text();
+
+        // alert(app_number);
+
+        $('#app_id').val(id);
+        $('#editapp_number').val(app_number);
+        $('#editpatient_id').val(patient_id);
+        $('#editdoctor_id').val(doctor_id);
+        $('#editspecialization_id').val(specialization_id);
+        $('#editfees').val(fees);
+        $('#editapp_date').val(app_date);
+        $('#editapp_time').val(app_time);
+        $('#edit').modal('toggle');
+
+      });
+
+    });
+  </script>
 
 </body>

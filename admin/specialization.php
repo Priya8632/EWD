@@ -5,7 +5,7 @@ include 'config.php';
 $query = "SELECT * FROM specialization";
 $result = mysqli_query($conn, $query);
 
-if(!isset($_SESSION['aid'])){
+if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
 if (!isset($_SESSION['aid'])) {
@@ -15,7 +15,7 @@ if (!isset($_SESSION['aid'])) {
 
 $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-$result1 = mysqli_query($conn,$sql);
+$result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
 ?>
@@ -41,9 +41,10 @@ $mydata = mysqli_fetch_assoc($result1);
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
-     body{
-      background-color:rgb(146, 234, 153);
+    body {
+      background-color: rgb(146, 234, 153);
     }
+
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
@@ -52,13 +53,16 @@ $mydata = mysqli_fetch_assoc($result1);
       background-color: white;
       padding: 30px;
     }
+
     h2 {
       margin-bottom: 30px;
     }
+
     .list-group-item {
       border: none;
       padding: 20px 30px;
     }
+
     .list-group-item.active {
       background-color: transparent;
       color: var(--main-text-color);
@@ -147,7 +151,7 @@ $mydata = mysqli_fetch_assoc($result1);
                 <td data-target="specialization"><?php echo $data['specialization']; ?></td>
 
                 <td>
-                  <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id'];?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
@@ -174,15 +178,15 @@ $mydata = mysqli_fetch_assoc($result1);
               <form action="code.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>Specialization id</label>
                     <input type="text" name="specialization_id" class="form-control" placeholder="specialization id" value="">
-                </div>
+                  </div>
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>Specialization</label>
                     <input type="text" name="specialization" class="form-control" placeholder="specialization name" value="">
-                </div>
+                  </div>
 
                   <div class="form-group p-2">
                     <button type="submit" class="btn btn-success btn-block" name="speciality">Add</button>
@@ -207,32 +211,32 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="code.php" method="POST">
-          <div class="modal-body">
-            <div class="container p-5 text-dark mx-auto bg-light">
+            <div class="modal-body">
+              <div class="container p-5 text-dark mx-auto bg-light">
 
-              <div class="row">
+                <div class="row">
 
-                <input type="text" id="s_id" name="s_id">
+                  <input type="text" id="s_id" name="s_id">
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>Specialization</label>
                     <input type="text" name="specialization" id="editspecialization" class="form-control" placeholder="specialization" value="">
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                  <button type="submit" name="specialization_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
                 </div>
 
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                <button type="submit" name="specialization_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
-              </div>
-
             </div>
-          </div>
           </form>
         </div>
       </div>
     </div>
     <!-- end -->
- 
+
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -261,14 +265,14 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="code.php" method="POST">
-          <div class="modal-body">
+            <div class="modal-body">
               <input type="text" id="delete_id" name="s_id">
               <h4>Are you sure,you want to delete this data?</h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-            <button type="submit" name="specializationdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="specializationdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            </div>
           </form>
         </div>
       </div>
@@ -279,18 +283,16 @@ $mydata = mysqli_fetch_assoc($result1);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
     <script>
-
       $(document).ready(function() {
 
-      $('.delete-btn').click(function(e)
-      {
+        $('.delete-btn').click(function(e) {
           e.preventDefault();
 
           var sid = $(this).closest('tr').find('.s_id').text();
           $('#delete_id').val(sid);
           $('#delete').modal('show');
 
-      });
+        });
 
         $('.view-btn').click(function(e) {
           e.preventDefault();
@@ -313,42 +315,21 @@ $mydata = mysqli_fetch_assoc($result1);
 
         });
 
-         // edit value
-         $(document).on('click','a[data-role=specializationupdate]',function(){
-            // append values in input feilds
-            // var id = $(this).data('specialization_id');
-            alert($(this).data('specialization_id'));
-            // var specialization = $('#'+id).children('td[data-target=specialization]').text(); 
+        // edit value
+        $(document).on('click', 'a[data-role=specializationupdate]', function() {
+          // append values in input feilds
+        
+          var id = $(this).attr('data-id');
+          var specialization = $('#' + id).children('td[data-target=specialization]').text();
+          // alert(id);
+        
+          $('#s_id').val(id);
+          $('#editspecialization').val(specialization);
+          $('#edit').modal('toggle');
 
-            // $('#s_id').val(id);
-            // $('#editspecialization').val(specialization);
-            // $('#edit').modal('toggle');
-
-
-          });
-
-           // update data
-
-          // $('#save').click(function()
-          // {
-          //     var id = $('#s_id').val();
-          //     var specialization = $('#editspecialization').val();
-
-          //     $.ajax({
-          //       url:'code.php',
-          //       method:'POST',
-          //       data:{ specialization: specialization},
-          //       success:function(response)
-          //       {
-          //           $('#'+id).children('td[data-target=specialization]').text(specialization);
-
-          //           $('#edit').modal('toggle');
-          //       }
-
-          //       });
-          // });
+        });
+       
       });
-
     </script>
 
 </body>

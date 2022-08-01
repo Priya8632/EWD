@@ -149,17 +149,17 @@ $mydata = mysqli_fetch_assoc($result1);
           </thead>
           <tbody id="rows">
             <?php while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr>
+              <tr id="<?php echo $data['patient_id']; ?>">
                 <td class="patient_id"><?php echo $data['patient_id']; ?></td>
-                <td><?php echo $data['patient_name']; ?></td>
-                <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['mobile']; ?></td>
-                <td><?php echo $data['gender']; ?></td>
-                <td><?php echo $data['age']; ?></td>
-                <td><?php echo $data['doctor_name']; ?></td>
+                <td data-target='patient_name'><?php echo $data['patient_name']; ?></td>
+                <td data-target='email'><?php echo $data['email']; ?></td>
+                <td data-target='mobile'><?php echo $data['mobile']; ?></td>
+                <td data-target='gender'><?php echo $data['gender']; ?></td>
+                <td data-target='age'><?php echo $data['age']; ?></td>
+                <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
 
                 <td>
-                  <a href="#" class="edit-btn"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
@@ -229,9 +229,8 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
 
-    <!-- edit modal -->
-
-    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <!-- edit modal -->
+  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -240,16 +239,44 @@ $mydata = mysqli_fetch_assoc($result1);
           </div>
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="" method="POST" enctype="multipart/form-data">
-                <div id="edit-data">
+              <form action="code.php" method="POST">
 
+              <div class="row">
+
+                <input type="hidden" id="patient_id" name="patient_id">
+
+                <div class="form-group col-md-6 p-2">
+                    <label>patient name</label>
+                    <input type="text" name="patient_name" id="editpatientname" class="form-control" placeholder="patient name" value="">
                 </div>
+
+                <div class="form-group col-md-6 p-2">
+                    <label>email</label>
+                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                </div>
+
                 <div class="form-group p-2">
-                  <button type="button" class="btn btn-secondary btn-block">close</button>
-                  <button type="submit" class="btn btn-success btn-block" name="update">update</button>
-
+                    <label>mobile</label>
+                    <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
                 </div>
-              </form>
+
+                <div class="form-group p-2">
+                    <label>age</label>
+                    <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
+                </div>
+
+                <div class="form-group p-2">
+                    <label>doctor</label>
+                    <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                <button type="submit" name="patient_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+              </div>
+            </form>
 
             </div>
           </div>
@@ -257,8 +284,7 @@ $mydata = mysqli_fetch_assoc($result1);
       </div>
     </div>
     <!-- end -->
-
-
+ 
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -359,6 +385,30 @@ $mydata = mysqli_fetch_assoc($result1);
           });
         });
 
+         // edit value
+         $(document).on('click','a[data-role=patientupdate]',function(){
+            // append values in input feilds
+            // alert($(this).attr('data-id'));
+            var id = $(this).attr('data-id');
+            var patient_name = $('#'+id).children('td[data-target=patient_name]').text(); 
+            var email = $('#'+id).children('td[data-target=email]').text(); 
+            var mobile = $('#'+id).children('td[data-target=mobile]').text(); 
+            var age = $('#'+id).children('td[data-target=age]').text(); 
+            var doctor_name = $('#'+id).children('td[data-target=doctor_name]').text(); 
+
+
+
+            $('#patient_id').val(id);
+            $('#editpatientname').val(patient_name);
+            $('#editemail').val(email);
+            $('#editmobile').val(mobile);
+            $('#editage').val(age);
+            $('#editdoctorname').val(doctor_name);
+
+            $('#edit').modal('toggle');
+
+
+          });
         });
     </script>
 

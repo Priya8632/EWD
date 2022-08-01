@@ -224,8 +224,8 @@ $mydata = mysqli_fetch_assoc($result1);
       </div>
     </div>
     <!-- end -->
-  <!-- edit modal -->
 
+  <!-- edit modal -->
   <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -233,13 +233,13 @@ $mydata = mysqli_fetch_assoc($result1);
             <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="code.php" method="POST">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
+              <form action="code.php" method="POST">
 
               <div class="row">
 
-                <input type="text" id="doctorid">
+                <input type="hidden" id="doctor_id" name="doctor_id">
 
                 <div class="form-group col-md-6 p-2">
                     <label>doctor name</label>
@@ -262,13 +262,15 @@ $mydata = mysqli_fetch_assoc($result1);
                 </div>
 
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                <button type="submit" name="doctorupdate" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                <button type="submit" name="doctor_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
               </div>
+            </form>
+
             </div>
           </div>
-          </form>
         </div>
       </div>
     </div>
@@ -359,15 +361,15 @@ $mydata = mysqli_fetch_assoc($result1);
         // edit value
         $(document).on('click','a[data-role=doctorupdate]',function(){
             // append values in input feilds
-            alert($(this).data('doctor_id'));
-            var did = $(this).data('doctor_id');
+            // alert($(this).attr('data-id'));
+            var did = $(this).attr('data-id');
             var doctor_name = $('#'+did).children('td[data-target=doctor_name]').text(); 
             var email = $('#'+did).children('td[data-target=email]').text(); 
             var mobile = $('#'+did).children('td[data-target=mobile]').text(); 
             var specialization = $('#'+did).children('td[data-target=specialization]').text(); 
 
 
-            $('#doctorid').val(did);
+            $('#doctor_id').val(did);
             $('#editdoctorname').val(doctor_name);
             $('#editemail').val(email);
             $('#editmobile').val(mobile);
