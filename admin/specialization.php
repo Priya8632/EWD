@@ -118,24 +118,42 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <form class="">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
+          <i class="fa-solid fa-gear me-2"></i>
         </div>
       </nav>
 
       <!-- <div class="container mx-auto"> -->
-      <div class="table-responsive mx-auto">
+      <div class="table-responsive mx-auto bg-light shadow">
         <div class="row">
           <div class="col-md-6">
-            <h2>specialization Records </h2>
+            <h2 class="text-success">specialization Records </h2>
           </div>
           <div class="col-md-6">
-            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
+            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
           </div>
         </div>
 
-        <table class="table table-hover">
+        <div class="row">
+          
+          <div class="col-md-6">
+            <form action="" method="POST">
+              <select name="records" id="records">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="70">70</option>
+              </select>
+              <span>Entities</span>
+            </form>
+          </div>
+          
+          <div class="col-md-6 mb-4 d-flex">
+            <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+          </div>
+        </div>
+
+        <table class="table table-hover text-center">
           <thead class="table table-dark">
             <tr>
               <th>ID</th>

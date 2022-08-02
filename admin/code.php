@@ -402,6 +402,7 @@ if(isset($_POST['appointment_update']))
 }
 
 // patient update
+
 // doctor update
 if(isset($_POST['patient_update']))
 {

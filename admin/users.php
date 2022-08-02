@@ -71,7 +71,10 @@ $mydata = mysqli_fetch_assoc($result1);
       font-weight: bold;
       border: none;
     }
-
+    .fa-gear{
+        font-size: 20px;
+        color:green;
+      }
     .page {
       position: relative;
     }
@@ -124,18 +127,25 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;color:blue;"></i>
+          <i class="fa-solid fa-gear me-2"></i>
         </div>
       </nav>
-
+      
     </div>
-
-
+    
       <!-- <div class="container mx-auto"> -->
-    <div class="table-responsive mx-auto bg-light">
-        <h2>Users Records</h2>
+    <div class="table-responsive mx-auto bg-light shadow">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="text-success">Users Records</h2>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
+          <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;color:blue;float:right;"></i> -->
+        </div>
+      </div>
         <div class="row">
-
+          
           <div class="col-md-6">
             <form action="" method="POST">
               <select name="records" id="records">
@@ -147,8 +157,8 @@ $mydata = mysqli_fetch_assoc($result1);
               <span>Entities</span>
             </form>
           </div>
-
-          <div class="col-md-6 mb-4 w-25">
+          
+          <div class="col-md-6 mb-4 d-flex">
             <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
           </div>
         </div>
@@ -156,7 +166,7 @@ $mydata = mysqli_fetch_assoc($result1);
 
         <div id="searchresult">
 
-          <table class="table table-hover">
+          <table class="table table-hover text-center">
             <thead class="table table-dark">
               <tr>
                 <th>ID</th>
@@ -176,7 +186,7 @@ $mydata = mysqli_fetch_assoc($result1);
                   <td>
                     <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                     <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                    <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                   </td>
                 </tr>
               <?php } ?>
