@@ -46,6 +46,7 @@
     min-width:100vw;
   }
   #wrapper.toggled #sidebar-wrapper{
+    
     margin-left:0;
   }
   #menu-toggle{

@@ -21,20 +21,20 @@
 
 <body>
   <!-- navigation -->
-  <nav class="navbar navbar-light fixed-top bg-light shadow-sm p-3">
+  <nav class="navbar bg-success  fixed-top shadow-sm p-3">
     <div class="container-lg">
 
-      <a class="navbar-brand text-success" href="#">
+      <a class="navbar-brand text-light" href="#">
           <i class="fa-solid fa-heart-circle-plus"></i>
           HEALTH
         </a>
       <!-- <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a> -->
       <ul class="nav jastify-content-end">
-        <li class="nav-item"><a class="nav-link text-success" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link text-success" href="#about">About Us</a></li>
-        <li class="nav-item"><a class="nav-link text-success" href="#team">Team</a></li>
-        <li class="nav-item"><a class="nav-link text-success" href="#contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link text-success" href="admin_login.php">Signin</a></li>
+        <li class="nav-item"><a class="nav-link text-success text-light" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-success text-light" href="#about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link text-success text-light" href="#team">Team</a></li>
+        <li class="nav-item"><a class="nav-link text-success text-light" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link text-success text-light" href="admin_login.php">Signin</a></li>
       </ul>
     </div>
   </nav>

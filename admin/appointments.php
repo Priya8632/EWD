@@ -120,20 +120,37 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <form class="">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
         </div>
       </nav>
 
       <!-- <div class="container mx-auto"> -->
       <div class="table-responsive mx-auto">
         <div class="row">
-          <div class="col-md-6">
-            <h2>appointment Records </h2>
+          <div class="col-md-6 text-success">
+            <h2>Appointment Records </h2>
           </div>
           <div class="col-md-6">
-            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add Appointment</button>
+            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
+          </div>
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-6">
+            <form action="" method="POST">
+              <select name="records" id="records">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="70">70</option>
+              </select>
+              <span>Entities</span>
+            </form>
+          </div>
+          
+          <div class="col-md-6 mb-4 d-flex">
+            <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
           </div>
         </div>
 
@@ -171,6 +188,26 @@ $mydata = mysqli_fetch_assoc($result1);
             <?php } ?>
           </tbody>
         </table>
+
+         <!-- pagination -->
+         <div class="page">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next &raquo;</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end -->
+
+ 
       </div>
     </div>
 
@@ -292,64 +329,64 @@ $mydata = mysqli_fetch_assoc($result1);
 
                 </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                    <button type="submit" name="appointment_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
-                  </div>
-
-                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                  <button type="submit" name="appointment_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
                 </div>
-              </div>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-  
-  <!-- end -->
+
+    <!-- end -->
 
 
-  <!-- view modal -->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="user_viewing"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end -->
-
-
-  <!-- delete modal -->
-  <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">delete</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="code.php" method="POST">
+    <!-- view modal -->
+    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
           <div class="modal-body">
-            <input type="text" id="delete_id" name="app_id">
-            <h4>Are you sure,you want to delete this data?</h4>
+            <div class="user_viewing"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-            <button type="submit" name="appdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- end -->
+    <!-- end -->
+
+
+    <!-- delete modal -->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="code.php" method="POST">
+            <div class="modal-body">
+              <input type="text" id="delete_id" name="app_id">
+              <h4>Are you sure,you want to delete this data?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="appdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

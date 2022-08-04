@@ -118,7 +118,7 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <i class="fa-solid fa-gear me-2"></i>
+          <!-- <i class="fa-solid fa-gear me-2"></i> -->
         </div>
       </nav>
 
@@ -126,10 +126,10 @@ $mydata = mysqli_fetch_assoc($result1);
       <div class="table-responsive mx-auto bg-light shadow">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="text-success">specialization Records </h2>
+            <h2 class="text-success">Specialization Records </h2>
           </div>
           <div class="col-md-6">
-            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add speciality</button>
             <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
           </div>
         </div>
@@ -176,6 +176,26 @@ $mydata = mysqli_fetch_assoc($result1);
             <?php } ?>
           </tbody>
         </table>
+
+         <!-- pagination -->
+         <div class="page">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next &raquo;</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end -->
+
+ 
       </div>
     </div>
 
@@ -187,7 +207,7 @@ $mydata = mysqli_fetch_assoc($result1);
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add speciality</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -234,7 +254,7 @@ $mydata = mysqli_fetch_assoc($result1);
 
                 <div class="row">
 
-                  <input type="text" id="s_id" name="s_id">
+                  <input type="hidden" id="s_id" name="s_id">
 
                   <div class="form-group col-md-6 p-2">
                     <label>Specialization</label>

@@ -6,7 +6,7 @@ $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.d
  where p.doctor_id = d.doctor_id";
 $result = mysqli_query($conn, $query);
 
-if(!isset($_SESSION['aid'])){
+if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
 if (!isset($_SESSION['aid'])) {
@@ -16,7 +16,7 @@ if (!isset($_SESSION['aid'])) {
 
 $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-$result1 = mysqli_query($conn,$sql);
+$result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
 
@@ -44,9 +44,10 @@ $mydata = mysqli_fetch_assoc($result1);
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
   <style>
-     body{
-      background-color:rgb(146, 234, 153);
+    body {
+      background-color: rgb(146, 234, 153);
     }
+
     .table-responsive.mx-auto {
       width: 80%;
       position: absolute;
@@ -55,13 +56,16 @@ $mydata = mysqli_fetch_assoc($result1);
       background-color: white;
       padding: 30px;
     }
+
     h2 {
       margin-bottom: 30px;
     }
+
     .list-group-item {
       border: none;
       padding: 20px 30px;
     }
+
     .list-group-item.active {
       background-color: transparent;
       color: var(--main-text-color);
@@ -116,21 +120,38 @@ $mydata = mysqli_fetch_assoc($result1);
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email'];?></a>
-          <form class="">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
+          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
         </div>
       </nav>
 
       <!-- <div class="container mx-auto"> -->
       <div class="table-responsive mx-auto">
         <div class="row">
-          <div class="col-md-6">
-            <h2>Patient Records </h2>
+          <div class="col-md-6 text-success">
+            <h2>Patient Records</h2>
           </div>
           <div class="col-md-6">
-            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add patients</button>
+            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
+          </div>
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-6">
+            <form action="" method="POST">
+              <select name="records" id="records">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="70">70</option>
+              </select>
+              <span>Entities</span>
+            </form>
+          </div>
+          
+          <div class="col-md-6 mb-4 d-flex">
+            <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
           </div>
         </div>
 
@@ -166,6 +187,26 @@ $mydata = mysqli_fetch_assoc($result1);
             <?php } ?>
           </tbody>
         </table>
+
+         <!-- pagination -->
+         <div class="page">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next &raquo;</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- end -->
+
+ 
       </div>
     </div>
 
@@ -177,7 +218,7 @@ $mydata = mysqli_fetch_assoc($result1);
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add patient</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -191,7 +232,7 @@ $mydata = mysqli_fetch_assoc($result1);
                   </div>
 
                   <div class="form-group p-2">
-                    <label>email</label>
+                    <label>Email</label>
                     <input type="text" name="email" class="form-control" placeholder="email" value="">
                   </div>
 
@@ -229,8 +270,8 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
 
-     <!-- edit modal -->
-  <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- edit modal -->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -241,42 +282,42 @@ $mydata = mysqli_fetch_assoc($result1);
             <div class="container p-5 text-dark mx-auto bg-light">
               <form action="code.php" method="POST">
 
-              <div class="row">
+                <div class="row">
 
-                <input type="hidden" id="patient_id" name="patient_id">
+                  <input type="hidden" id="patient_id" name="patient_id">
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>patient name</label>
                     <input type="text" name="patient_name" id="editpatientname" class="form-control" placeholder="patient name" value="">
-                </div>
+                  </div>
 
-                <div class="form-group col-md-6 p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>email</label>
                     <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
-                </div>
+                  </div>
 
-                <div class="form-group p-2">
+                  <div class="form-group p-2">
                     <label>mobile</label>
                     <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
-                </div>
+                  </div>
 
-                <div class="form-group p-2">
+                  <div class="form-group p-2">
                     <label>age</label>
                     <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
-                </div>
+                  </div>
 
-                <div class="form-group p-2">
+                  <div class="form-group p-2">
                     <label>doctor</label>
                     <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
+                  </div>
+
                 </div>
 
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                <button type="submit" name="patient_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
-              </div>
-            </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                  <button type="submit" name="patient_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                </div>
+              </form>
 
             </div>
           </div>
@@ -284,7 +325,7 @@ $mydata = mysqli_fetch_assoc($result1);
       </div>
     </div>
     <!-- end -->
- 
+
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -313,14 +354,14 @@ $mydata = mysqli_fetch_assoc($result1);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="code.php" method="POST">
-          <div class="modal-body">
+            <div class="modal-body">
               <input type="text" id="delete_id" name="patient_id">
               <h4>Are you sure,you want to delete this data?</h4>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-            <button type="submit" name="patientdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="patientdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            </div>
           </form>
         </div>
       </div>
@@ -333,15 +374,14 @@ $mydata = mysqli_fetch_assoc($result1);
     <script>
       $(document).ready(function() {
 
-          $('.delete-btn').click(function(e)
-          {
-              e.preventDefault();
+        $('.delete-btn').click(function(e) {
+          e.preventDefault();
 
-              var sid = $(this).closest('tr').find('.patient_id').text();
-              $('#delete_id').val(sid);
-              $('#delete').modal('show');
+          var sid = $(this).closest('tr').find('.patient_id').text();
+          $('#delete_id').val(sid);
+          $('#delete').modal('show');
 
-          });
+        });
 
         $('.edit-btn').click(function(e) {
 
@@ -385,31 +425,31 @@ $mydata = mysqli_fetch_assoc($result1);
           });
         });
 
-         // edit value
-         $(document).on('click','a[data-role=patientupdate]',function(){
-            // append values in input feilds
-            // alert($(this).attr('data-id'));
-            var id = $(this).attr('data-id');
-            var patient_name = $('#'+id).children('td[data-target=patient_name]').text(); 
-            var email = $('#'+id).children('td[data-target=email]').text(); 
-            var mobile = $('#'+id).children('td[data-target=mobile]').text(); 
-            var age = $('#'+id).children('td[data-target=age]').text(); 
-            var doctor_name = $('#'+id).children('td[data-target=doctor_name]').text(); 
+        // edit value
+        $(document).on('click', 'a[data-role=patientupdate]', function() {
+          // append values in input feilds
+          // alert($(this).attr('data-id'));
+          var id = $(this).attr('data-id');
+          var patient_name = $('#' + id).children('td[data-target=patient_name]').text();
+          var email = $('#' + id).children('td[data-target=email]').text();
+          var mobile = $('#' + id).children('td[data-target=mobile]').text();
+          var age = $('#' + id).children('td[data-target=age]').text();
+          var doctor_name = $('#' + id).children('td[data-target=doctor_name]').text();
 
 
 
-            $('#patient_id').val(id);
-            $('#editpatientname').val(patient_name);
-            $('#editemail').val(email);
-            $('#editmobile').val(mobile);
-            $('#editage').val(age);
-            $('#editdoctorname').val(doctor_name);
+          $('#patient_id').val(id);
+          $('#editpatientname').val(patient_name);
+          $('#editemail').val(email);
+          $('#editmobile').val(mobile);
+          $('#editage').val(age);
+          $('#editdoctorname').val(doctor_name);
 
-            $('#edit').modal('toggle');
+          $('#edit').modal('toggle');
 
 
-          });
         });
+      });
     </script>
 
 </body>

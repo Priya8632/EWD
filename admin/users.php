@@ -127,7 +127,7 @@ $mydata = mysqli_fetch_assoc($result1);
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <i class="fa-solid fa-gear me-2"></i>
+          <!-- <i class="fa-solid fa-gear me-2"></i> -->
         </div>
       </nav>
       
@@ -217,7 +217,6 @@ $mydata = mysqli_fetch_assoc($result1);
       <!-- crud section end -->
 
       <!-- add user modal -->
-
       <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -269,7 +268,6 @@ $mydata = mysqli_fetch_assoc($result1);
       <!-- end -->
 
       <!-- edit modal -->
-
       <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -371,7 +369,7 @@ $mydata = mysqli_fetch_assoc($result1);
             var input = $(this).val();
             if (input != '') {
               $.ajax({
-                url: 'code.php',
+                url: 'search.php',
                 method: 'POST',
                 data: {
                   input: input
