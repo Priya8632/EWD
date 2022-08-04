@@ -2,9 +2,9 @@
 
 include 'config.php';
 
-$query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-          where d.specialization_id = s.specialization_id ";
-$result = mysqli_query($conn, $query);
+// $query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+//           where d.specialization_id = s.specialization_id ";
+// $result = mysqli_query($conn, $query);
 
 if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
@@ -17,10 +17,30 @@ if (!isset($_SESSION['aid'])) {
 $id = $_SESSION['aid'];
 // $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
-
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
+
+$per_page = 3;
+$start = 0;
+$current_page = 1;
+if (isset($_GET['start'])) {
+  $start = $_GET['start'];
+  if ($start <= 0) {
+    $start = 0;
+    $current_page = 1;
+  } else {
+    $current_page = $start;
+    $start--;
+    $start = $start * $per_page;
+  }
+}
+
+$record = mysqli_num_rows(mysqli_query($conn, "select * from doctor"));
+$pagi = ceil($record / $per_page);
+$query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+          where d.specialization_id = s.specialization_id limit $start ,$per_page ";
+$result = mysqli_query($conn, $query);
 
 
 ?>
@@ -52,14 +72,14 @@ $mydata = mysqli_fetch_assoc($result1);
     body {
       background-color: rgb(146, 234, 153);
       padding: 0;
-      margin:0;
+      margin: 0;
     }
 
     .table-responsive.mx-auto {
-      width: 80%;
+      width: 82%;
       position: absolute;
       top: 12%;
-      right: 30px;
+      /* right: 30px; */
       background-color: white;
       padding: 30px;
     }
@@ -123,7 +143,7 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
 
 
-    <div class="container justify-content-end">
+    <div class="container justify-content-end p-3">
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -133,16 +153,37 @@ $mydata = mysqli_fetch_assoc($result1);
       </nav>
 
       <div class="table-responsive mx-auto">
-        <!-- <div class="row">
-          <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 text-success">
             <h2>Doctors Records </h2>
           </div>
           <div class="col-md-6">
-            <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i>
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add Doctor</button>
+            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
           </div>
-        </div> -->
+        </div>
 
-        <table class="table table-hover text-center" id="datatableid">
+        <div class="row">
+
+          <div class="col-md-6">
+            <form action="" method="POST">
+              <select name="records" id="records">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="70">70</option>
+              </select>
+              <span>Entities</span>
+            </form>
+          </div>
+
+          <div class="col-md-6 mb-4 d-flex">
+            <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+          </div>
+        </div>
+
+
+        <table class="table table-hover text-center" id="mytable">
           <thead class="table table-dark">
             <tr>
               <th>ID</th>
@@ -155,7 +196,9 @@ $mydata = mysqli_fetch_assoc($result1);
             </tr>
           </thead>
           <tbody id="rows">
-            <?php while ($data = mysqli_fetch_assoc($result)) { ?>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+            while ($data = mysqli_fetch_assoc($result)) { ?>
               <tr id="<?php echo $data['doctor_id']; ?>">
                 <td class="doctorid"><?php echo $data['doctor_id']; ?></td>
                 <td data-target="doctor_name"><?php echo $data['doctor_name']; ?></td>
@@ -169,12 +212,45 @@ $mydata = mysqli_fetch_assoc($result1);
                   <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
               </tr>
-            <?php } ?>
+            <?php } 
+           } else {  ?>
+            no records
+          <?php } ?> 
           </tbody>
         </table>
+
+         <!-- pagination -->
+        <div class="page">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
+              </li>
+              <?php
+
+              for ($i = 1; $i <= $pagi; $i++) {
+                $class = '';
+                if ($current_page == $i) {
+              ?>
+                  <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i; ?></a></li>
+                <?php
+                } else {
+                ?>
+                  <li class="page-item"><a class="page-link" href="?start=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php
+                }
+                ?>
+              <?php } ?>
+              <li class="page-item">
+                <a class="page-link" href="#">Next &raquo;</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- end -->
+
       </div>
     </div>
-
     <!-- crud section end -->
 
     <!-- add user modal -->
@@ -281,8 +357,6 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
 
-
-
     <!-- view modal -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -328,31 +402,30 @@ $mydata = mysqli_fetch_assoc($result1);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- search -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
     <script>
       $(document).ready(function() {
-        $('#datatableid').DataTable({
-            // "pagingType": "full_numbers",
-            // "lengthMenu" :[
-            //   [10,15,20,30,-1],
-            //   [10,15,20,30,'all']
-            // ],
-            // responsive:true,
-            // language:{
-            //   search: "_INPUT_",
-            //   searchPlaceholder: "search records",
-            // }
 
+        $('#search').keyup(function() {
+          search_table($(this).val());
 
         });
-      });
-    </script>
-    <!-- search -->
 
-    <script>
-      $(document).ready(function() {
+        function search_table(value) {
+          $('#mytable tr').each(function() {
+            var found = 'false';
+            $(this).each(function() {
+              if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                found = 'true';
+              }
+            });
+            if (found == 'true') {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+
+        }
 
         $('.delete-btn').click(function(e) {
           e.preventDefault();
@@ -395,7 +468,6 @@ $mydata = mysqli_fetch_assoc($result1);
           var mobile = $('#' + did).children('td[data-target=mobile]').text();
           var specialization = $('#' + did).children('td[data-target=specialization]').text();
 
-
           $('#doctor_id').val(did);
           $('#editdoctorname').val(doctor_name);
           $('#editemail').val(email);
@@ -403,10 +475,7 @@ $mydata = mysqli_fetch_assoc($result1);
           $('#editspecialization').val(specialization);
           $('#edit').modal('toggle');
 
-
         });
-
-
 
       });
     </script>

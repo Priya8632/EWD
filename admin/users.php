@@ -2,8 +2,8 @@
 
 include 'config.php';
 
-$query = "SELECT * FROM users";
-$result = mysqli_query($conn, $query);
+// $query = "SELECT * FROM users";
+// $result = mysqli_query($conn, $query);
 
 
 if (!isset($_SESSION['aid'])) {
@@ -18,6 +18,29 @@ $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
+
+
+$per_page = 3;
+$start = 0;
+$current_page = 1;
+if (isset($_GET['start'])) {
+  $start = $_GET['start'];
+  if ($start <= 0) {
+    $start = 0;
+    $current_page = 1;
+  } else {
+    $current_page = $start;
+    $start--;
+    $start = $start * $per_page;
+  }
+}
+
+
+$record = mysqli_num_rows(mysqli_query($conn, "select * from users"));
+$pagi = ceil($record / $per_page);
+
+$query = "SELECT * FROM users limit $start ,$per_page";
+$result = mysqli_query($conn, $query);
 
 ?>
 
@@ -45,14 +68,15 @@ $mydata = mysqli_fetch_assoc($result1);
   <style>
     body {
       background-color: rgb(146, 234, 153);
+      padding: 0;
+      margin: 0;
     }
 
     .table-responsive.mx-auto {
-      width: 80%;
+      width: 82%;
       position: absolute;
-      top: 15%;
-      right: 30px;
-      /* background-color:lightblue; */
+      top: 12%;
+      background-color: white;
       padding: 30px;
     }
 
@@ -71,10 +95,12 @@ $mydata = mysqli_fetch_assoc($result1);
       font-weight: bold;
       border: none;
     }
-    .fa-gear{
-        font-size: 20px;
-        color:green;
-      }
+
+    .fa-gear {
+      font-size: 20px;
+      color: green;
+    }
+
     .page {
       position: relative;
     }
@@ -84,9 +110,7 @@ $mydata = mysqli_fetch_assoc($result1);
 
 <body>
 
-
   <div class="d-flex" id="wrapper">
-
     <!-- sidbar start -->
 
     <div class="bg-white" id="sidebar-wrapper">
@@ -130,22 +154,20 @@ $mydata = mysqli_fetch_assoc($result1);
           <!-- <i class="fa-solid fa-gear me-2"></i> -->
         </div>
       </nav>
-      
-    </div>
-    
+
       <!-- <div class="container mx-auto"> -->
-    <div class="table-responsive mx-auto bg-light shadow">
-      <div class="row">
-        <div class="col-md-6">
-          <h2 class="text-success">Users Records</h2>
-        </div>
-        <div class="col-md-6">
-          <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
-          <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;color:blue;float:right;"></i> -->
-        </div>
-      </div>
+      <div class="table-responsive mx-auto bg-light shadow">
         <div class="row">
-          
+          <div class="col-md-6">
+            <h2 class="text-success">Users Records</h2>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
+            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;color:blue;float:right;"></i> -->
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col-md-6">
             <form action="" method="POST">
               <select name="records" id="records">
@@ -157,27 +179,26 @@ $mydata = mysqli_fetch_assoc($result1);
               <span>Entities</span>
             </form>
           </div>
-          
+
           <div class="col-md-6 mb-4 d-flex">
-            <input class="form-control" id="live_search" type="text" name="input" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+            <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
           </div>
         </div>
 
-
-        <div id="searchresult">
-
-          <table class="table table-hover text-center">
-            <thead class="table table-dark">
-              <tr>
-                <th>ID</th>
-                <th>FNAME</th>
-                <th>LNAME</th>
-                <th>EMAIL</th>
-                <th>OPERATION</th>
-              </tr>
-            </thead>
-            <tbody id="rows">
-              <?php while ($data = mysqli_fetch_assoc($result)) { ?>
+        <table class="table table-hover text-center" id="mytable">
+          <thead class="table table-dark">
+            <tr>
+              <th>ID</th>
+              <th>FNAME</th>
+              <th>LNAME</th>
+              <th>EMAIL</th>
+              <th>OPERATION</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <?php
+            if (mysqli_num_rows($result) > 0) {
+              while ($data = mysqli_fetch_assoc($result)) { ?>
                 <tr id="<?php echo $data['id']; ?>">
                   <td class="id"><?php echo $data['id']; ?></td>
                   <td data-target="firstName"><?php echo $data['firstName']; ?></td>
@@ -189,276 +210,268 @@ $mydata = mysqli_fetch_assoc($result1);
                     <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                   </td>
                 </tr>
+              <?php }
+            } else {  ?>
+              no records
+            <?php } ?>
+          </tbody>
+        </table>
+
+        <!-- pagination -->
+        <div class="page">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
+              </li>
+              <?php
+
+              for ($i = 1; $i <= $pagi; $i++) {
+                $class = '';
+                if ($current_page == $i) {
+              ?>
+                  <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i;?></a></li>
+              <?php
+                } else {
+              ?>
+                  <li class="page-item"><a class="page-link" href="?start=<?php echo $i; ?>"><?php echo $i;?></a></li>
+              <?php
+                }
+              ?>
               <?php } ?>
-            </tbody>
-          </table>
-
-          <!-- pagination -->
-          <div class="page">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next &raquo;</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <!-- end -->
-
+              <li class="page-item">
+                <a class="page-link" href="#">Next &raquo;</a>
+              </li>
+            </ul>
+          </nav>
         </div>
+        <!-- end -->
+
       </div>
+    </div>
 
-      <!-- crud section end -->
+    <!-- crud section  -->
 
-      <!-- add user modal -->
-      <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="container p-5 text-dark mx-auto bg-light">
-
-                <form action="code.php" method="POST" enctype="multipart/form-data">
-                  <div class="row">
-                    <div class="form-group col-md-6 p-2">
-                      <label>first name</label>
-                      <input type="text" name="fname" class="form-control" placeholder="first name" value="">
-                    </div>
-
-                    <div class="form-group col-md-6 p-2">
-                      <label>last name</label>
-                      <input type="text" name="lname" class="form-control" placeholder="last name" value="">
-                    </div>
-
-                    <div class="form-group p-2">
-                      <label>email</label>
-                      <input type="text" name="email" class="form-control" placeholder="email" value="">
-                    </div>
-
-                    <div class="form-group p-2">
-                      <label>password</label>
-                      <input type="password" name="p_word" class="form-control" placeholder="password" value="">
-                    </div>
-
-                    <div class="form-group p-2">
-                      <label>confirm password</label>
-                      <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
-                    </div>
-
-                    <div class="form-group p-2">
-                      <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
-                    </div>
-                  </div>
-                </form>
-
-              </div>
-            </div>
+    <!-- add user modal -->
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
-      </div>
-      <!-- end -->
+          <div class="modal-body">
+            <div class="container p-5 text-dark mx-auto bg-light">
 
-      <!-- edit modal -->
-      <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="container p-5 text-dark mx-auto bg-light">
-                  <form action="code.php" method="POST">
-
-                  <div class="row">
-
-                    <input type="hidden" id="userId" name="userId">
-
-                    <div class="form-group col-md-6 p-2">
-                      <label>first name</label>
-                      <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="">
-                    </div>
-
-                    <div class="form-group col-md-6 p-2">
-                      <label>last name</label>
-                      <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
-                    </div>
-
-                    <div class="form-group p-2">
-                      <label>email</label>
-                      <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
-                    </div>
-
+              <form action="code.php" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="form-group col-md-6 p-2">
+                    <label>first name</label>
+                    <input type="text" name="fname" class="form-control" placeholder="first name" value="">
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                    <button type="submit" name="update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>last name</label>
+                    <input type="text" name="lname" class="form-control" placeholder="last name" value="">
                   </div>
-                  
-                </form>
+
+                  <div class="form-group p-2">
+                    <label>email</label>
+                    <input type="text" name="email" class="form-control" placeholder="email" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>password</label>
+                    <input type="password" name="p_word" class="form-control" placeholder="password" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>confirm password</label>
+                    <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
+                  </div>
                 </div>
-              </div>
+              </form>
+
+            </div>
           </div>
         </div>
       </div>
-      <!-- end -->
+    </div>
+    <!-- end -->
 
-      <!-- view modal -->
-      <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- edit modal -->
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-5 text-dark mx-auto bg-light">
+              <form action="code.php" method="POST">
+
+                <div class="row">
+
+                  <input type="hidden" id="userId" name="userId">
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>first name</label>
+                    <input type="text" name="fname" id="editfname" class="form-control" placeholder="first name" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>last name</label>
+                    <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>email</label>
+                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                  <button type="submit" name="update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                </div>
+
+              </form>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+
+    <!-- view modal -->
+    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="user_viewing"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+
+    <!-- delete modal -->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="code.php" method="POST">
             <div class="modal-body">
-              <div class="user_viewing"></div>
+              <input type="text" id="delete_id" name="id">
+              <h4>Are you sure,you want to delete this data?</h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="userdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-      <!-- end -->
+    </div>
+    <!-- end -->
 
-      <!-- delete modal -->
-      <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">delete</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="code.php" method="POST">
-              <div class="modal-body">
-                <input type="text" id="delete_id" name="id">
-                <h4>Are you sure,you want to delete this data?</h4>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                <button type="submit" name="userdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- end -->
+  </div>
 
-</div>
+  <!-- script section -->
 
-<!-- script section -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
 
-      <script>
-        $(document).ready(function() {
+      $('#search').keyup(function() {
+        search_table($(this).val());
 
-          $('#live_search').keyup(function() {
-            var input = $(this).val();
-            if (input != '') {
-              $.ajax({
-                url: 'search.php',
-                method: 'POST',
-                data: {
-                  input: input
-                },
+      });
 
-                success: function(data) {
-                  $('#searchresult').html(data);
-                  $('#searchresult').css('display', 'block');
-                }
-              });
-            } else {
-              $('#searchresult').css('display', 'none');
+      function search_table(value) {
+        $('#mytable tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
             }
           });
-
-          $('.delete-btn').click(function(e) {
-            e.preventDefault();
-
-            var sid = $(this).closest('tr').find('.id').text();
-            $('#delete_id').val(sid);
-            $('#delete').modal('show');
-
-          });
-
-
-          $('.view-btn').click(function(e) {
-            e.preventDefault();
-            var id = $(this).closest('tr').find('.id').text();
-            // console.log(userid);
-            $.ajax({
-              type: "POST",
-              url: "code.php",
-              data: {
-                'checking_userbtn': true,
-                'id': id,
-              },
-              success: function(response) {
-                //  console.log(response);
-                $('.user_viewing').html(response);
-                $('#view').modal('show');
-
-              }
-            });
-          });
-
-          // edit value
-          $(document).on('click', 'a[data-role=update]', function() {
-            // append values in input feilds
-            var id = $(this).attr('data-id');
-            var firstName = $('#' + id).children('td[data-target=firstName]').text();
-            var lastName = $('#' + id).children('td[data-target=lastName]').text();
-            var email = $('#' + id).children('td[data-target=Email]').text();
-
-            $('#userId').val(id);
-            $('#editfname').val(firstName);
-            $('#editlname').val(lastName);
-            $('#editemail').val(email);
-            $('#edit').modal('toggle');
-            // alert($(this).data('id'));
-
-
-          });
-
-          // update data
-
-          // $('#save').click(function()
-          // {
-          //     var id = $('#userId').val();
-          //     var firstName = $('#editfname').val();
-          //     var lastName = $('#editlname').val();
-          //     var email = $('#editemail').val();
-
-          //     $.ajax({
-          //       url:'code.php',
-          //       method:'POST',
-          //       data:{firstName:firstName,lastName:lastName,email:email,id:id},
-          //       success:function(response)
-          //       {
-          //           // $('#'+id).children('td[data-target=firstName]').text(firstName);
-          //           // $('#'+id).children('td[data-target=lastName]').text(lastName);
-          //           // $('#'+id).children('td[data-target=Email]').text(email);
-
-          //           // $('#edit').modal('toggle');
-          //       }
-
-          //       });
-          // });
-
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
         });
-      </script>
+
+      }
+
+      $('.delete-btn').click(function(e) {
+        e.preventDefault();
+
+        var sid = $(this).closest('tr').find('.id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
+
+      });
+
+
+      $('.view-btn').click(function(e) {
+        e.preventDefault();
+        var id = $(this).closest('tr').find('.id').text();
+        // console.log(userid);
+        $.ajax({
+          type: "POST",
+          url: "code.php",
+          data: {
+            'checking_userbtn': true,
+            'id': id,
+          },
+          success: function(response) {
+            //  console.log(response);
+            $('.user_viewing').html(response);
+            $('#view').modal('show');
+
+          }
+        });
+      });
+
+      // edit value
+      $(document).on('click', 'a[data-role=update]', function() {
+        // append values in input feilds
+        var id = $(this).attr('data-id');
+        var firstName = $('#' + id).children('td[data-target=firstName]').text();
+        var lastName = $('#' + id).children('td[data-target=lastName]').text();
+        var email = $('#' + id).children('td[data-target=Email]').text();
+
+        $('#userId').val(id);
+        $('#editfname').val(firstName);
+        $('#editlname').val(lastName);
+        $('#editemail').val(email);
+        $('#edit').modal('toggle');
+        // alert($(this).data('id'));
+
+
+      });
+
+    });
+  </script>
 
 </body>
