@@ -62,7 +62,7 @@ $result = mysqli_query($conn, $query);
 <body>
 
   <div class="d-flex" id="wrapper">
-      <?php include 'sidebar.php'; ?>
+    <?php include 'sidebar.php'; ?>
 
     <div class="container justify-content-end p-3">
 
@@ -87,15 +87,23 @@ $result = mysqli_query($conn, $query);
         <div class="row">
           <div class="col-md-6">
             <form action="" method="POST">
-              <select name="records" id="records">
+              <select name="records" id="records" onclick="select()">
+                <option value="5">5</option>
                 <option value="10">10</option>
+                <option value="15">15</option>
                 <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="70">70</option>
               </select>
               <span>Entities</span>
             </form>
           </div>
+
+          <script>
+            function select() {
+                
+
+            }
+          </script>
+
 
           <div class="col-md-6 mb-4 d-flex">
             <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
@@ -277,7 +285,7 @@ $result = mysqli_query($conn, $query);
     </div>
     <!-- end -->
 
-</div>
+  </div>
 
   <!-- script section -->
 
@@ -286,4 +294,5 @@ $result = mysqli_query($conn, $query);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
+
 </html>
