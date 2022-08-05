@@ -57,80 +57,14 @@ $result = mysqli_query($conn, $query);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
-
-  <!-- <style>
-    body {
-      background-color: rgb(146, 234, 153);
-      padding: 0;
-      margin: 0;
-    }
-
-    .table-responsive.mx-auto {
-      width: 82%;
-      position: absolute;
-      top: 12%;
-      /* right: 30px; */
-      background-color: white;
-      padding: 30px;
-    }
-
-    h2 {
-      margin-bottom: 30px;
-    }
-
-    .list-group-item {
-      border: none;
-      padding: 20px 30px;
-    }
-
-    .list-group-item.active {
-      background-color: transparent;
-      color: var(--main-text-color);
-      font-weight: bold;
-      border: none;
-    }
-  </style> -->
-
 </head>
 
 <body>
 
-
-  <!-- <div class="d-flex" id="wrapper">
-    <!-- sidbar start
-    <div class="bg-white" id="sidebar-wrapper">
-      <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-blod text-uppercase border-bottom">
-        <i class="fas fa-user-secret me-2"></i>HEALTHCARE
-      </div>
-      <div class="list-group list-group-flush my-3">
-        <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active">
-          <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-        </a>
-        <a href="doctor.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-          <i class="fa-solid fa-user-doctor me-2"></i>Doctors
-        </a>
-        <a href="patient.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-          <i class="fa-solid fa-bed me-2"></i>Patients
-        </a>
-        <a href="appointments.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-          <i class="fa-solid fa-clipboard-user me-2"></i>Appointments
-        </a>
-        <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-          <i class="fa-solid fa-star-of-life me-2"></i>Specialization
-        </a>
-        <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-          <i class="fa-solid fa-user me-2"></i>Users
-        </a>
-        <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-          <i class="fas fa-project-diagram me-2"></i>logout
-        </a>
-      </div>
-    </div> -->
-    <div>
+  <div class="d-flex">
         <?php include 'sidebar.php'; ?>
-    </div>
-
-    <div class="container justify-content-end p-3">
+  
+   <div class="container justify-content-end p-3">
 
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
@@ -139,14 +73,13 @@ $result = mysqli_query($conn, $query);
         </div>
       </nav>
 
-      <div class="table-responsive mx-auto">
+      <div class="table-responsive mx-auto shadow">
         <div class="row">
           <div class="col-md-6 text-success">
             <h2>Doctors Records </h2>
           </div>
           <div class="col-md-6">
             <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add Doctor</button>
-            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
           </div>
         </div>
 
@@ -168,7 +101,6 @@ $result = mysqli_query($conn, $query);
             <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
           </div>
         </div>
-
 
         <table class="table table-hover text-center" id="mytable">
           <thead class="table table-dark">
@@ -205,14 +137,13 @@ $result = mysqli_query($conn, $query);
           <?php } ?> 
           </tbody>
         </table>
-            <?php include 'pagination.php';?>
       </div>
-    </div>
-    <!-- crud section end -->
-
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- add user modal -->
+      </div>
+      <!-- crud section end -->
+      
+      <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      
+      <!-- add user modal -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -357,6 +288,7 @@ $result = mysqli_query($conn, $query);
     </div>
     <!-- end -->
 
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
