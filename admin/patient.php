@@ -37,9 +37,8 @@ if (isset($_GET['start'])) {
 $record = mysqli_num_rows(mysqli_query($conn, "select * from patient"));
 $pagi = ceil($record / $per_page);
 
-
 $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
- where p.doctor_id = d.doctor_id limit $start ,$per_page";
+          where p.doctor_id = d.doctor_id limit $start ,$per_page";
 $result = mysqli_query($conn, $query);
 
 ?>
@@ -55,11 +54,8 @@ $result = mysqli_query($conn, $query);
 
   <link rel="stylesheet" href="../css/sidebar.css">
   <script src="../js/jquery.js"></script>
-
+  <script src="../js/code.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> -->
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
@@ -192,61 +188,30 @@ $result = mysqli_query($conn, $query);
             </tr>
           </thead>
           <tbody id="rows">
-            <?php 
+            <?php
             if (mysqli_num_rows($result) > 0) {
-            while ($data = mysqli_fetch_assoc($result)) { ?>
-              <tr id="<?php echo $data['patient_id']; ?>">
-                <td class="patient_id"><?php echo $data['patient_id']; ?></td>
-                <td data-target='patient_name'><?php echo $data['patient_name']; ?></td>
-                <td data-target='email'><?php echo $data['email']; ?></td>
-                <td data-target='mobile'><?php echo $data['mobile']; ?></td>
-                <td data-target='gender'><?php echo $data['gender']; ?></td>
-                <td data-target='age'><?php echo $data['age']; ?></td>
-                <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
+              while ($data = mysqli_fetch_assoc($result)) { ?>
+                <tr id="<?php echo $data['patient_id']; ?>">
+                  <td class="patient_id"><?php echo $data['patient_id']; ?></td>
+                  <td data-target='patient_name'><?php echo $data['patient_name']; ?></td>
+                  <td data-target='email'><?php echo $data['email']; ?></td>
+                  <td data-target='mobile'><?php echo $data['mobile']; ?></td>
+                  <td data-target='gender'><?php echo $data['gender']; ?></td>
+                  <td data-target='age'><?php echo $data['age']; ?></td>
+                  <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
 
-                <td>
-                  <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-              </tr>
-            <?php } 
-          } else {  ?>
-            no records
-          <?php } ?>
+                  <td>
+                    <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                    <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                    <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                </tr>
+              <?php }
+            } else {  ?>
+              no records
+            <?php } ?>
           </tbody>
         </table>
-
-        <!-- pagination -->
-        <div class="page">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
-              </li>
-              <?php
-
-              for ($i = 1; $i <= $pagi; $i++) {
-                $class = '';
-                if ($current_page == $i) {
-              ?>
-                  <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i; ?></a></li>
-                <?php
-                } else {
-                ?>
-                  <li class="page-item"><a class="page-link" href="?start=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php
-                }
-                ?>
-              <?php } ?>
-              <li class="page-item">
-                <a class="page-link" href="#">Next &raquo;</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <!-- end -->
-
-
+        <?php include 'pagination.php';?>
       </div>
     </div>
 
@@ -395,7 +360,7 @@ $result = mysqli_query($conn, $query);
           </div>
           <form action="code.php" method="POST">
             <div class="modal-body">
-              <input type="text" id="delete_id" name="patient_id">
+              <input type="hidden" id="delete_id" name="patient_id">
               <h4>Are you sure,you want to delete this data?</h4>
             </div>
             <div class="modal-footer">
@@ -411,107 +376,5 @@ $result = mysqli_query($conn, $query);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-    <script>
-      $(document).ready(function() {
-
-        $('#search').keyup(function() {
-          search_table($(this).val());
-
-        });
-
-        function search_table(value) {
-          $('#mytable tr').each(function() {
-            var found = 'false';
-            $(this).each(function() {
-              if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-                found = 'true';
-              }
-            });
-            if (found == 'true') {
-              $(this).show();
-            } else {
-              $(this).hide();
-            }
-          });
-
-        }
-
-        $('.delete-btn').click(function(e) {
-          e.preventDefault();
-
-          var sid = $(this).closest('tr').find('.patient_id').text();
-          $('#delete_id').val(sid);
-          $('#delete').modal('show');
-
-        });
-
-        $('.edit-btn').click(function(e) {
-
-          e.preventDefault();
-
-          var userid = $(this).closest('tr').find('.user_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_editbtn': true,
-              'user_id': userid,
-            },
-            success: function(response) {
-              $('#edit-data').html(response);
-              $('#edit').modal('show');
-
-            }
-          });
-
-        });
-
-        $('.view-btn').click(function(e) {
-          e.preventDefault();
-          var patientid = $(this).closest('tr').find('.patient_id').text();
-          // console.log(userid);
-          $.ajax({
-            type: "POST",
-            url: "code.php",
-            data: {
-              'checking_patientbtn': true,
-              'patient_id': patientid,
-            },
-            success: function(response) {
-              //  console.log(response);
-              $('.user_viewing').html(response);
-              $('#view').modal('show');
-
-            }
-          });
-        });
-
-        // edit value
-        $(document).on('click', 'a[data-role=patientupdate]', function() {
-          // append values in input feilds
-          // alert($(this).attr('data-id'));
-          var id = $(this).attr('data-id');
-          var patient_name = $('#' + id).children('td[data-target=patient_name]').text();
-          var email = $('#' + id).children('td[data-target=email]').text();
-          var mobile = $('#' + id).children('td[data-target=mobile]').text();
-          var age = $('#' + id).children('td[data-target=age]').text();
-          var doctor_name = $('#' + id).children('td[data-target=doctor_name]').text();
-
-
-
-          $('#patient_id').val(id);
-          $('#editpatientname').val(patient_name);
-          $('#editemail').val(email);
-          $('#editmobile').val(mobile);
-          $('#editage').val(age);
-          $('#editdoctorname').val(doctor_name);
-
-          $('#edit').modal('toggle');
-
-
-        });
-      });
-    </script>
-
 </body>
+</html>

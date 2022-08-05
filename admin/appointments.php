@@ -13,7 +13,6 @@ if (!isset($_SESSION['aid'])) {
   $_SESSION['aid'] = $_COOKIE['aid'];
 }
 
-
 $id = $_SESSION['aid'];
 $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $result1 = mysqli_query($conn, $sql);
@@ -53,11 +52,8 @@ $result = mysqli_query($conn, $query);
 
   <link rel="stylesheet" href="../css/sidebar.css">
   <script src="../js/jquery.js"></script>
-
+  <script src="../js/code.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> -->
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
@@ -215,38 +211,7 @@ $result = mysqli_query($conn, $query);
             <?php } ?>
           </tbody>
         </table>
-
-        <!-- pagination -->
-        <div class="page">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
-              </li>
-              <?php
-
-              for ($i = 1; $i <= $pagi; $i++) {
-                $class = '';
-                if ($current_page == $i) {
-              ?>
-                  <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i; ?></a></li>
-                <?php
-                } else {
-                ?>
-                  <li class="page-item"><a class="page-link" href="?start=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php
-                }
-                ?>
-              <?php } ?>
-              <li class="page-item">
-                <a class="page-link" href="#">Next &raquo;</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <!-- end -->
-
-
+        <?php include 'pagination.php';?>
       </div>
     </div>
 
@@ -414,7 +379,7 @@ $result = mysqli_query($conn, $query);
           </div>
           <form action="code.php" method="POST">
             <div class="modal-body">
-              <input type="text" id="delete_id" name="app_id">
+              <input type="hidden" id="delete_id" name="app_id">
               <h4>Are you sure,you want to delete this data?</h4>
             </div>
             <div class="modal-footer">
@@ -430,109 +395,5 @@ $result = mysqli_query($conn, $query);
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-  <script>
-    $(document).ready(function() {
-
-      $('#search').keyup(function() {
-        search_table($(this).val());
-
-      });
-
-      function search_table(value) {
-        $('#mytable tr').each(function() {
-          var found = 'false';
-          $(this).each(function() {
-            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-              found = 'true';
-            }
-          });
-          if (found == 'true') {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      }
-
-      $('.delete-btn').click(function(e) {
-        e.preventDefault();
-
-        var sid = $(this).closest('tr').find('.app_id').text();
-        $('#delete_id').val(sid);
-        $('#delete').modal('show');
-
-      });
-
-      $('.edit-btn').click(function(e) {
-
-        e.preventDefault();
-
-        var userid = $(this).closest('tr').find('.user_id').text();
-        // console.log(userid);
-        $.ajax({
-          type: "POST",
-          url: "code.php",
-          data: {
-            'checking_editbtn': true,
-            'user_id': userid,
-          },
-          success: function(response) {
-            $('#edit-data').html(response);
-            $('#edit').modal('show');
-
-          }
-        });
-
-      });
-
-      $('.view-btn').click(function(e) {
-        e.preventDefault();
-        var appid = $(this).closest('tr').find('.app_id').text();
-        // console.log(userid);
-        $.ajax({
-          type: "POST",
-          url: "code.php",
-          data: {
-            'checking_appbtn': true,
-            'app_id': appid,
-          },
-          success: function(response) {
-            //  console.log(response);
-            $('.user_viewing').html(response);
-            $('#view').modal('show');
-
-          }
-        });
-      });
-
-      // edit value
-      $(document).on('click', 'a[data-role=appointmentupdate]', function() {
-        // append values in input feilds
-
-        var id = $(this).attr('data-id');
-        var app_number = $('#' + id).children('td[data-target=app_number]').text();
-        var patient_id = $('#' + id).children('td[data-target=patient_name]').text();
-        var doctor_id = $('#' + id).children('td[data-target=doctor_name]').text();
-        var specialization_id = $('#' + id).children('td[data-target=specialization]').text();
-        var fees = $('#' + id).children('td[data-target=fees]').text();
-        var app_date = $('#' + id).children('td[data-target=app_date]').text();
-        var app_time = $('#' + id).children('td[data-target=app_time]').text();
-
-        // alert(app_number);
-
-        $('#app_id').val(id);
-        $('#editapp_number').val(app_number);
-        $('#editpatient_id').val(patient_id);
-        $('#editdoctor_id').val(doctor_id);
-        $('#editspecialization_id').val(specialization_id);
-        $('#editfees').val(fees);
-        $('#editapp_date').val(app_date);
-        $('#editapp_time').val(app_time);
-        $('#edit').modal('toggle');
-
-      });
-
-    });
-  </script>
-
 </body>
+</html>
