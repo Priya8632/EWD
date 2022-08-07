@@ -97,12 +97,12 @@ $result = mysqli_query($conn, $query);
             </form>
           </div>
 
-          <script>
+          <!-- <script>
             function select() {
                 
 
             }
-          </script>
+          </script> -->
 
 
           <div class="col-md-6 mb-4 d-flex">
