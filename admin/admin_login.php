@@ -39,7 +39,7 @@ if (isset($_POST['adsubmit'])) {
 
             $_SESSION['aid'] = $fetch_array['admin_id'];
             setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
-            header('location:exam.php');
+            header('location:dashboard.php');
             
         } else {
 
