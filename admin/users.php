@@ -145,6 +145,26 @@ $result = mysqli_query($conn, $query);
       </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     <!-- crud section  -->
 
     <!-- add user modal -->
