@@ -62,109 +62,86 @@ $result = mysqli_query($conn, $query);
 <body>
 
   <div class="d-flex" id="wrapper">
-    <?php include 'sidebar.php'; ?>
+    <div class="row">
 
-    <div class="container justify-content-end p-3">
+      <div class="col-md-5">
+        <?php include 'sidebar.php'; ?>
+      </div>
 
-      <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-          <!-- <i class="fa-solid fa-gear me-2"></i> -->
+      <div class="col-md-7">
+        <div class="container-fluid justify-content-end">
+
+              <!-- <h1 class="text-2xl font-semibold pt-2">Dashboard</h1> -->
+              <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
+              </a>
+
+            <!-- <div class="container mx-auto"> -->
+            <div class="table-responsive mx-auto shadow">
+              <div class="row">
+                <div class="col-md-6">
+                  <h2 class="text-success">Users Records</h2>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <form action="" method="POST">
+                    <select name="records" id="records" onclick="select()">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                    </select>
+                    <span>Entities</span>
+                  </form>
+                </div>
+
+                <div class="col-md-6 mb-4 d-flex">
+                  <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+                </div>
+              </div>
+
+              <table class="table table-hover table-bordered border-success text-center">
+                <thead class="bg-dark text-light">
+                  <tr class="uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-center">ID</th>
+                    <th class="py-3 px-6 text-center">FNAME</th>
+                    <th class="py-3 px-6 text-center">LNAME</th>
+                    <th class="py-3 px-6 text-center">EMAIL</th>
+                    <th class="py-3 px-6 text-center">OPERATION</th>
+                  </tr>
+                </thead>
+                <tbody id="rows" >
+                  <?php
+                  if (mysqli_num_rows($result) > 0) {
+                    while ($data = mysqli_fetch_assoc($result)) { ?>
+                      <tr id="<?php echo $data['id']; ?>">
+                        <td class="id"><?php echo $data['id']; ?></td>
+                        <td data-target="firstName"><?php echo $data['firstName']; ?></td>
+                        <td data-target="lastName"><?php echo $data['lastName']; ?></td>
+                        <td data-target="Email"><?php echo $data['Email']; ?></td>
+                        <td>
+                          <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                          <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                          <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
+                        </td>
+                      </tr>
+                    <?php }
+                  } else {  ?>
+                    no records
+                  <?php } ?>
+                </tbody>
+              </table>
+              <?php include 'pagination.php'; ?>
+            </div>
         </div>
-      </nav>
-
-      <!-- <div class="container mx-auto"> -->
-      <div class="table-responsive mx-auto shadow">
-        <div class="row">
-          <div class="col-md-6">
-            <h2 class="text-success">Users Records</h2>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <form action="" method="POST">
-              <select name="records" id="records" onclick="select()">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-              </select>
-              <span>Entities</span>
-            </form>
-          </div>
-
-          <!-- <script>
-            function select() {
-                
-
-            }
-          </script> -->
-
-
-          <div class="col-md-6 mb-4 d-flex">
-            <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
-          </div>
-        </div>
-
-        <table class="table table-hover text-center" id="mytable">
-          <thead class="table table-dark">
-            <tr>
-              <th>ID</th>
-              <th>FNAME</th>
-              <th>LNAME</th>
-              <th>EMAIL</th>
-              <th>OPERATION</th>
-            </tr>
-          </thead>
-          <tbody id="rows">
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-              while ($data = mysqli_fetch_assoc($result)) { ?>
-                <tr id="<?php echo $data['id']; ?>">
-                  <td class="id"><?php echo $data['id']; ?></td>
-                  <td data-target="firstName"><?php echo $data['firstName']; ?></td>
-                  <td data-target="lastName"><?php echo $data['lastName']; ?></td>
-                  <td data-target="Email"><?php echo $data['Email']; ?></td>
-                  <td>
-                    <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                  </td>
-                </tr>
-              <?php }
-            } else {  ?>
-              no records
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php include 'pagination.php'; ?>
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     <!-- crud section  -->
 
     <!-- add user modal -->
@@ -314,5 +291,4 @@ $result = mysqli_query($conn, $query);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
-
 </html>

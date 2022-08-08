@@ -63,248 +63,256 @@ $result = mysqli_query($conn, $query);
 
 <body>
   <div class="d-flex" id="wrapper">
-      <?php include 'sidebar.php';?>
-  
-    <div class="container justify-content-end p-3">
+    <div class="row">
 
-      <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand"><i class="fas fa-user me-2"></i><?php echo $mydata['email']; ?></a>
-        </div>
-      </nav>
+      <div class="col-md-5">
+        <?php include 'sidebar.php'; ?>
+      </div>
 
-      <!-- <div class="container mx-auto"> -->
-      <div class="table-responsive mx-auto shadow">
-        <div class="row">
-          <div class="col-md-6 text-success">
-            <h2>Patient Records</h2>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add patients</button>
-            <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
-          </div>
-        </div>
+      <div class="col-md-7">
+        <div class="container-fluid justify-content-end">
 
-        <div class="row">
+          <!-- <h1 class="text-2xl font-semibold pt-2">Dashboard</h1> -->
+          <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
+          </a>
+          
+          <!-- <div class="container mx-auto"> -->
+          <div class="table-responsive mx-auto shadow">
+            <div class="row">
+              <div class="col-md-6 text-success">
+                <h2>Patient Records</h2>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add patients</button>
+                <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
+              </div>
+            </div>
 
-          <div class="col-md-6">
-            <form action="" method="POST">
-              <select name="records" id="records">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="70">70</option>
-              </select>
-              <span>Entities</span>
-            </form>
-          </div>
+            <div class="row">
 
-          <div class="col-md-6 mb-4 d-flex">
-            <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
-          </div>
-        </div>
+              <div class="col-md-6">
+                <form action="" method="POST">
+                  <select name="records" id="records">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                  </select>
+                  <span>Entities</span>
+                </form>
+              </div>
 
-        <table class="table table-hover" id="mytable">
-          <thead class="table table-dark">
-            <tr>
-              <th>ID</th>
-              <th>PATIENT_NAME</th>
-              <th>EMAIL</th>
-              <th>MOBILE</th>
-              <th>GENDER</th>
-              <th>AGE</th>
-              <th>DOCTOR</th>
-              <th>OPERATION</th>
-            </tr>
-          </thead>
-          <tbody id="rows">
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-              while ($data = mysqli_fetch_assoc($result)) { ?>
-                <tr id="<?php echo $data['patient_id']; ?>">
-                  <td class="patient_id"><?php echo $data['patient_id']; ?></td>
-                  <td data-target='patient_name'><?php echo $data['patient_name']; ?></td>
-                  <td data-target='email'><?php echo $data['email']; ?></td>
-                  <td data-target='mobile'><?php echo $data['mobile']; ?></td>
-                  <td data-target='gender'><?php echo $data['gender']; ?></td>
-                  <td data-target='age'><?php echo $data['age']; ?></td>
-                  <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
+              <div class="col-md-6 mb-4 d-flex">
+                <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+              </div>
+            </div>
 
-                  <td>
-                    <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+            <table class="table table-hover table-bordered border-success text-center">
+              <thead class="bg-dark text-light">
+                <tr class="uppercase text-sm leading-normal">
+                  <th class="py-3 px-6 text-center">ID</th>
+                  <th class="py-3 px-6 text-center">PATIENT_NAME</th>
+                  <th class="py-3 px-6 text-center">EMAIL</th>
+                  <th class="py-3 px-6 text-center">MOBILE</th>
+                  <th class="py-3 px-6 text-center">GENDER</th>
+                  <th class="py-3 px-6 text-center">AGE</th>
+                  <th class="py-3 px-6 text-center">DOCTOR</th>
+                  <th class="py-3 px-6 text-center">OPERATION</th>
                 </tr>
-              <?php }
-            } else {  ?>
-              no records
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php include 'pagination.php';?>
+              </thead>
+              <tbody id="rows">
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                  while ($data = mysqli_fetch_assoc($result)) { ?>
+                    <tr id="<?php echo $data['patient_id']; ?>">
+                      <td class="patient_id"><?php echo $data['patient_id']; ?></td>
+                      <td data-target='patient_name'><?php echo $data['patient_name']; ?></td>
+                      <td data-target='email'><?php echo $data['email']; ?></td>
+                      <td data-target='mobile'><?php echo $data['mobile']; ?></td>
+                      <td data-target='gender'><?php echo $data['gender']; ?></td>
+                      <td data-target='age'><?php echo $data['age']; ?></td>
+                      <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
+
+                      <td>
+                        <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                        <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                        <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                    </tr>
+                  <?php }
+                } else {  ?>
+                  no records
+                <?php } ?>
+              </tbody>
+            </table>
+            <?php include 'pagination.php'; ?>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- crud section end -->
+        <!-- crud section end -->
 
-    <!-- add user modal -->
+        <!-- add user modal -->
 
-    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add patient</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container p-5 text-dark mx-auto bg-light">
+        <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container p-5 text-dark mx-auto bg-light">
 
-              <form action="code.php" method="POST" enctype="multipart/form-data">
-                <div class="row">
-                  <div class="form-group p-2">
-                    <label>Patient name</label>
-                    <input type="text" name="fname" class="form-control" placeholder="first name" value="">
-                  </div>
+                  <form action="code.php" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="form-group p-2">
+                        <label>Patient name</label>
+                        <input type="text" name="fname" class="form-control" placeholder="first name" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="email" value="">
-                  </div>
+                      <div class="form-group p-2">
+                        <label>Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="email" value="">
+                      </div>
 
-                  <div class="form-group col-md-6 p-2">
-                    <label>Age</label>
-                    <input type="text" name="age" class="form-control" placeholder="age" value="">
-                  </div>
+                      <div class="form-group col-md-6 p-2">
+                        <label>Age</label>
+                        <input type="text" name="age" class="form-control" placeholder="age" value="">
+                      </div>
 
-                  <div class="form-group col-md-6 p-2">
-                    <label>Mobile</label>
-                    <input type="text" name="mobile" class="form-control" placeholder="mobile" value="">
-                  </div>
+                      <div class="form-group col-md-6 p-2">
+                        <label>Mobile</label>
+                        <input type="text" name="mobile" class="form-control" placeholder="mobile" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>Gender</label>
-                    <input type="radio" name="gender" value="male">Male
-                    <input type="radio" name="gender" value="female">feMale
-                  </div>
+                      <div class="form-group p-2">
+                        <label>Gender</label>
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female">feMale
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>Doctor</label>
-                    <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
-                  </div>
+                      <div class="form-group p-2">
+                        <label>Doctor</label>
+                        <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <button type="submit" class="btn btn-success btn-block" name="patient">Add</button>
-                  </div>
+                      <div class="form-group p-2">
+                        <button type="submit" class="btn btn-success btn-block" name="patient">Add</button>
+                      </div>
+                    </div>
+                  </form>
+
                 </div>
-              </form>
-
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- end -->
+        <!-- end -->
 
-    <!-- edit modal -->
-    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container p-5 text-dark mx-auto bg-light">
-              <form action="code.php" method="POST">
+        <!-- edit modal -->
+        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container p-5 text-dark mx-auto bg-light">
+                  <form action="code.php" method="POST">
 
-                <div class="row">
+                    <div class="row">
 
-                  <input type="hidden" id="patient_id" name="patient_id">
+                      <input type="hidden" id="patient_id" name="patient_id">
 
-                  <div class="form-group col-md-6 p-2">
-                    <label>patient name</label>
-                    <input type="text" name="patient_name" id="editpatientname" class="form-control" placeholder="patient name" value="">
-                  </div>
+                      <div class="form-group col-md-6 p-2">
+                        <label>patient name</label>
+                        <input type="text" name="patient_name" id="editpatientname" class="form-control" placeholder="patient name" value="">
+                      </div>
 
-                  <div class="form-group col-md-6 p-2">
-                    <label>email</label>
-                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
-                  </div>
+                      <div class="form-group col-md-6 p-2">
+                        <label>email</label>
+                        <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>mobile</label>
-                    <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
-                  </div>
+                      <div class="form-group p-2">
+                        <label>mobile</label>
+                        <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>age</label>
-                    <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
-                  </div>
+                      <div class="form-group p-2">
+                        <label>age</label>
+                        <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
+                      </div>
 
-                  <div class="form-group p-2">
-                    <label>doctor</label>
-                    <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
-                  </div>
+                      <div class="form-group p-2">
+                        <label>doctor</label>
+                        <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
+                      </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                      <button type="submit" name="patient_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                    </div>
+                  </form>
 
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end -->
 
+        <!-- view modal -->
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Patient records</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="user_viewing"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end -->
+
+        <!-- delete modal -->
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="code.php" method="POST">
+                <div class="modal-body">
+                  <input type="hidden" id="delete_id" name="patient_id">
+                  <h4>Are you sure,you want to delete this data?</h4>
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                  <button type="submit" name="patient_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                  <button type="submit" name="patientdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- end -->
-
-    <!-- view modal -->
-    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Patient records</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="user_viewing"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end -->
-
-    <!-- delete modal -->
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form action="code.php" method="POST">
-            <div class="modal-body">
-              <input type="hidden" id="delete_id" name="patient_id">
-              <h4>Are you sure,you want to delete this data?</h4>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-              <button type="submit" name="patientdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- end -->
+        <!-- end -->
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+<!-- script section -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

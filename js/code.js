@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
 
     function search_table(value) {
-      $('#mytable tr').each(function() {
+      $('#rows tr').each(function() {
         var found = 'false';
         $(this).each(function() {
           if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {

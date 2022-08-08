@@ -20,9 +20,9 @@
             text-decoration: none;
         }
     </style>
-</head> 
+</head>
 
-<!-- <body class="antialiased bg-gray-100"> -->
+<body class="antialiased bg-gray-100">
 <!-- <div class="flex relative" x-data="{navOpen: false}"> -->
 <!-- NAV -->
 <nav class=" bg-success absolute md:relative w-64 transform -translate-x-full md:translate-x-0 h-screen overflow-y-scroll bg-black transition-all duration-300" :class="{'-translate-x-full': !navOpen}">
@@ -103,25 +103,24 @@
 </nav>
 
 <!-- PAGE CONTENT -->
-<!-- <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
-            <div class="md:hidden justify-between items-center bg-success text-white flex">
-                <h1 class="text-2xl font-bold px-4">HEALTHCARE</h1>
-                <button @click="navOpen = !navOpen" class="btn p-4 focus:outline-none">
-                    <svg class="w-6 h-6 fill-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-            <section class="max-w-7xl mx-auto py-4 px-5">
-                <div class="flex justify-between items-center border-b border-gray-300">
-                    <h1 class="text-2xl font-semibold pt-2">Dashboard</h1>
-                    <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px">
-                    </a>
-                </div>
-            </section>
-           
-        </main> -->
+ <!-- <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
+    <div class="md:hidden justify-between items-center bg-success text-white flex">
+        <h1 class="text-2xl font-bold px-4">HEALTHCARE</h1>
+        <button @click="navOpen = !navOpen" class="btn p-4 focus:outline-none">
+            <svg class="w-6 h-6 fill-current" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+    <section class="max-w-7xl mx-auto py-4 px-5">
+        <div class="flex justify-between items-center border-b border-gray-300">
+            <h1 class="text-2xl font-semibold pt-2">Dashboard</h1>
+            <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px">
+            </a>
+        </div>
+    </section>
+</main> -->
 
 <!-- </div> -->
 
@@ -159,7 +158,6 @@
     </div>
 </div> -->
 
-<!-- </body> -->
-<!--  -->
+</body>
 
 </html>

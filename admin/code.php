@@ -56,25 +56,6 @@ $doctor = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , 
 
 if (isset($_REQUEST['doctor'])) {
 
-    if (empty($_POST['fname'])) {
-        $fnamearr = "fname is required";
-    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
-        $fnamearr = "only character and letter ";
-    } elseif (empty($_POST['email'])) {
-        $emailarr = "email is required";
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = "invaild formet";
-    } elseif (empty($_POST['gender'])) {
-        $genderarr = "gender is required";
-    } elseif (empty($_POST['specialization_id'])) {
-        $specializationarr = "field is required";
-    } elseif (!preg_match("/^[0-9]*$/", $_POST['specialization_id'])) {
-        $specializationarr = "only number ";
-    } elseif (empty($_POST['mobile'])) {
-        $mobilearr = "field is required";
-    } elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
-        $mobilearr = "length 10 is required";
-    } else {
 
         $fname = $_POST['fname'];
         $email = $_POST['email'];
@@ -91,7 +72,7 @@ if (isset($_REQUEST['doctor'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:doctor.php');
         }
-    }
+    
 }
 
 // insert patient data
@@ -99,28 +80,6 @@ $patient = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d
             where p.doctor_id = d.doctor_id";
 
 if (isset($_REQUEST['patient'])) {
-
-    if (empty($_POST['fname'])) {
-        $fnamearr = "fname is required";
-    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
-        $fnamearr = "only character and letter ";
-    } elseif (empty($_POST['email'])) {
-        $emailarr = "email is required";
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = "invaild formet";
-    } elseif (empty($_POST['gender'])) {
-        $genderarr = "gender is required";
-    } elseif (empty($_POST['doctor_id'])) {
-        $specializationarr = "field is required";
-    } elseif (!preg_match("/^[0-9]*$/", $_POST['doctor_id'])) {
-        $specializationarr = "only number ";
-    } elseif (empty($_POST['mobile'])) {
-        $mobilearr = "field is required";
-    } elseif (!preg_match("/^[0-9]*$/", $_POST['mobile'])) {
-        $mobilearr = "length 10 is required";
-    } elseif (empty($_POST['age'])) {
-        $agearr = "field is required";
-    } else {
 
         $fname = $_POST['fname'];
         $email = $_POST['email'];
@@ -138,21 +97,14 @@ if (isset($_REQUEST['patient'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:patient.php');
         }
-    }
+    
 }
 
 // insert specialization data
 $specialization = "SELECT * FROM specialization";
 
 if (isset($_REQUEST['speciality'])) {
-    if (empty($_POST['specialization_id'])) {
-        $idarr = "feild is required";
-    } elseif (empty($_POST['specialization'])) {
-        $specializationarr = "feild is required";
-    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['specialization'])) {
-        $fnamearr = "only character and letter ";
-    } else {
-
+  
         $specialization_id = $_POST['specialization_id'];
         $specialization = $_POST['specialization'];
 
@@ -164,7 +116,7 @@ if (isset($_REQUEST['speciality'])) {
             // $_SESSION['status_code'] = "success"; 
             header('location:specialization.php');
         }
-    }
+    
 }
 
 // insert appointment data
