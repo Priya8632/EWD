@@ -2,9 +2,12 @@
 
 include 'config.php';
 
-// if (isset($_SESSION['id']) || isset($_COOKIE['id'])) {    
-//     header('location:dashboard.php');
-// }
+if (isset($_SESSION['id'])) {
+    header('location:user_dashboard.php');
+}
+if (isset($_COOKIE['id'])) {
+    header('location:user_dashboard.php');
+}
 
 $pwarr = $emailarr = "";
 
@@ -36,8 +39,8 @@ if(isset($_POST['submit'])){
         if($arr['Email'] == $email){
             // $_SESSION['status'] = "login successfully";
             // $_SESSION['status_code'] = "success"; 
-            // $_SESSION['id'] = $arr['id'];
-            // setcookie('id',$arr['id'],time() + 60*10);
+            $_SESSION['id'] = $arr['id'];
+            setcookie('id',$arr['id'],time() + 60*10);
             header('location:user_dashboard.php');
              }else {
                 
