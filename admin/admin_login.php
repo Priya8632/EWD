@@ -113,7 +113,7 @@ if (isset($_POST['adsubmit'])) {
           <span class="navbar-toggler-icon"></span>
         </button> -->
             <ul class="nav jastify-content-end">
-                <li class="nav-item"><a class="nav-link text-success" href="index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-success" href="../index.php">Home</a></li>
             </ul>
         </div>
     </nav>
