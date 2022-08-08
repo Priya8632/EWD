@@ -43,8 +43,8 @@ if (isset($_REQUEST['add'])) {
         ('$fname','$lname','$email','$pw','$cw')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
+            $_SESSION['status'] = "registered successfully";
+            $_SESSION['status_code'] = "success"; 
             header('location:users.php');
         }
     }
@@ -68,8 +68,6 @@ if (isset($_REQUEST['doctor'])) {
         ('$fname','$email','$mobile','$gender','$specialization_id')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
             header('location:doctor.php');
         }
     
@@ -93,8 +91,6 @@ if (isset($_REQUEST['patient'])) {
         ('$fname','$email','$mobile','$gender','$age','$doctor_id')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
             header('location:patient.php');
         }
     
@@ -112,8 +108,6 @@ if (isset($_REQUEST['speciality'])) {
         (`specialization_id`,`specialization`) VALUES ('$specialization_id','$specialization')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
             header('location:specialization.php');
         }
     
@@ -138,8 +132,6 @@ if (isset($_REQUEST['appointment'])) {
         ('$app_number','$patient_id','$doctor_id','$specialization_id','$fees','$app_date','$app_time')";
 
     if (mysqli_query($conn, $insert)) {
-        // $_SESSION['status'] = "registered successfully";
-        // $_SESSION['status_code'] = "success"; 
         header('location:appointments.php');
     }
 }
@@ -197,121 +189,6 @@ if (isset($_POST['userdelete'])) {
     }
 }
 
-// view specialization data 
-if (isset($_POST['checking_specializationbtn'])) {
-    
-    $id = $_POST['s_id'];
-    // echo $return = $id;
-
-    $query = "SELECT * FROM specialization where specialization_id = '$id'";
-    $q_run = mysqli_query($conn, $query);
-    if (mysqli_num_rows($q_run) > 0) {
-
-        foreach ($q_run as $data) {
-
-            echo $return = '
-                <h5> specialization_Id : ' . $data['specialization_id'] . '</h5>
-                <h5> specialization : ' . $data['specialization'] . '</h5>
-            ';
-        }
-    }
-}
-
-// view appointment details
-if (isset($_POST['checking_appbtn'])) {
-    $id = $_POST['app_id'];
-    // echo $return = $id;
-
-    $query = "SELECT * FROM appointment where appointment_id = '$id'";
-    // $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
-    //        where a.appointment = $id ";
-
-    $q_run = mysqli_query($conn, $query);
-    if (mysqli_num_rows($q_run) > 0) {
-
-        foreach ($q_run as $data) {
-
-            echo $return = '
-                <h5> appointment_Id :       ' . $data['appointment_id'] . '</h5>
-                <h5> appoint_number :       ' . $data['app_number'] . '</h5>
-                <h5> patient_id :           ' . $data['patient_id'] . '</h5>
-                <h5> doctor_id :            ' . $data['doctor_id'] . '</h5>
-                <h5> specialization_id :    ' . $data['specialization_id'] . '</h5>
-                <h5> fees :                 ' . $data['fees'] . '</h5>
-                <h5> app_date :             ' . $data['app_date'] . '</h5>
-                <h5> app_time :             ' . $data['app_time'] . '</h5>
-            ';
-        }
-    }
-}
-
-// view doctor data
-if (isset($_POST['checking_doctorbtn'])) {
-    $id = $_POST['doctor_id'];
-    // echo $return = $id;
-
-    $query = "SELECT * FROM doctor where doctor_id = '$id'";
-    $q_run = mysqli_query($conn, $query);
-    if (mysqli_num_rows($q_run) > 0) {
-
-        foreach ($q_run as $data) {
-
-            echo $return = '
-                <h5> Dcotor_ID : ' . $data['doctor_id'] . '</h5>
-                <h5> Doctor_name : ' . $data['doctor_name'] . '</h5>
-                <h5> Email : ' . $data['email'] . '</h5>
-                <h5> Mobile : ' . $data['mobile'] . '</h5>
-                <h5> Gender : ' . $data['gender'] . '</h5>
-                <h5> Specialization_id : ' . $data['specialization_id'] . '</h5>
-            ';
-        }
-    }
-}
-
-// view patient data
-if (isset($_POST['checking_patientbtn'])) {
-    $id = $_POST['patient_id'];
-    // echo $return = $id;
-
-    $query = "SELECT * FROM patient where patient_id = '$id'";
-    $q_run = mysqli_query($conn, $query);
-    if (mysqli_num_rows($q_run) > 0) {
-
-        foreach ($q_run as $data) {
-
-            echo $return = '
-                <h5> patient_ID : ' . $data['patient_id'] . '</h5>
-                <h5> patient_name : ' . $data['patient_name'] . '</h5>
-                <h5> Email : ' . $data['email'] . '</h5>
-                <h5> Mobile : ' . $data['mobile'] . '</h5>
-                <h5> Gender : ' . $data['gender'] . '</h5>
-                <h5> Age : ' . $data['age'] . '</h5>
-                <h5> Doctor_id : ' . $data['doctor_id'] . '</h5>
-            ';
-        }
-    }
-}
-
-// view user data
-if (isset($_POST['checking_userbtn'])) {
-    $id = $_POST['id'];
-    // echo $return = $id;
-
-    $query = "SELECT * FROM users where id = '$id'";
-    $q_run = mysqli_query($conn, $query);
-    if (mysqli_num_rows($q_run) > 0) {
-
-        foreach ($q_run as $data) {
-
-            echo $return = '
-                <h5> ID : ' . $data['id'] . '</h5>
-                <h5> first Name : ' . $data['firstName'] . '</h5>
-                <h5> Last Name : ' . $data['lastName'] . '</h5>
-                <h5> Email : ' . $data['Email'] . '</h5>
-            ';
-        }
-    }
-}
 
 // doctor update
 if(isset($_POST['doctor_update']))
@@ -337,9 +214,9 @@ if(isset($_POST['appointment_update']))
 {
     $id = $_POST['app_id'];
     $app_number = $_POST['app_number'];
-    $patient_id = $_POST['patient_id'];
-    $doctor_id = $_POST['doctor_id'];
-    $specialization_id = $_POST['specialization_id'];
+    $patient_id = $_POST['patient_name'];
+    $doctor_id = $_POST['doctor_name'];
+    $specialization_id = $_POST['specialization'];
     $fees = $_POST['fees'];
     $app_date = $_POST['app_date'];
     $app_time = $_POST['app_time'];
@@ -354,8 +231,6 @@ if(isset($_POST['appointment_update']))
 }
 
 // patient update
-
-// doctor update
 if(isset($_POST['patient_update']))
 {
     $id = $_POST['patient_id'];

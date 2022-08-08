@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../css/sidebar.css"> -->
-
     <style>
         a {
             text-decoration: none;
@@ -124,40 +122,5 @@
 
 <!-- </div> -->
 
-
-
-
-<!-- <div class="d-flex" id="wrapper">
-    <div class="bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-blod text-uppercase border-bottom">
-            <i class="fas fa-user-secret me-2"></i>HEALTHCARE
-        </div>
-        <div class="list-group list-group-flush my-3">
-            <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active">
-                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-            </a>
-            <a href="doctor.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fa-solid fa-user-doctor me-2"></i>Doctors
-            </a>
-            <a href="patient.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fa-solid fa-bed me-2"></i>Patients
-            </a>
-            <a href="appointments.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fa-solid fa-clipboard-user me-2"></i>Appointments
-            </a>
-            <a href="specialization.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fa-solid fa-star-of-life me-2"></i>Specialization
-            </a>
-            <a href="users.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fa-solid fa-user me-2"></i>Users
-            </a>
-            <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                <i class="fas fa-project-diagram me-2"></i>logout
-            </a>
-        </div>
-    </div>
-</div> -->
-
 </body>
-
 </html>

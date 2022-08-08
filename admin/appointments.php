@@ -39,6 +39,21 @@ $pagi = ceil($record / $per_page);
 $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id  limit $start ,$per_page";
 $result = mysqli_query($conn, $query);
+
+function FillComboBoxUpdate($query, $id)
+{
+
+  global $conn;
+  $cmbStr = "<option value=\"select\">Select</option>";
+  $cmbRS = mysqli_query($conn, $query) or die(mysqli_error($conn));
+  while ($cmbRow = mysqli_fetch_array($cmbRS)) {
+    if ($cmbRow[0] == $id)
+      $cmbStr = $cmbStr . "<option selected=\"selected\" value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+    else
+      $cmbStr = $cmbStr . "<option value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+  }
+  return $cmbStr;
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +90,7 @@ $result = mysqli_query($conn, $query);
           <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
           </a>
-          
+
 
           <!-- <div class="container mx-auto"> -->
           <div class="table-responsive mx-auto shadow">
@@ -152,187 +167,207 @@ $result = mysqli_query($conn, $query);
       </div>
     </div>
 
-        <!-- crud section end -->
+    <!-- crud section end -->
 
-        <!-- add user modal -->
+    <!-- add user modal -->
 
-        <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="container p-3 text-dark mx-auto bg-light">
+    <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-3 text-dark mx-auto bg-light">
 
-                  <form action="code.php" method="POST" enctype="multipart/form-data">
-                    <div class="row">
-                      <div class="form-group p-2">
-                        <label>Appointment number</label>
-                        <input type="text" name="app_number" class="form-control" placeholder="appointment_number" value="">
-                      </div>
+              <form action="code.php" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="form-group p-2">
+                    <label>Appointment number</label>
+                    <input type="text" name="app_number" class="form-control" placeholder="appointment_number" value="">
+                  </div>
 
-                      <div class="form-group p-2">
-                        <label>Patient</label>
-                        <input type="text" name="patient_id" class="form-control" placeholder="patient_id" value="">
-                      </div>
+                  <div class="form-group p-2">
+                    <label>Patient</label>
+                    <input type="text" name="patient_id" class="form-control" placeholder="patient_id" value="">
+                  </div>
 
-                      <div class="form-group p-2">
-                        <label>Doctor</label>
-                        <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
-                      </div>
+                  <div class="form-group p-2">
+                    <label>Doctor</label>
+                    <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
+                  </div>
 
-                      <div class="form-group p-2">
-                        <label>Specialization</label>
-                        <input type="text" name="specialization_id" class="form-control" placeholder="specialization_id" value="">
-                      </div>
+                  <div class="form-group p-2">
+                    <label>Specialization</label>
+                    <input type="text" name="specialization_id" class="form-control" placeholder="specialization_id" value="">
+                  </div>
 
-                      <div class="form-group col-md-6 p-2">
-                        <label>Fees</label>
-                        <input type="text" name="fees" class="form-control" placeholder="fees" value="">
-                      </div>
+                  <div class="form-group col-md-6 p-2">
+                    <label>Fees</label>
+                    <input type="text" name="fees" class="form-control" placeholder="fees" value="">
+                  </div>
 
-                      <div class="form-group col-md-6 p-2">
-                        <label>Date</label>
-                        <input type="date" name="app_date" class="form-control" placeholder="appointment_date" value="">
-                      </div>
+                  <div class="form-group col-md-6 p-2">
+                    <label>Date</label>
+                    <input type="date" name="app_date" class="form-control" placeholder="appointment_date" value="">
+                  </div>
 
-                      <div class="form-group p-2">
-                        <label>Time</label>
-                        <input type="text" name="app_time" class="form-control" placeholder="appointment_time" value="">
-                      </div>
+                  <div class="form-group p-2">
+                    <label>Time</label>
+                    <input type="text" name="app_time" class="form-control" placeholder="appointment_time" value="">
+                  </div>
 
-                      <div class="form-group p-2">
-                        <button type="submit" class="btn btn-success btn-block" name="appointment">Add</button>
-                      </div>
-                    </div>
-                  </form>
-
+                  <div class="form-group p-2">
+                    <button type="submit" class="btn btn-success btn-block" name="appointment">Add</button>
+                  </div>
                 </div>
-              </div>
+              </form>
+
             </div>
           </div>
         </div>
-        <!-- end -->
+      </div>
+    </div>
+    <!-- end -->
 
-        <!-- edit modal -->
+    <!-- edit modal -->
 
-        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="container p-3 text-dark mx-auto bg-light">
-                  <form action="code.php" method="POST">
-
-                    <div class="row">
-
-                      <input type="hidden" id="app_id" name="app_id">
-
-                      <div class="form-group p-2">
-                        <label>Appointment number</label>
-                        <input type="text" name="app_number" id="editapp_number" class="form-control" placeholder="appointment_number" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Patient</label>
-                        <input type="text" name="patient_id" id="editpatient_id" class="form-control" placeholder="patient_id" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Doctor</label>
-                        <input type="text" name="doctor_id" id="editdoctor_id" class="form-control" placeholder="doctor_id" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Specialization</label>
-                        <input type="text" name="specialization_id" id="editspecialization_id" class="form-control" placeholder="specialization_id" value="">
-                      </div>
-
-                      <div class="form-group col-md-6 p-2">
-                        <label>Fees</label>
-                        <input type="text" name="fees" id="editfees" class="form-control" placeholder="fees" value="">
-                      </div>
-
-                      <div class="form-group col-md-6 p-2">
-                        <label>Date</label>
-                        <input type="date" name="app_date" id="editapp_date" class="form-control" placeholder="appointment_date" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Time</label>
-                        <input type="text" name="app_time" id="editapp_time" class="form-control" placeholder="appointment_time" value="">
-                      </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                      <button type="submit" name="appointment_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
-                    </div>
-
-                  </form>
-                </div>
-              </div>
-            </div>
+    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
-
-
-        <!-- end -->
-
-
-        <!-- view modal -->
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="user_viewing"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end -->
-
-
-        <!-- delete modal -->
-        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
+          <div class="modal-body">
+            <div class="container p-3 text-dark mx-auto bg-light">
               <form action="code.php" method="POST">
-                <div class="modal-body">
-                  <input type="hidden" id="delete_id" name="app_id">
-                  <h4>Are you sure,you want to delete this data?</h4>
+
+                <div class="row">
+
+                  <input type="hidden" id="app_id" name="app_id">
+
+                  <div class="form-group p-2">
+                    <label>Appointment number</label>
+                    <input type="text" name="app_number" id="editapp_number" class="form-control" placeholder="appointment_number" value="">
+                  </div>
+
+                  <!-- <div class="form-group p-2">
+                        <label>Patient</label>
+                        <input type="text" name="patient_name" id="editpatient_id" class="form-control" placeholder="patient_id" value="">
+                      </div>
+
+                      <div class="form-group p-2">
+                        <label>Doctor</label>
+                        <input type="text" name="doctor_name" id="editdoctor_id" class="form-control" placeholder="doctor_id" value="">
+                      </div>
+
+                      <div class="form-group p-2">
+                        <label>Specialization</label>
+                        <input type="text" name="specialization" id="editspecialization_id" class="form-control" placeholder="specialization_id" value="">
+                      </div> -->
+
+                  <div class="form-group p-2">
+                    <label for="">Patient</label>
+                    <?php $query = "select patient_id,patient_name from patient"; ?>
+                    <select name="patient_name" id="editpatientname" value="<?php echo $row[3] ?>">
+                      <?php echo FillComboBoxUpdate($query, $row[5]); ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label for="">Doctor</label>
+                    <?php $query = "select doctor_id,doctor_name from doctor"; ?>
+                    <select name="doctor_name" id="editdoctorname" value="<?php echo $row[3] ?>">
+                      <?php echo FillComboBoxUpdate($query, $row[5]); ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label for="">Specialization</label>
+                    <?php $query = "select specialization_id,specialization from specialization"; ?>
+                    <select name="specialization" id="editspecialization" value="<?php echo $row[1]; ?>">
+                      <?php echo FillComboBoxUpdate($query, $row[1]); ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>Fees</label>
+                    <input type="text" name="fees" id="editfees" class="form-control" placeholder="fees" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>Date</label>
+                    <input type="date" name="app_date" id="editapp_date" class="form-control" placeholder="appointment_date" value="">
+                  </div>
+
+                  <div class="form-group p-2">
+                    <label>Time</label>
+                    <input type="text" name="app_time" id="editapp_time" class="form-control" placeholder="appointment_time" value="">
+                  </div>
+
                 </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                  <button type="submit" name="appdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+                  <button type="submit" name="appointment_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
                 </div>
+
               </form>
             </div>
           </div>
         </div>
-        <!-- end -->
       </div>
+    </div>
+    <!-- end -->
 
-      <!-- script section -->
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <!-- view modal -->
+    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="user_viewing"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+
+    <!-- delete modal -->
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="code.php" method="POST">
+            <div class="modal-body">
+              <input type="hidden" id="delete_id" name="app_id">
+              <h4>Are you sure,you want to delete this data?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+              <button type="submit" name="appdelete" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- end -->
+  </div>
+
+  <!-- script section -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

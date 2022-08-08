@@ -165,14 +165,8 @@ if(isset($_POST['submit'])){
 
         </script>
 
-
-        <?php
-
-        //  include 'alert.php';
-
-         ?>
-        
 </body>
+</html>
 
 
 

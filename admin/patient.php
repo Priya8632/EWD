@@ -41,6 +41,20 @@ $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.d
           where p.doctor_id = d.doctor_id limit $start ,$per_page";
 $result = mysqli_query($conn, $query);
 
+function FillComboBoxUpdate($query,$id){
+
+  global $conn;
+	$cmbStr="<option value=\"select\">Select</option>";
+	$cmbRS=mysqli_query($conn,$query) or die(mysqli_error($conn));
+	while($cmbRow=mysqli_fetch_array($cmbRS))
+	{
+		if($cmbRow[0]==$id)
+			$cmbStr=$cmbStr."<option selected=\"selected\" value=".$cmbRow[0].">".$cmbRow[1]."</option>";
+		else
+			$cmbStr=$cmbStr."<option value=".$cmbRow[0].">".$cmbRow[1]."</option>";
+	}
+	return $cmbStr;
+}
 ?>
 
 <!DOCTYPE html>
@@ -247,9 +261,17 @@ $result = mysqli_query($conn, $query);
                         <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
                       </div>
 
-                      <div class="form-group p-2">
+                      <!-- <div class="form-group p-2">
                         <label>doctor</label>
                         <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
+                      </div> -->
+
+                      <div class="form-group p-2">
+                        <label for="">Doctor</label>
+                        <?php  $query="select doctor_id,doctor_name from doctor"; ?>
+                        <select name="doctor_name" id="editdoctorname" value="<?php echo $row[3]?>">
+                            <?php echo FillComboBoxUpdate($query,$row[5]);?>
+                        </select>
                       </div>
 
                     </div>

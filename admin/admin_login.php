@@ -173,10 +173,6 @@ if (isset($_POST['adsubmit'])) {
             });
         });
     </script>
-    <?php
-
-    //  include 'alert.php';
-
-    ?>
-
+   
 </body>
+</html>

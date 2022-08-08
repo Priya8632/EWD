@@ -7,7 +7,6 @@ $error = $createTable ="";
 $fname = $lname = $email = $pw = $cw ="";
 
 
-
 $query = "SELECT * FROM users";
 
 if(isset($_REQUEST['submit'])){
@@ -184,7 +183,7 @@ elseif($_POST['c_word'] != $_POST['p_word']){
         </form>
         </div>
 
-
 </body>
+</html>
 
 

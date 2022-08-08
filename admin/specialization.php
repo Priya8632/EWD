@@ -59,7 +59,6 @@ $result = mysqli_query($conn, $query);
 
 <body>
 
-
   <div class="d-flex" id="wrapper">
     <div class="row">
       <div class="col-md-5">
@@ -262,5 +261,4 @@ $result = mysqli_query($conn, $query);
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
-
 </html>

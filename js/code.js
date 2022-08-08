@@ -113,28 +113,6 @@ $(document).ready(function() {
 
     });
 
-    $('.edit-btn').click(function(e) {
-
-      e.preventDefault();
-
-      var userid = $(this).closest('tr').find('.user_id').text();
-      // console.log(userid);
-      $.ajax({
-        type: "POST",
-        url: "code.php",
-        data: {
-          'checking_editbtn': true,
-          'user_id': userid,
-        },
-        success: function(response) {
-          $('#edit-data').html(response);
-          $('#edit').modal('show');
-
-        }
-      });
-
-    });
-
     $('.view-btn').click(function(e) {
       e.preventDefault();
       var patientid = $(this).closest('tr').find('.patient_id').text();
@@ -215,28 +193,6 @@ $(document).ready(function() {
 
     });
 
-    $('.edit-btn').click(function(e) {
-
-      e.preventDefault();
-
-      var userid = $(this).closest('tr').find('.user_id').text();
-      // console.log(userid);
-      $.ajax({
-        type: "POST",
-        url: "code.php",
-        data: {
-          'checking_editbtn': true,
-          'user_id': userid,
-        },
-        success: function(response) {
-          $('#edit-data').html(response);
-          $('#edit').modal('show');
-
-        }
-      });
-
-    });
-
     $('.view-btn').click(function(e) {
       e.preventDefault();
       var appid = $(this).closest('tr').find('.app_id').text();
@@ -274,9 +230,9 @@ $(document).ready(function() {
 
       $('#app_id').val(id);
       $('#editapp_number').val(app_number);
-      $('#editpatient_id').val(patient_id);
-      $('#editdoctor_id').val(doctor_id);
-      $('#editspecialization_id').val(specialization_id);
+      $('#editpatientname').val(patient_id);
+      $('#editdoctorname').val(doctor_id);
+      $('#editspecialization').val(specialization_id);
       $('#editfees').val(fees);
       $('#editapp_date').val(app_date);
       $('#editapp_time').val(app_time);
