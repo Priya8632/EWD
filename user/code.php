@@ -30,36 +30,21 @@ if (isset($_REQUEST['add'])) {
         $pwarr = "8 length is required";
     } elseif ($_POST['c_word'] != $_POST['p_word']) {
         $cwarr = "both password is not same..";
-    }elseif ($filesize > 1000000) {
-        $imgarr = "image file must be less than 1 mb";} 
-    else {
-
-        $email = $_POST['email'];
-        $email01 = "SELECT * FROM users WHERE Email ='$email'";
-        $emailchk = mysqli_query($conn, $email01);
-        $result = mysqli_num_rows($emailchk);
-        $filesize = $_FILES['file']['size']; 
+    } else {
 
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
         $pw = base64_encode($_POST['p_word']);
         $cw = base64_encode($_POST['c_word']);
-        $mobile = $_POST['mob'];
-        $gender = $_POST['gender'];
-
-        $target_dir = "./userimage/";
-
-        $imagepath = $target_dir . basename($_FILES['file']['name']);
-        $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
 
         $insert = "INSERT INTO users
-        (`firstName`,`lastName`,`Email`,`Password`,`Confirm_Password`,`Mobile`,`Gender`,`img`) VALUES 
-        ('$fname','$lname','$email','$pw','$cw','$mobile','$gender','$imagepath')";
+        (`firstName`,`lastName`,`Email`,`Password`,`Confirm_Password`) VALUES 
+        ('$fname','$lname','$email','$pw','$cw')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
+            $_SESSION['status'] = "registered successfully";
+            $_SESSION['status_code'] = "success"; 
             header('location:users.php');
         }
     }
@@ -286,10 +271,9 @@ if(isset($_POST['update']))
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
-    $mobile = $_POST['mob'];
 
 
-    $update = "UPDATE users SET firstName='$fname',lastName='$lname',Email ='$email',Mobile= '$mobile' where id=$id";
+    $update = "UPDATE users SET firstName='$fname',lastName='$lname',Email ='$email' where id=$id";
     $chk = mysqli_query($conn,$update);
     if($chk){
 

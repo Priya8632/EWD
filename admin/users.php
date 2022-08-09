@@ -67,79 +67,79 @@ $result = mysqli_query($conn, $query);
       <div class="col-md-7">
         <div class="container-fluid justify-content-end">
 
-              <!-- <h1 class="text-2xl font-semibold pt-2">Dashboard</h1> -->
-              <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
-              </a>
+          <!-- <h1 class="text-2xl font-semibold pt-2">Dashboard</h1> -->
+          <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
+          </a>
 
-            <!-- <div class="container mx-auto"> -->
-            <div class="table-responsive mx-auto shadow">
-              <div class="row">
-                <div class="col-md-6">
-                  <h2 class="text-success">Users Records</h2>
-                </div>
-                <div class="col-md-6">
-                  <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
-                </div>
+          <!-- <div class="container mx-auto"> -->
+          <div class="table-responsive mx-auto shadow">
+            <div class="row">
+              <div class="col-md-6">
+                <h2 class="text-success">Users Records</h2>
               </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <form action="" method="POST">
-                    <select name="records" id="records" onclick="select()">
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="15">15</option>
-                      <option value="20">20</option>
-                    </select>
-                    <span>Entities</span>
-                  </form>
-                </div>
-
-                <div class="col-md-6 mb-4 d-flex">
-                  <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
-                </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
               </div>
-
-              <table class="table table-hover table-bordered border-success text-center">
-                <thead class="bg-dark text-light">
-                  <tr class="uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-center">ID</th>
-                    <th class="py-3 px-6 text-center">FNAME</th>
-                    <th class="py-3 px-6 text-center">LNAME</th>
-                    <th class="py-3 px-6 text-center">EMAIL</th>
-                    <th class="py-3 px-6 text-center">MOBILE</th>
-                    <th class="py-3 px-6 text-center">GENDER</th>
-                    <th class="py-3 px-6 text-center">IMAGE</th>
-                    <th class="py-3 px-6 text-center">OPERATION</th>
-                  </tr>
-                </thead>
-                <tbody id="rows" >
-                  <?php
-                  if (mysqli_num_rows($result) > 0) {
-                    while ($data = mysqli_fetch_assoc($result)) { ?>
-                      <tr id="<?php echo $data['id']; ?>">
-                        <td class="id"><?php echo $data['id']; ?></td>
-                        <td data-target="firstName"><?php echo $data['firstName']; ?></td>
-                        <td data-target="lastName"><?php echo $data['lastName']; ?></td>
-                        <td data-target="Email"><?php echo $data['Email']; ?></td>
-                        <td><?php echo $data['Mobile'];?></td>
-                        <td><?php echo $data['Gender'];?></td>
-                        <td><img src="<?php echo $data['img']; ?>" alt="Network Error" hright='100px' width='100px'></td>
-                        <td>
-                          <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                          <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                          <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
-                        </td>
-                      </tr>
-                    <?php }
-                  } else {  ?>
-                    no records
-                  <?php } ?>
-                </tbody>
-              </table>
-              <?php include 'pagination.php'; ?>
             </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <form action="" method="POST">
+                  <select name="records" id="records" onclick="select()">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                  <span>Entities</span>
+                </form>
+              </div>
+
+              <div class="col-md-6 mb-4 d-flex">
+                <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+              </div>
+            </div>
+
+            <table class="table table-hover table-bordered border-success text-center">
+              <thead class="bg-dark text-light">
+                <tr class="uppercase text-sm leading-normal">
+                  <th class="py-3 px-6 text-center">ID</th>
+                  <th class="py-3 px-6 text-center">FNAME</th>
+                  <th class="py-3 px-6 text-center">LNAME</th>
+                  <th class="py-3 px-6 text-center">EMAIL</th>
+                  <th class="py-3 px-6 text-center">MOBILE</th>
+                  <th class="py-3 px-6 text-center">GENDER</th>
+                  <th class="py-3 px-6 text-center">IMAGE</th>
+                  <th class="py-3 px-6 text-center">OPERATION</th>
+                </tr>
+              </thead>
+              <tbody id="rows">
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                  while ($data = mysqli_fetch_assoc($result)) { ?>
+                    <tr id="<?php echo $data['id']; ?>">
+                      <td class="id"><?php echo $data['id']; ?></td>
+                      <td data-target="firstName"><?php echo $data['firstName']; ?></td>
+                      <td data-target="lastName"><?php echo $data['lastName']; ?></td>
+                      <td data-target="Email"><?php echo $data['Email']; ?></td>
+                      <td data-target="Mobile"><?php echo $data['Mobile']; ?></td>
+                      <td><?php echo $data['Gender']; ?></td>
+                      <td><img src="<?php echo $data['img']; ?>" alt="Network Error" hright='100px' width='100px'></td>
+                      <td>
+                        <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                        <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                        <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
+                      </td>
+                    </tr>
+                  <?php }
+                } else {  ?>
+                  no records
+                <?php } ?>
+              </tbody>
+            </table>
+            <?php include 'pagination.php'; ?>
+          </div>
         </div>
       </div>
     </div>
@@ -174,14 +174,30 @@ $result = mysqli_query($conn, $query);
                     <input type="text" name="email" class="form-control" placeholder="email" value="">
                   </div>
 
-                  <div class="form-group p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>password</label>
                     <input type="password" name="p_word" class="form-control" placeholder="password" value="">
                   </div>
 
-                  <div class="form-group p-2">
+                  <div class="form-group col-md-6 p-2">
                     <label>confirm password</label>
                     <input type="password" name="c_word" class="form-control" placeholder="confirm" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>mobile</label>
+                    <input type="text" name="mob" class="form-control" placeholder="mobile" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>gender</label><br>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="male">Female
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>photo</label>
+                    <input type="file" name="file" value="">
                   </div>
 
                   <div class="form-group p-2">
@@ -226,6 +242,22 @@ $result = mysqli_query($conn, $query);
                   <div class="form-group p-2">
                     <label>email</label>
                     <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>mobile</label>
+                    <input type="text" name="mob" id="editmobile" class="form-control" placeholder="mobile" value="">
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>gender</label><br>
+                    <input type="radio" name="gender" value="male">Male
+                    <input type="radio" name="gender" value="male">Female
+                  </div>
+
+                  <div class="form-group col-md-6 p-2">
+                    <label>photo</label>
+                    <input type="file" name="file" value="">
                   </div>
 
                 </div>
@@ -287,10 +319,37 @@ $result = mysqli_query($conn, $query);
   </div>
 
   <!-- script section -->
+  <script>
+    $(document).ready(function() {
+      $(document).on('click', 'a[data-role=update]', function() {
+      // append values in input feilds
+      var id = $(this).attr('data-id');
+      var firstName = $('#' + id).children('td[data-target=firstName]').text();
+      var lastName = $('#' + id).children('td[data-target=lastName]').text();
+      var email = $('#' + id).children('td[data-target=Email]').text();
+      var mobile = $('#' + id).children('td[data-target=Mobile]').text();
+
+
+      $('#userId').val(id);
+      $('#editfname').val(firstName);
+      $('#editlname').val(lastName);
+      $('#editemail').val(email);
+      $('#editmobile').val(mobile);
+      
+      $('#edit').modal('toggle');
+      // alert($(this).data('id'));
+    });
+
+
+
+
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
+
 </html>

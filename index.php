@@ -12,8 +12,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <style>
-    ion-icon{
-        font-size:xx-large;
+    ion-icon {
+      font-size: xx-large;
+    }
+
+    .card-img-top {
+      object-fit: cover;
+      height: 300px;
+      width: 300px;
     }
   </style>
 </head>
@@ -24,9 +30,9 @@
     <div class="container-lg">
 
       <a class="navbar-brand text-light" href="#">
-          <i class="fa-solid fa-heart-circle-plus"></i>
-          HEALTH
-        </a>
+        <i class="fa-solid fa-heart-circle-plus"></i>
+        HEALTH
+      </a>
       <!-- <a class="navbar-brand text-success fw-bold fs-4" href="#">HEALTH</a> -->
       <ul class="nav jastify-content-end">
         <li class="nav-item"><a class="nav-link text-success text-light" href="#">Home</a></li>
@@ -187,6 +193,7 @@
         </span>
       </div>
     </div>
+
     <div class="grid-container">
       <div data-aos="flip-right" data-aos-duration="2000">
         <i class="fa-solid fa-stethoscope"></i>
@@ -220,102 +227,110 @@
 
     <h2 class="fw-bold text-center">EXPERT DOCTORS</h2>
     <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 m-auto">
+          <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+            <img src="./img/d1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">ROBERT SMITH</h5>
+              <p class="card-text">Neurology</p>
+              <a href="#" class="btn btn-success">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 m-auto">
 
-      <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="./img/d1.jpg" class="card-img-top" alt="..." height="400px">
-        <div class="card-body">
-          <h5 class="card-title">ROBERT SMITH</h5>
-          <p class="card-text">Neurology</p>
-          <a href="#" class="btn btn-success">Read More</a>
+          <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+            <img src="./img/d3.jfif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">BRENT GRUNDY</h5>
+              <p class="card-text">Arthology</p>
+              <a href="#" class="btn btn-success">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 m-auto">
+
+          <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+            <img src="./img/d4.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">JEFT BENSON</h5>
+              <p class="card-text">Cardiology</p>
+              <a href="#" class="btn btn-success">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 m-auto">
+
+          <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
+            <img src="./img/d2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">DANNY ASHTON</h5>
+              <p class="card-text">Medicine</p>
+              <a href="#" class="btn btn-success">Read More</a>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="./img/d3.jfif" class="card-img-top" alt="..." height="400px">
-        <div class="card-body">
-          <h5 class="card-title">BRENT GRUNDY</h5>
-          <p class="card-text">Arthology</p>
-          <a href="#" class="btn btn-success">Read More</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="./img/d4.jpg" class="card-img-top" alt="..." height="400px">
-        <div class="card-body">
-          <h5 class="card-title">JEFT BENSON</h5>
-          <p class="card-text">Cardiology</p>
-          <a href="#" class="btn btn-success">Read More</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;" data-aos="zoom-in-up" data-aos-duration="2000">
-        <img src="./img/d2.jpg" class="card-img-top" alt="..." height="400px">
-        <div class="card-body">
-          <h5 class="card-title">DANNY ASHTON</h5>
-          <p class="card-text">Medicine</p>
-          <a href="#" class="btn btn-success">Read More</a>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <!-- contact section start -->
-<section class="contact py-5" id="contact">
-<div class="container-lg py-4">
-  
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="section-title text-center">
-        <h2 class="fw-bold mb-5">Get In Touch</h2>
+  <section class="contact py-5" id="contact">
+    <div class="container-lg py-4">
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h2 class="fw-bold mb-5">Get In Touch</h2>
+          </div>
+        </div>
       </div>
-    </div>  
-  </div>
 
-    <div class="col-md-12">
-      <div class="contact-form">
+      <div class="col-md-12">
+        <div class="contact-form">
 
-        <form action="">
-          <div class="row">
-            <div class="col-lg-6">
+          <form action="">
+            <div class="row">
+              <div class="col-lg-6">
                 <input type="text" placeholder="first name" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+              </div>
+              <div class="col-lg-6">
+                <input type="text" placeholder="last name" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+              </div>
             </div>
-            <div class="col-lg-6">
-              <input type="text" placeholder="last name" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="text" placeholder="email" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <input type="text" placeholder="email" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded">
+            <div class="row">
+              <div class="col-lg-12">
+                <textarea placeholder="your message" rows="5" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <textarea placeholder="your message" rows="5" class="form-control form-control-lg fs-6 border-0 shadow p-3 mb-5 bg-light rounded"></textarea>
+            <div class="row">
+              <div class="col-lg-12">
+                <button type="submit" class="btn btn-success px-3">Send Message</button>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <button type="submit" class="btn btn-success px-3">Send Message</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+
     </div>
 
-  </div>
+    </div>
+  </section>
+  <!-- contact section end -->
 
-</div>
-</section>
-<!-- contact section end -->
+  <style>
+    input {
+      background-color: gray;
+    }
+  </style>
 
-<style>
-  input{
-    background-color: gray;
-  }
-</style>
 
- 
   <!-- footer -->
   <div class="footer">
     <p class="text-light">Copyright © HealthCare Department Website</p>

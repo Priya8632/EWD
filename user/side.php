@@ -22,7 +22,8 @@
             <div class="p-4">
                 <!-- LOGO -->
                 <a class="nav-link second-text fw-bold p-2" style="color:white;margin:10px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../img/admin.png" alt="" class="rounded-circle" style="margin-left:30px;" height="80px" width="80px">
+                    <!-- <img src="../img/admin.png" alt="" class="rounded-circle" style="margin-left:30px;" height="80px" width="80px"> -->
+                    <img src="<?php echo $mydata['img']; ?>" class="rounded-circle" style="margin-left:30px;background-color:white;" alt="Network Error" height='70px' width='80px'>
                     <p style="padding-top:20px;"><?php echo $mydata['Email']; ?></p>
                 </a>
     

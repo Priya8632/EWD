@@ -105,7 +105,7 @@
     display: grid;
     grid-template-columns: auto auto auto auto;
     gap: 10px;
-    /* padding: 10px; */
+    padding: 10px;
   }
 
   .grid-container>div {
@@ -125,9 +125,10 @@
     border: 1px solid green;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 920px) {
     header.stiky {
       margin: 0;
     }
+  
   }
 

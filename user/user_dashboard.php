@@ -136,8 +136,23 @@ $mydata = mysqli_fetch_assoc($result1);
                                     <input type="text" name="lname" id="editlname" class="form-control" placeholder="last name" value="">
                                 </div>
 
-                                <div class="form-group p-2">
+                                <div class="form-group col-md-12 p-2">
                                     <label>email</label>
+                                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                                </div>
+
+                                <div class="form-group col-md-6 p-2">
+                                    <label>mobile</label>
+                                    <input type="text" name="mob" id="editmob" class="form-control" placeholder="mobile" value="">
+                                </div>
+
+                                <div class="form-group col-md-6 p-2">
+                                    <label>gender</label>
+                                    
+                                </div>
+
+                                <div class="form-group p-2">
+                                    <label>photo</label>
                                     <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
                                 </div>
 
