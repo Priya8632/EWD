@@ -128,7 +128,7 @@ $result = mysqli_query($conn, $query);
                             <i class="fa-solid fa-user me-2" style="font-size:large;"></i>
                             <span>Users</span>
                         </a>
-                        <a href="logout.php" class="block py-2.5 px-4 flex items-center space-x-2  text-white rounded">
+                        <a href="admin_logout.php" class="block py-2.5 px-4 flex items-center space-x-2  text-white rounded">
                             <i class="fas fa-project-diagram me-2" style="font-size:large;"></i>
                             <span>Logout</span>
                         </a>

@@ -108,6 +108,9 @@ $result = mysqli_query($conn, $query);
                     <th class="py-3 px-6 text-center">FNAME</th>
                     <th class="py-3 px-6 text-center">LNAME</th>
                     <th class="py-3 px-6 text-center">EMAIL</th>
+                    <th class="py-3 px-6 text-center">MOBILE</th>
+                    <th class="py-3 px-6 text-center">GENDER</th>
+                    <th class="py-3 px-6 text-center">IMAGE</th>
                     <th class="py-3 px-6 text-center">OPERATION</th>
                   </tr>
                 </thead>
@@ -120,6 +123,9 @@ $result = mysqli_query($conn, $query);
                         <td data-target="firstName"><?php echo $data['firstName']; ?></td>
                         <td data-target="lastName"><?php echo $data['lastName']; ?></td>
                         <td data-target="Email"><?php echo $data['Email']; ?></td>
+                        <td><?php echo $data['Mobile'];?></td>
+                        <td><?php echo $data['Gender'];?></td>
+                        <td><img src="<?php echo $data['img']; ?>" alt="Network Error" hright='100px' width='100px'></td>
                         <td>
                           <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                           <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>

@@ -46,7 +46,7 @@
       <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, mollitia.
         Lorem ipsum dolor sitectetur adipisicing elit. Qu or sitectetur adipisicing elit.
         or sitectetur adipisicing elit. or sitectetur adipisicing elit. or sitectetur adipisicing elit. </h5>
-      <a href="./admin/login.php" class="btn btn-success">Appointment</a>
+      <a href="./user/login.php" class="btn btn-success">Appointment</a>
       <button class="btn btn-light">More info</button>
     </div>
   </section>
