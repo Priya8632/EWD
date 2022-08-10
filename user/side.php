@@ -28,9 +28,9 @@
                 </a>
     
                 <div class="py-4 text-gray-400 space-y-1">
-                    <a href="user_dashboard.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded" style="text-decoration:none;">
-                        <i class="fas fa-tachometer-alt me-2" style="font-size:large;"></i>
-                        <span>Profile</span>
+                    <a href="../index.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded" style="text-decoration:none;">
+                        <i class="fa-solid fa-house-user" style="font-size:larger;"></i>
+                        <span>Home</span>
                     </a>        
                     <a href="#" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded" style="text-decoration:none;">
                         <i class="fa-solid fa-clipboard-user me-2" style="font-size:large;"></i>

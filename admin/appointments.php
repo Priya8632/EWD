@@ -95,26 +95,12 @@ function FillComboBoxUpdate($query, $id)
           <!-- <div class="container mx-auto"> -->
           <div class="table-responsive mx-auto shadow">
             <div class="row">
-              <div class="col-md-6 text-success">
-                <h2>Appointment Records </h2>
-              </div>
-              <div class="col-md-6">
-                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add Appointment</button>
-              </div>
+                <h2 class="text-success text-center">Appointment Records </h2>
             </div>
 
             <div class="row">
-
               <div class="col-md-6">
-                <form action="" method="POST">
-                  <select name="records" id="records">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="70">70</option>
-                  </select>
-                  <span>Entities</span>
-                </form>
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Appointment</button>
               </div>
 
               <div class="col-md-6 mb-4 d-flex">
@@ -370,4 +356,5 @@ function FillComboBoxUpdate($query, $id)
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

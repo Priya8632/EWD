@@ -122,7 +122,7 @@ if (isset($_POST['adsubmit'])) {
     <div class="container p-5 text-dark mx-auto bg-light w-50">
 
         <form action="" method="POST" enctype="multipart/form-data">
-            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Sign in</h3>
+            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Admin</h3>
             <hr>
 
             <span class="error">* <?php echo $error; ?></span>

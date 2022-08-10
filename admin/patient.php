@@ -94,27 +94,13 @@ function FillComboBoxUpdate($query,$id){
           <!-- <div class="container mx-auto"> -->
           <div class="table-responsive mx-auto shadow">
             <div class="row">
-              <div class="col-md-6 text-success">
-                <h2>Patient Records</h2>
-              </div>
-              <div class="col-md-6">
-                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add patients</button>
-                <!-- <i class="fa-solid fa-circle-plus" data-bs-target="#add" data-bs-toggle="modal" style="font-size:35px;margin-left:540px;color:blue;"></i> -->
-              </div>
+                <h2 class="text-success text-center">Patient Records</h2>
             </div>
-
+            
             <div class="row">
-
+              
               <div class="col-md-6">
-                <form action="" method="POST">
-                  <select name="records" id="records">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="70">70</option>
-                  </select>
-                  <span>Entities</span>
-                </form>
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Patients</button>
               </div>
 
               <div class="col-md-6 mb-4 d-flex">

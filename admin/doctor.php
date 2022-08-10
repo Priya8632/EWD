@@ -93,25 +93,12 @@ function FillComboBoxUpdate($query, $id)
           <!-- <div class="container mx-auto"> -->
           <div class="table-responsive mx-auto shadow">
             <div class="row">
-              <div class="col-md-6">
-                <h2 class="text-success">Doctor Records</h2>
+                <h2 class="text-success text-center">Doctor Records</h2>
               </div>
-              <div class="col-md-6">
-                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <form action="" method="POST">
-                  <select name="records" id="records" onclick="select()">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                  </select>
-                  <span>Entities</span>
-                </form>
+              
+              <div class="row">
+                <div class="col-md-6">
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Doctor</button>
               </div>
 
               <div class="col-md-6 mb-4 d-flex">
@@ -246,11 +233,6 @@ function FillComboBoxUpdate($query, $id)
                     <label>mobile</label>
                     <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
                   </div>
-
-                  <!-- <div class="form-group p-2">
-                            <label>specialization</label>
-                            <input type="text" name="specialization" id="editspecialization" class="form-control" placeholder="specialization" value="">
-                          </div> -->
 
                   <div class="form-group p-2">
                     <label for="">Specialization</label>

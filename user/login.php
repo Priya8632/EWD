@@ -117,7 +117,7 @@ if(isset($_POST['submit'])){
 
         <form action="" method="POST" enctype="multipart/form-data">
             <!-- <span class="error">* <?php echo $error; ?></span> -->
-            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>login</h3>
+            <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Sign in</h3>
             <hr>
 
             <div class="form-group">

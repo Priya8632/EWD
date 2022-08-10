@@ -75,25 +75,12 @@ $result = mysqli_query($conn, $query);
           <!-- <div class="container mx-auto"> -->
           <div class="table-responsive mx-auto shadow">
             <div class="row">
-              <div class="col-md-6">
-                <h2 class="text-success">Users Records</h2>
-              </div>
-              <div class="col-md-6">
-                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal" style="float:right;">+ Add User</button>
-              </div>
+              <h2 class="text-success text-center">Users Records</h2>
             </div>
 
             <div class="row">
               <div class="col-md-6">
-                <form action="" method="POST">
-                  <select name="records" id="records" onclick="select()">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                  </select>
-                  <span>Entities</span>
-                </form>
+                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add User</button>
               </div>
 
               <div class="col-md-6 mb-4 d-flex">
@@ -129,7 +116,6 @@ $result = mysqli_query($conn, $query);
                       <td>
                         <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                         <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                        <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                       </td>
                     </tr>
                   <?php }
@@ -322,23 +308,23 @@ $result = mysqli_query($conn, $query);
   <script>
     $(document).ready(function() {
       $(document).on('click', 'a[data-role=update]', function() {
-      // append values in input feilds
-      var id = $(this).attr('data-id');
-      var firstName = $('#' + id).children('td[data-target=firstName]').text();
-      var lastName = $('#' + id).children('td[data-target=lastName]').text();
-      var email = $('#' + id).children('td[data-target=Email]').text();
-      var mobile = $('#' + id).children('td[data-target=Mobile]').text();
+        // append values in input feilds
+        var id = $(this).attr('data-id');
+        var firstName = $('#' + id).children('td[data-target=firstName]').text();
+        var lastName = $('#' + id).children('td[data-target=lastName]').text();
+        var email = $('#' + id).children('td[data-target=Email]').text();
+        var mobile = $('#' + id).children('td[data-target=Mobile]').text();
 
 
-      $('#userId').val(id);
-      $('#editfname').val(firstName);
-      $('#editlname').val(lastName);
-      $('#editemail').val(email);
-      $('#editmobile').val(mobile);
-       
-      $('#edit').modal('toggle');
-      // alert($(this).data('id'));
-    });
+        $('#userId').val(id);
+        $('#editfname').val(firstName);
+        $('#editlname').val(lastName);
+        $('#editemail').val(email);
+        $('#editmobile').val(mobile);
+
+        $('#edit').modal('toggle');
+        // alert($(this).data('id'));
+      });
 
 
 
