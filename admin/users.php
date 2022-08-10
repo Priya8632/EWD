@@ -335,7 +335,7 @@ $result = mysqli_query($conn, $query);
       $('#editlname').val(lastName);
       $('#editemail').val(email);
       $('#editmobile').val(mobile);
-      
+       
       $('#edit').modal('toggle');
       // alert($(this).data('id'));
     });

@@ -70,11 +70,11 @@ $result = mysqli_query($conn, $query);
                     </a>
                     <hr>
                     <!-- NAV LINKS -->
-                    <div class="py-4 text-gray-400 space-y-1">
+                    <div class="py-4 text-gray-400 space-y-2">
                         <!-- BASIC LINK -->
-                        <a href="#" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
-                            <i class="fas fa-tachometer-alt me-2" style="font-size:large;"></i>
-                            <span>Dashboard</span>
+                        <a href="../index.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
+                        <i class="fa-solid fa-house-user" style="font-size:larger;"></i>
+                            <span>Home</span>
                         </a>
                         <!-- DROPDOWN LINK -->
                         <div class="block" x-data="{open: false}">
