@@ -137,7 +137,6 @@ function FillComboBoxUpdate($query,$id){
                       <td>
                         <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                         <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                        <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                     </tr>
                   <?php }
                 } else {  ?>
@@ -246,11 +245,6 @@ function FillComboBoxUpdate($query,$id){
                         <label>age</label>
                         <input type="text" name="age" id="editage" class="form-control" placeholder="specialization" value="">
                       </div>
-
-                      <!-- <div class="form-group p-2">
-                        <label>doctor</label>
-                        <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="specialization" value="">
-                      </div> -->
 
                       <div class="form-group p-2">
                         <label for="">Doctor</label>

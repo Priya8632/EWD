@@ -25,7 +25,10 @@ $mydata = mysqli_fetch_assoc($result1);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user dasboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/code.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
     <style>
         .data {
@@ -54,36 +57,29 @@ $mydata = mysqli_fetch_assoc($result1);
                     </div>
                 </nav>
 
-                <!-- <div class="data"> -->
-                <!-- <marquee>Welcome to your page</marquee> -->
-                <!-- </div> -->
-
                 <div class="content">
-
-                    <!-- <div class="container-fluid justify-content-end"> -->
-                    <!-- <div class="container mx-auto"> -->
                     <div class="table-responsive mx-auto p-4">
                         <h2 class="text-success">Details</h2>
                         <table class="table table-bordered mt-4 w-full bg-white">
                             <tr>
-                                <th class="th-dark">Id</th>
+                                <th>Id</th>
                                 <td><?php echo $mydata['id']; ?> </td>
                             </tr>
                             <tr>
                                 <th>Fisrt_Name</th>
-                                <td><?php echo $mydata['firstName']; ?> </td>
+                                <td data-target="firstName"><?php echo $mydata['firstName']; ?> </td>
                             </tr>
                             <tr>
                                 <th>Last_Name</th>
-                                <td><?php echo $mydata['lastName']; ?> </td>
+                                <td data-target="lastName"><?php echo $mydata['lastName']; ?> </td>
                             </tr>
                             <tr>
                                 <th>email</th>
-                                <td><?php echo $mydata['Email']; ?> </td>
+                                <td data-target="Email"><?php echo $mydata['Email']; ?> </td>
                             </tr>
                             <tr>
                                 <th>Mobile no</th>
-                                <td><?php echo $mydata['Mobile']; ?> </td>
+                                <td data-target="Mobile"><?php echo $mydata['Mobile']; ?> </td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
@@ -96,7 +92,7 @@ $mydata = mysqli_fetch_assoc($result1);
                             <tr>
                                 <th>Update</th>
                                 <td>
-                                    <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                                    <a href="#" data-role="update" data-id="<?php echo $mydata['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                                 </td>
                             </tr>
 
@@ -143,17 +139,18 @@ $mydata = mysqli_fetch_assoc($result1);
 
                                 <div class="form-group col-md-6 p-2">
                                     <label>mobile</label>
-                                    <input type="text" name="mob" id="editmob" class="form-control" placeholder="mobile" value="">
+                                    <input type="text" name="mob" id="editmobile" class="form-control" placeholder="mobile" value="">
                                 </div>
 
                                 <div class="form-group col-md-6 p-2">
-                                    <label>gender</label>
-                                    
+                                    <label>gender</label><br>
+                                    <input type="radio" name="gender" id="editgender" value="male">Male
+                                    <input type="radio" name="gender" id="editgender" value="male">Female
                                 </div>
 
                                 <div class="form-group p-2">
                                     <label>photo</label>
-                                    <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
+                                    <input type="file" name="file" value="">
                                 </div>
 
                             </div>

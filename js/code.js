@@ -373,20 +373,21 @@ $(document).ready(function() {
     // edit value
     $(document).on('click', 'a[data-role=update]', function() {
       // append values in input feilds
+      
       var id = $(this).attr('data-id');
-      // var firstName = $('#' + id).children('td[data-target=firstName]').text();
-      // var lastName = $('#' + id).children('td[data-target=lastName]').text();
-      // var email = $('#' + id).children('td[data-target=Email]').text();
-      // var mobile = $('#' + id).children('td[data-target=Mobile]').text();
+      var firstName = $('#' + id).children('td[data-target=firstName]').text();
+      var lastName = $('#' + id).children('td[data-target=lastName]').text();
+      var email = $('#' + id).children('td[data-target=Email]').text();
+      var mobile = $('#' + id).children('td[data-target=Mobile]').text();
 
 
-      // $('#userId').val(id);
-      // $('#editfname').val(firstName);
-      // $('#editlname').val(lastName);
-      // $('#editemail').val(email);
-      // $('#editmobile').val(mobile);
-      // $('#edit').modal('toggle');
-      alert($(this).data('id'));
+      $('#userId').val(id);
+      $('#editfname').val(firstName);
+      $('#editlname').val(lastName);
+      $('#editemail').val(email);
+      $('#editmobile').val(mobile);
+      $('#edit').modal('toggle');
+      // alert($(this).data('id'));
 
     });
 

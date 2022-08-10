@@ -73,8 +73,12 @@ $result = mysqli_query($conn, $query);
                     <div class="py-4 text-gray-400 space-y-2">
                         <!-- BASIC LINK -->
                         <a href="../index.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
-                        <i class="fa-solid fa-house-user" style="font-size:larger;"></i>
+                            <i class="fa-solid fa-house-user" style="font-size:larger;"></i>
                             <span>Home</span>
+                        </a>
+                        <a href="appointments.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
+                            <i class="fa-solid fa-clipboard-user me-2" style="font-size:large;"></i>
+                            <span>Appointments</span>
                         </a>
                         <!-- DROPDOWN LINK -->
                         <div class="block" x-data="{open: false}">
@@ -99,27 +103,7 @@ $result = mysqli_query($conn, $query);
                                 </a>
                             </div>
                         </div>
-                        <div class="block" x-data="{open: false}">
-                            <div @click="open = !open" class="flex items-center text-white justify-between cursor-pointer py-2.5 px-4 rounded">
-                                <div class="flex items-center space-x-2">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                                    </svg>
-                                    <span>Scheduled</span>
-                                </div>
-                                <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
-                                </svg>
-                                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                            <div x-show="open" class="text-sm border-l-2 border-gray-800 mx-6 my-2.5 px-2.5 flex flex-col gap-y-1">
-                                <a href="appointments.php" class="block py-2 px-4 text-white hover:bg-gray-800 hover:text-white rounded">
-                                    Appointments
-                                </a>
-                            </div>
-                        </div>
+
                         <a href="patient.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
                             <i class="fa-solid fa-bed me-2" style="font-size:large;"></i>
                             <span>Patients</span>
@@ -203,4 +187,5 @@ $result = mysqli_query($conn, $query);
         </main>
     </div>
 </body>
+
 </html>

@@ -237,8 +237,8 @@ $result = mysqli_query($conn, $query);
 
                   <div class="form-group col-md-6 p-2">
                     <label>gender</label><br>
-                    <input type="radio" name="gender" value="male">Male
-                    <input type="radio" name="gender" value="male">Female
+                    <input type="radio" name="gender" id="editgender" value="male">Male
+                    <input type="radio" name="gender" id="editgender" value="male">Female
                   </div>
 
                   <div class="form-group col-md-6 p-2">
@@ -305,32 +305,6 @@ $result = mysqli_query($conn, $query);
   </div>
 
   <!-- script section -->
-  <script>
-    $(document).ready(function() {
-      $(document).on('click', 'a[data-role=update]', function() {
-        // append values in input feilds
-        var id = $(this).attr('data-id');
-        var firstName = $('#' + id).children('td[data-target=firstName]').text();
-        var lastName = $('#' + id).children('td[data-target=lastName]').text();
-        var email = $('#' + id).children('td[data-target=Email]').text();
-        var mobile = $('#' + id).children('td[data-target=Mobile]').text();
-
-
-        $('#userId').val(id);
-        $('#editfname').val(firstName);
-        $('#editlname').val(lastName);
-        $('#editemail').val(email);
-        $('#editmobile').val(mobile);
-
-        $('#edit').modal('toggle');
-        // alert($(this).data('id'));
-      });
-
-
-
-
-    });
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
