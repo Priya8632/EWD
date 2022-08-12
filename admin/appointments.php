@@ -33,27 +33,27 @@ if (isset($_GET['start'])) {
   }
 }
 
-// $record = mysqli_num_rows(mysqli_query($conn, "select * from appointment"));
-// $pagi = ceil($record / $per_page);
+$record = mysqli_num_rows(mysqli_query($conn, "select * from appointment"));
+$pagi = ceil($record / $per_page);
 
-// $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
-//            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id  limit $start ,$per_page";
-// $result = mysqli_query($conn, $query);
+$query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+           where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id  limit $start ,$per_page";
+$result = mysqli_query($conn, $query);
 
-// function FillComboBoxUpdate($query, $id)
-// {
+function FillComboBoxUpdate($query, $id)
+{
 
-//   global $conn;
-//   $cmbStr = "<option value=\"select\">Select</option>";
-//   $cmbRS = mysqli_query($conn, $query) or die(mysqli_error($conn));
-//   while ($cmbRow = mysqli_fetch_array($cmbRS)) {
-//     if ($cmbRow[0] == $id)
-//       $cmbStr = $cmbStr . "<option selected=\"selected\" value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
-//     else
-//       $cmbStr = $cmbStr . "<option value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
-//   }
-//   return $cmbStr;
-// }
+  global $conn;
+  $cmbStr = "<option value=\"select\">Select</option>";
+  $cmbRS = mysqli_query($conn, $query) or die(mysqli_error($conn));
+  while ($cmbRow = mysqli_fetch_array($cmbRS)) {
+    if ($cmbRow[0] == $id)
+      $cmbStr = $cmbStr . "<option selected=\"selected\" value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+    else
+      $cmbStr = $cmbStr . "<option value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+  }
+  return $cmbStr;
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +67,8 @@ if (isset($_GET['start'])) {
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
+  <!-- <script src="../js/code.js"></script> -->
+  <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -145,7 +147,6 @@ if (isset($_GET['start'])) {
                     <td>
                       <a href="#" data-role="appointmentupdate" data-id="<?php echo $data['appointment_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                      <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                   </tr>
                 <?php }
               } else {  ?>
@@ -159,34 +160,6 @@ if (isset($_GET['start'])) {
       </section>
     </main>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- crud section end -->
 
   <!-- add user modal -->
@@ -342,25 +315,6 @@ if (isset($_GET['start'])) {
   </div>
   <!-- end -->
 
-  <!-- view modal -->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="user_viewing"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end -->
-
   <!-- delete modal -->
   <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -384,7 +338,68 @@ if (isset($_GET['start'])) {
   </div>
   <!-- end -->
 
+  <script>
+    $(document).ready(function() {
 
+      $('#search').keyup(function() {
+        search_table($(this).val());
+
+      });
+
+      function search_table(value) {
+        $('#rows tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
+            }
+          });
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+
+      // edit value
+      $(document).on('click', 'a[data-role=appointmentupdate]', function() {
+        // append values in input feilds
+
+        var id = $(this).attr('data-id');
+        var app_number = $('#' + id).children('td[data-target=app_number]').text();
+        var patient_id = $('#' + id).children('td[data-target=patient_name]').text();
+        var doctor_id = $('#' + id).children('td[data-target=doctor_name]').text();
+        var specialization_id = $('#' + id).children('td[data-target=specialization]').text();
+        var fees = $('#' + id).children('td[data-target=fees]').text();
+        var app_date = $('#' + id).children('td[data-target=app_date]').text();
+        var app_time = $('#' + id).children('td[data-target=app_time]').text();
+
+        // alert(app_number);
+
+        $('#app_id').val(id);
+        $('#editapp_number').val(app_number);
+        $('#editpatientname').val(patient_id);
+        $('#editdoctorname').val(doctor_id);
+        $('#editspecialization').val(specialization_id);
+        $('#editfees').val(fees);
+        $('#editapp_date').val(app_date);
+        $('#editapp_time').val(app_time);
+        $('#edit').modal('toggle');
+
+      });
+
+      $('.delete-btn').click(function(e) {
+      e.preventDefault();
+
+      var sid = $(this).closest('tr').find('.app_id').text();
+      $('#delete_id').val(sid);
+      $('#delete').modal('show');
+
+    });
+
+    });
+  </script>
   <!-- script section -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

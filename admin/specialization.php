@@ -17,26 +17,26 @@ $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-// $per_page = 3;
-// $start = 0;
-// $current_page = 1;
-// if (isset($_GET['start'])) {
-//   $start = $_GET['start'];
-//   if ($start <= 0) {
-//     $start = 0;
-//     $current_page = 1;
-//   } else {
-//     $current_page = $start;
-//     $start--;
-//     $start = $start * $per_page;
-//   }
-// }
+$per_page = 3;
+$start = 0;
+$current_page = 1;
+if (isset($_GET['start'])) {
+  $start = $_GET['start'];
+  if ($start <= 0) {
+    $start = 0;
+    $current_page = 1;
+  } else {
+    $current_page = $start;
+    $start--;
+    $start = $start * $per_page;
+  }
+}
 
-// $record = mysqli_num_rows(mysqli_query($conn, "select * from specialization"));
-// $pagi = ceil($record / $per_page);
+$record = mysqli_num_rows(mysqli_query($conn, "select * from specialization"));
+$pagi = ceil($record / $per_page);
 
-// $query = "SELECT * FROM specialization limit $start ,$per_page";
-// $result = mysqli_query($conn, $query);
+$query = "SELECT * FROM specialization limit $start ,$per_page";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +50,8 @@ $mydata = mysqli_fetch_assoc($result1);
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
+  <script src="../js/code.js"></script>
+  <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -89,86 +91,51 @@ $mydata = mysqli_fetch_assoc($result1);
 
         <!-- Specializations Table -->
         <div class="table-responsive mx-auto shadow p-3 mt-5">
-        
+          <div class="row">
 
-            <div class="row">
-
-              <div class="col-md-6">
-                <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Speciality</button>
-              </div>
-
-              <div class="col-md-6 mb-4 d-flex">
-                <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
-              </div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Speciality</button>
             </div>
 
-            <table class="table table-hover table-bordered border-success text-center">
-              <thead class="bg-dark text-light">
-                <tr class="uppercase text-sm leading-normal">
-                  <th class="py-3 px-6 text-center">ID</th>
-                  <th class="py-3 px-6 text-center">SPECIALIZATION</th>
-                  <th class="py-3 px-6 text-center">OPERATION</th>
-                </tr>
-              </thead>
-              <tbody id="rows">
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                  while ($data = mysqli_fetch_assoc($result)) { ?>
-
-                    <tr id="<?php echo $data['specialization_id']; ?>">
-                      <td class="s_id"><?php echo $data['specialization_id']; ?></td>
-                      <td data-target="specialization"><?php echo $data['specialization']; ?></td>
-
-                      <td>
-                        <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                        <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                    </tr>
-                  <?php }
-                } else { ?>
-                  no records
-                <?php } ?>
-              </tbody>
-            </table>
-            <?php include 'pagination.php'; ?>
+            <div class="col-md-6 mb-4 d-flex">
+              <input class="form-control" id="search" type="text" name="search" placeholder="Search" aria-label="Search" style="margin-left:300px;">
+            </div>
           </div>
+
+          <table class="table table-hover table-bordered border-success text-center">
+            <thead class="bg-dark text-light">
+              <tr class="uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-center">ID</th>
+                <th class="py-3 px-6 text-center">SPECIALIZATION</th>
+                <th class="py-3 px-6 text-center">OPERATION</th>
+              </tr>
+            </thead>
+            <tbody id="rows">
+              <?php
+              if (mysqli_num_rows($result) > 0) {
+                while ($data = mysqli_fetch_assoc($result)) { ?>
+
+                  <tr id="<?php echo $data['specialization_id']; ?>">
+                    <td class="s_id"><?php echo $data['specialization_id']; ?></td>
+                    <td data-target="specialization"><?php echo $data['specialization']; ?></td>
+
+                    <td>
+                      <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                      <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                  </tr>
+                <?php }
+              } else { ?>
+                no records
+              <?php } ?>
+            </tbody>
+          </table>
+          <?php include 'pagination.php'; ?>
+        </div>
 
       </section>
     </main>
   </div>
   <!-- crud section  -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- add user modal -->
 
   <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -243,25 +210,6 @@ $mydata = mysqli_fetch_assoc($result1);
   </div>
   <!-- end -->
 
-  <!-- view modal -->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">specialization details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="user_viewing"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end -->
-
   <!-- delete modal -->
   <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -284,7 +232,55 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
   </div>
   <!-- end -->
+  <script>
+    $(document).ready(function() {
 
+      $('#search').keyup(function() {
+        search_table($(this).val());
+
+      });
+
+      function search_table(value) {
+        $('#rows tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
+            }
+          });
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+
+      }
+      $('.delete-btn').click(function(e) {
+        e.preventDefault();
+
+        var sid = $(this).closest('tr').find('.s_id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
+
+      });
+
+      // edit value
+      $(document).on('click', 'a[data-role=specializationupdate]', function() {
+        // append values in input feilds
+
+        var id = $(this).attr('data-id');
+        var specialization = $('#' + id).children('td[data-target=specialization]').text();
+        // alert(id);
+
+        $('#s_id').val(id);
+        $('#editspecialization').val(specialization);
+        $('#edit').modal('toggle');
+
+      });
+
+    });
+  </script>
 
   <!-- script section -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

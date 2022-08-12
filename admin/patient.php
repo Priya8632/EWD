@@ -19,42 +19,43 @@ $sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-// $per_page = 3;
-// $start = 0;
-// $current_page = 1;
-// if (isset($_GET['start'])) {
-//   $start = $_GET['start'];
-//   if ($start <= 0) {
-//     $start = 0;
-//     $current_page = 1;
-//   } else {
-//     $current_page = $start;
-//     $start--;
-//     $start = $start * $per_page;
-//   }
-// }
+$per_page = 3;
+$start = 0;
+$current_page = 1;
+if (isset($_GET['start'])) {
+  $start = $_GET['start'];
+  if ($start <= 0) {
+    $start = 0;
+    $current_page = 1;
+  } else {
+    $current_page = $start;
+    $start--;
+    $start = $start * $per_page;
+  }
+}
 
-// $record = mysqli_num_rows(mysqli_query($conn, "select * from patient"));
-// $pagi = ceil($record / $per_page);
+$record = mysqli_num_rows(mysqli_query($conn, "select * from patient"));
+$pagi = ceil($record / $per_page);
 
-// $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
-//           where p.doctor_id = d.doctor_id limit $start ,$per_page";
-// $result = mysqli_query($conn, $query);
+$query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
+          where p.doctor_id = d.doctor_id limit $start ,$per_page";
+$result = mysqli_query($conn, $query);
 
-// function FillComboBoxUpdate($query,$id){
+function FillComboBoxUpdate($query, $id)
+{
 
-//   global $conn;
-// 	$cmbStr="<option value=\"select\">Select</option>";
-// 	$cmbRS=mysqli_query($conn,$query) or die(mysqli_error($conn));
-// 	while($cmbRow=mysqli_fetch_array($cmbRS))
-// 	{
-// 		if($cmbRow[0]==$id)
-// 			$cmbStr=$cmbStr."<option selected=\"selected\" value=".$cmbRow[0].">".$cmbRow[1]."</option>";
-// 		else
-// 			$cmbStr=$cmbStr."<option value=".$cmbRow[0].">".$cmbRow[1]."</option>";
-// 	}
-// 	return $cmbStr;
-// }
+  global $conn;
+  $cmbStr = "<option value=\"select\">Select</option>";
+  $cmbRS = mysqli_query($conn, $query) or die(mysqli_error($conn));
+  while ($cmbRow = mysqli_fetch_array($cmbRS)) {
+    if ($cmbRow[0] == $id)
+      $cmbStr = $cmbStr . "<option selected=\"selected\" value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+    else
+      $cmbStr = $cmbStr . "<option value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
+  }
+  return $cmbStr;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +69,8 @@ $mydata = mysqli_fetch_assoc($result1);
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/code.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -160,37 +163,6 @@ $mydata = mysqli_fetch_assoc($result1);
   </div>
 
   <!-- crud section end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="d-flex" id="wrapper">
 
 
@@ -312,25 +284,6 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
 
-    <!-- view modal -->
-    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Patient records</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="user_viewing"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end -->
-
     <!-- delete modal -->
     <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -354,6 +307,62 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
   </div>
+  <script>
+    $(document).ready(function() {
+
+      $('#search').keyup(function() {
+        search_table($(this).val());
+
+      });
+
+      function search_table(value) {
+        $('#rows tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
+            }
+          });
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+
+      }
+      $('.delete-btn').click(function(e) {
+        e.preventDefault();
+
+        var sid = $(this).closest('tr').find('.patient_id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
+
+      });
+
+      // edit value
+      $(document).on('click', 'a[data-role=patientupdate]', function() {
+        // append values in input feilds
+        // alert($(this).attr('data-id'));
+        var id = $(this).attr('data-id');
+        var patient_name = $('#' + id).children('td[data-target=patient_name]').text();
+        var email = $('#' + id).children('td[data-target=email]').text();
+        var mobile = $('#' + id).children('td[data-target=mobile]').text();
+        var age = $('#' + id).children('td[data-target=age]').text();
+        var doctor_name = $('#' + id).children('td[data-target=doctor_name]').text();
+
+        $('#patient_id').val(id);
+        $('#editpatientname').val(patient_name);
+        $('#editemail').val(email);
+        $('#editmobile').val(mobile);
+        $('#editage').val(age);
+        $('#editdoctorname').val(doctor_name);
+
+        $('#edit').modal('toggle');
+
+      });
+    });
+  </script>
 
   <!-- script section -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

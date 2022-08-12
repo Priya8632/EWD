@@ -33,11 +33,11 @@ if (isset($_GET['start'])) {
   }
 }
 
-// $record = mysqli_num_rows(mysqli_query($conn, "select * from doctor"));
-// $pagi = ceil($record / $per_page);
-// $query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-//           where d.specialization_id = s.specialization_id limit $start ,$per_page ";
-// $result = mysqli_query($conn, $query);
+$record = mysqli_num_rows(mysqli_query($conn, "select * from doctor"));
+$pagi = ceil($record / $per_page);
+$query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+          where d.specialization_id = s.specialization_id limit $start ,$per_page ";
+$result = mysqli_query($conn, $query);
 
 function FillComboBoxUpdate($query, $id)
 {
@@ -66,6 +66,8 @@ function FillComboBoxUpdate($query, $id)
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
+  <script src="../js/code.js"></script>
+  <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +104,7 @@ function FillComboBoxUpdate($query, $id)
 
         <!-- Doctors Table -->
         <div class="table-responsive mx-auto shadow p-3 mt-5">
-     
+
           <div class="row">
             <div class="col-md-6">
               <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Doctor</button>
@@ -140,7 +142,6 @@ function FillComboBoxUpdate($query, $id)
                     <td>
                       <a href="#" data-role="doctorupdate" data-id="<?php echo $data['doctor_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
-                      <!-- <a href="#" class="view-btn"><i class="fa-solid fa-eye text-primary" data-bs-target="#view" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                   </tr>
                 <?php }
               } else {  ?>
@@ -156,24 +157,6 @@ function FillComboBoxUpdate($query, $id)
   </div>
 
   <!-- crud section end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -284,25 +267,6 @@ function FillComboBoxUpdate($query, $id)
   </div>
   <!-- end -->
 
-  <!-- view modal -->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">doctor details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="user_viewing"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end -->
-
   <!-- delete modal -->
   <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -326,10 +290,64 @@ function FillComboBoxUpdate($query, $id)
   </div>
   <!-- end -->
   </div>
+  <script>
+    $(document).ready(function() {
 
+      $('#search').keyup(function() {
+        search_table($(this).val());
+
+      });
+
+      function search_table(value) {
+        $('#rows tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
+            }
+          });
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+
+      }
+
+      // edit value
+      $(document).on('click', 'a[data-role=doctorupdate]', function() {
+        // append values in input feilds
+        // alert($(this).attr('data-id'));
+        var did = $(this).attr('data-id');
+        var doctor_name = $('#' + did).children('td[data-target=doctor_name]').text();
+        var email = $('#' + did).children('td[data-target=email]').text();
+        var mobile = $('#' + did).children('td[data-target=mobile]').text();
+        var specialization = $('#' + did).children('td[data-target=specialization]').text();
+
+        $('#doctor_id').val(did);
+        $('#editdoctorname').val(doctor_name);
+        $('#editemail').val(email);
+        $('#editmobile').val(mobile);
+        $('#editspecialization').val(specialization);
+        $('#edit').modal('toggle');
+
+      });
+
+      $('.delete-btn').click(function(e) {
+      e.preventDefault();
+
+      var sid = $(this).closest('tr').find('.doctorid').text();
+      $('#delete_id').val(sid);
+      $('#delete').modal('show');
+
+    });
+    });
+  </script>
   <!-- script section -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
 </body>
 

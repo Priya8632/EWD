@@ -48,6 +48,8 @@ $result = mysqli_query($conn, $query);
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
+  <script src="../js/code.js"></script>
+  <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -142,32 +144,7 @@ $result = mysqli_query($conn, $query);
 
   <!-- crud section  -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="d-flex" id="wrapper">
-
-
 
     <!-- add user modal -->
     <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -297,25 +274,6 @@ $result = mysqli_query($conn, $query);
     </div>
     <!-- end -->
 
-    <!-- view modal -->
-    <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">User records</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="user_viewing"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end -->
-
     <!-- delete modal -->
     <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -343,9 +301,64 @@ $result = mysqli_query($conn, $query);
 
   <!-- script section -->
 
+  <script>
+    $(document).ready(function() {
+
+      $('#search').keyup(function() {
+        search_table($(this).val());
+
+      });
+
+      function search_table(value) {
+        $('#rows tr').each(function() {
+          var found = 'false';
+          $(this).each(function() {
+            if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+              found = 'true';
+            }
+          });
+          if (found == 'true') {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+
+      }
+
+      $('.delete-btn').click(function(e) {
+        e.preventDefault();
+
+        var sid = $(this).closest('tr').find('.id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
+
+      });
+      // edit value
+      $(document).on('click', 'a[data-role=update]', function() {
+        // append values in input feilds
+
+        var id = $(this).attr('data-id');
+        var firstName = $('#' + id).children('td[data-target=firstName]').text();
+        var lastName = $('#' + id).children('td[data-target=lastName]').text();
+        var email = $('#' + id).children('td[data-target=Email]').text();
+        var mobile = $('#' + id).children('td[data-target=Mobile]').text();
+
+
+        $('#userId').val(id);
+        $('#editfname').val(firstName);
+        $('#editlname').val(lastName);
+        $('#editemail').val(email);
+        $('#editmobile').val(mobile);
+        $('#edit').modal('toggle');
+        // alert($(this).data('id'));
+
+      });
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
 </body>
 
