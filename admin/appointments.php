@@ -80,7 +80,7 @@ function FillComboBoxUpdate($query, $id)
   </style>
 </head>
 
-<body>
+<body class="bg-light">
   <div class="flex relative" x-data="{navOpen: false}">
     <?php require 'sidebar.php' ?>
 
@@ -104,7 +104,7 @@ function FillComboBoxUpdate($query, $id)
         </div>
 
         <!-- Appointment Table -->
-        <div class="table-responsive mx-auto shadow p-3 mt-5">
+        <div class="table-responsive mx-auto shadow p-4 mt-5 bg-white">
 
           <div class="row">
             <div class="col-md-6">

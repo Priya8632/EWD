@@ -63,9 +63,7 @@ $result = mysqli_query($conn, $query);
   </style>
 </head>
 
-<body>
-
-
+<body class="bg-light">
 
   <div class="flex relative" x-data="{navOpen: false}">
     <?php require 'sidebar.php' ?>
@@ -90,7 +88,7 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <!-- Specializations Table -->
-        <div class="table-responsive mx-auto shadow p-3 mt-5">
+        <div class="table-responsive mx-auto shadow p-4 mt-5 bg-white">
           <div class="row">
 
             <div class="col-md-6">
@@ -107,6 +105,7 @@ $result = mysqli_query($conn, $query);
               <tr class="uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-center">ID</th>
                 <th class="py-3 px-6 text-center">SPECIALIZATION</th>
+                <th class="py-3 px-6 text-center">PHOTO</th>
                 <th class="py-3 px-6 text-center">OPERATION</th>
               </tr>
             </thead>
@@ -118,7 +117,7 @@ $result = mysqli_query($conn, $query);
                   <tr id="<?php echo $data['specialization_id']; ?>">
                     <td class="s_id"><?php echo $data['specialization_id']; ?></td>
                     <td data-target="specialization"><?php echo $data['specialization']; ?></td>
-
+                    <td data-target="image"><img src="<?php echo $data['img']; ?>" alt="Network Error" width='60px'></td>
                     <td>
                       <a href="#" data-role="specializationupdate" data-id="<?php echo $data['specialization_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
@@ -161,6 +160,11 @@ $result = mysqli_query($conn, $query);
                   <input type="text" name="specialization" class="form-control" placeholder="specialization name" value="">
                 </div>
 
+                <div class="form-group col-md-6 p-2">
+                  <label>Photo</label>
+                  <input type="file" name="file">
+                </div>
+
                 <div class="form-group p-2">
                   <button type="submit" class="btn btn-success btn-block" name="speciality">Add</button>
                 </div>
@@ -191,9 +195,13 @@ $result = mysqli_query($conn, $query);
 
                 <input type="hidden" id="s_id" name="s_id">
 
-                <div class="form-group col-md-6 p-2">
+                <div class="form-group p-2">
                   <label>Specialization</label>
                   <input type="text" name="specialization" id="editspecialization" class="form-control" placeholder="specialization" value="">
+                </div>
+
+                <div class="form-group p-2">
+                  <input type="file" name="file">
                 </div>
 
               </div>

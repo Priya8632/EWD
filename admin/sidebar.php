@@ -11,7 +11,7 @@
                     <!-- NAV LINKS -->
                     <div class="py-4 text-gray-400 space-y-2">
                         <!-- BASIC LINK -->
-                        <a href="../index.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
+                        <a href="dashboard.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
                             <i class="fa-solid fa-house-user" style="font-size:larger;"></i>
                             <span>Home</span>
                         </a>
