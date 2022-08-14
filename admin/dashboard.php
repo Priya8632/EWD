@@ -85,17 +85,17 @@ $result = mysqli_query($conn, $query);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Doctor</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">14</h1>
+                                <h1 class="text-xl font-semibold">44</h1>
                             </div>
                         </div>
-                        <i class="fas fa-user-secret me-2" style="font-size:xx-large;color:green;"></i>
+                        <i class="fa-solid fa-user-doctor me-2" style="font-size:xx-large;color:green;"></i>
                     </div>
 
                     <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Patient</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">219</h1>
+                                <h1 class="text-xl font-semibold">89</h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-bed" style="font-size:xx-large;color:green;"></i>
@@ -105,7 +105,7 @@ $result = mysqli_query($conn, $query);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Appointment</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">121</h1>
+                                <h1 class="text-xl font-semibold">21</h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-clipboard-user me-2" style="font-size:xx-large;color:green;"></i>
@@ -115,7 +115,7 @@ $result = mysqli_query($conn, $query);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Users</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">213</h1>
+                                <h1 class="text-xl font-semibold">101</h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-user me-2" style="font-size:xx-large;color:green;"></i>

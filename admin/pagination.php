@@ -1,7 +1,7 @@
 <!-- pagination -->
 <div class="page">
           <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
+            <ul class="pagination justify-content-end">
               <li class="page-item">
                 <a class="page-link" href="#" tabindex="-1">&laquo; Previous</a>
               </li>

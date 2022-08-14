@@ -165,10 +165,12 @@ if (isset($_REQUEST['appointment'])) {
     $fees = $_POST['fees'];
     $app_date = $_POST['app_date'];
     $app_time = $_POST['app_time'];
+    $status = $_POST['status'];
+
 
     $insert = "INSERT INTO appointment
-        (`app_number`,`patient_id`,`doctor_id`,`specialization_id`,`fees`,`app_date`,`app_time`) VALUES 
-        ('$app_number','$patient_id','$doctor_id','$specialization_id','$fees','$app_date','$app_time')";
+        (`app_number`,`patient_id`,`doctor_id`,`specialization_id`,`fees`,`app_date`,`app_time`,`status`) VALUES 
+        ('$app_number','$patient_id','$doctor_id','$specialization_id','$fees','$app_date','$app_time','$status')";
 
     if (mysqli_query($conn, $insert)) {
         header('location:appointments.php');
@@ -257,9 +259,10 @@ if (isset($_POST['appointment_update'])) {
     $fees = $_POST['fees'];
     $app_date = $_POST['app_date'];
     $app_time = $_POST['app_time'];
+    $status = $_POST['status'];
 
 
-    $update = "UPDATE appointment SET app_number='$app_number',patient_id='$patient_id',doctor_id='$doctor_id', specialization_id='$specialization_id', fees='$fees',app_date='$app_date',app_time='$app_time'  where appointment_id=$id";
+    $update = "UPDATE appointment SET app_number='$app_number',patient_id='$patient_id',doctor_id='$doctor_id', specialization_id='$specialization_id', fees='$fees',app_date='$app_date',app_time='$app_time', status ='$status'  where appointment_id=$id";
     $chk = mysqli_query($conn, $update);
     if ($chk) {
         header('location:appointments.php');

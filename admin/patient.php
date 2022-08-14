@@ -111,7 +111,7 @@ function FillComboBoxUpdate($query, $id)
           <div class="row">
 
             <div class="col-md-6">
-              <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Patients</button>
+              <!-- <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Patients</button> -->
             </div>
 
             <div class="col-md-6 mb-4 d-flex">
@@ -146,7 +146,7 @@ function FillComboBoxUpdate($query, $id)
                     <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
 
                     <td>
-                      <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                      <!-- <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   </tr>
                 <?php }

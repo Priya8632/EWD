@@ -105,7 +105,7 @@ $result = mysqli_query($conn, $query);
               <tr class="uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-center">ID</th>
                 <th class="py-3 px-6 text-center">SPECIALIZATION</th>
-                <th class="py-3 px-6 text-center">PHOTO</th>
+                <th class="py-3 px-6 text-center">DOCTOR</th>
                 <th class="py-3 px-6 text-center">OPERATION</th>
               </tr>
             </thead>

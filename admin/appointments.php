@@ -36,7 +36,7 @@ if (isset($_GET['start'])) {
 $record = mysqli_num_rows(mysqli_query($conn, "select * from appointment"));
 $pagi = ceil($record / $per_page);
 
-$query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
+$query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time,a.status FROM appointment as a, doctor as d , patient as p, specialization as s
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id  limit $start ,$per_page";
 $result = mysqli_query($conn, $query);
 
@@ -127,6 +127,7 @@ function FillComboBoxUpdate($query, $id)
                 <th class="py-3 px-6 text-center">FEES</th>
                 <th class="py-3 px-6 text-center">DATE</th>
                 <th class="py-3 px-6 text-center">TIME</th>
+                <th class="py-3 px-6 text-center">STATUS</th>
                 <th class="py-3 px-6 text-center">OPERATION</th>
               </tr>
             </thead>
@@ -143,7 +144,7 @@ function FillComboBoxUpdate($query, $id)
                     <td data-target="fees"><?php echo $data['fees']; ?></td>
                     <td data-target="app_date"><?php echo $data['app_date']; ?></td>
                     <td data-target="app_time"><?php echo $data['app_time']; ?></td>
-
+                    <td data-target="status"><?php echo $data['status']; ?></td>
                     <td>
                       <a href="#" data-role="appointmentupdate" data-id="<?php echo $data['appointment_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
@@ -212,6 +213,17 @@ function FillComboBoxUpdate($query, $id)
                 </div>
 
                 <div class="form-group p-2">
+                  <label>Status</label>
+                  <select name="status">
+                    <option value="" disabled>--select--</option>
+                    <option value="select"><?php if (isset($_POST['status'])) { echo $_POST['status'];} ?></option>
+                    <option value="booked">Booked</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancle">Cancle</option>
+                  </select>
+                </div>
+
+                <div class="form-group p-2">
                   <button type="submit" class="btn btn-success btn-block" name="appointment">Add</button>
                 </div>
               </div>
@@ -245,21 +257,6 @@ function FillComboBoxUpdate($query, $id)
                   <label>Appointment number</label>
                   <input type="text" name="app_number" id="editapp_number" class="form-control" placeholder="appointment_number" value="">
                 </div>
-
-                <!-- <div class="form-group p-2">
-                        <label>Patient</label>
-                        <input type="text" name="patient_name" id="editpatient_id" class="form-control" placeholder="patient_id" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Doctor</label>
-                        <input type="text" name="doctor_name" id="editdoctor_id" class="form-control" placeholder="doctor_id" value="">
-                      </div>
-
-                      <div class="form-group p-2">
-                        <label>Specialization</label>
-                        <input type="text" name="specialization" id="editspecialization_id" class="form-control" placeholder="specialization_id" value="">
-                      </div> -->
 
                 <div class="form-group p-2">
                   <label for="">Patient</label>
@@ -298,6 +295,17 @@ function FillComboBoxUpdate($query, $id)
                 <div class="form-group p-2">
                   <label>Time</label>
                   <input type="text" name="app_time" id="editapp_time" class="form-control" placeholder="appointment_time" value="">
+                </div>
+
+                <div class="form-group p-2">
+                  <label>Status</label>
+                  <select name="status">
+                    <option value="" disabled>--select--</option>
+                    <option value="select"><?php if (isset($_POST['status'])) { echo $_POST['status'];} ?></option>
+                    <option value="booked">Booked</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancle">Cancle</option>
+                  </select>
                 </div>
 
               </div>
@@ -390,13 +398,13 @@ function FillComboBoxUpdate($query, $id)
       });
 
       $('.delete-btn').click(function(e) {
-      e.preventDefault();
+        e.preventDefault();
 
-      var sid = $(this).closest('tr').find('.app_id').text();
-      $('#delete_id').val(sid);
-      $('#delete').modal('show');
+        var sid = $(this).closest('tr').find('.app_id').text();
+        $('#delete_id').val(sid);
+        $('#delete').modal('show');
 
-    });
+      });
 
     });
   </script>
