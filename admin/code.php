@@ -308,23 +308,35 @@ if (isset($_POST['specialization_update'])) {
     $id = $_POST['s_id'];
     $specialization = $_POST['specialization'];
 
-    $target_dir = "./doctorimage/";
+    // $target_dir = "./doctorimage/";
+    // if (!file_exists($_FILES['file']['tmp_name'])) {
+    //     $imagepath = $rows['img'];  
+    # aa $rows variable su kare chhe?                                   
+    // } else {
+    //     $imagePath = $target_dir . basename($_FILES['file']['name']);
+    # aa $imagePath ma P capital chhe ane uper small chhe
+    // }
+    // $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
 
+    // $update = "UPDATE specialization SET specialization='$specialization',img='$imagePath' where specialization_id=$id";
+    # same aa query ma  $imagePath ma P capital chhe
+
+    
+    # my code strats 
     $select_data = "SELECT * FROM specialization WHERE specialization_id = $id";
     $query = mysqli_query($conn, $select_data);
     $fetch_array = mysqli_fetch_assoc($query);
-
-   
-    if (!file_exists($_FILES['img']['tmp_name'])) {
+    if (!file_exists($_FILES['file']['tmp_name'])) {
         $imagepath = $fetch_array['img'];
     } else {
-        $imagepath = $target_dir . basename($_FILES['img']['name']);
+        $imagepath = $target_dir . basename($_FILES['file']['name']);
     }
-     
- 
-    $chkfile = move_uploaded_file($_FILES['img']['tmp_name'], $imagepath);
+    $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
 
     $update = "UPDATE specialization SET specialization='$specialization',img='$imagepath' where specialization_id=$id";
+    # my code ends
+
+
     $chk = mysqli_query($conn, $update);
     if ($chk) {
 

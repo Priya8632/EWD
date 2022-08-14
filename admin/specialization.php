@@ -201,7 +201,7 @@ $result = mysqli_query($conn, $query);
                 </div>
 
                 <div class="form-group p-2">
-                  <input type="file" name="img">
+                  <input type="file" name="file">
                 </div>
 
               </div>
