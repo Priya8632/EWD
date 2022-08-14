@@ -187,7 +187,7 @@ $result = mysqli_query($conn, $query);
           <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="code.php" method="POST">
+        <form action="code.php" method="POST" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="container p-5 text-dark mx-auto bg-light">
 
@@ -201,7 +201,7 @@ $result = mysqli_query($conn, $query);
                 </div>
 
                 <div class="form-group p-2">
-                  <input type="file" name="file">
+                  <input type="file" name="img">
                 </div>
 
               </div>

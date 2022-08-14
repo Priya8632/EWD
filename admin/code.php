@@ -130,15 +130,30 @@ if (isset($_REQUEST['patient'])) {
 
 // insert specialization data
 $specialization = "SELECT * FROM specialization";
+$specializationSelect = mysqli_query($conn, $specialization);
 
 if (isset($_REQUEST['speciality'])) {
+
+    if (!$specializationSelect) {
+        $createTable = "CREATE TABLE specialization(
+            specialization_id int(10) auto_increment primary key,
+            specialization text,
+            img varchar(255) 
+
+        )";
+
+        $tblchk = mysqli_query($conn, $createTable);
+        if (!$tblchk) {
+            echo mysqli_error($conn);
+        }
+    }
 
     $filesize = $_FILES['file']['size'];
 
     $specialization_id = $_POST['specialization_id'];
     $specialization = $_POST['specialization'];
 
-    
+
     $target_dir = "./doctorimage/";
     $imagepath = $target_dir . basename($_FILES['file']['name']);
     $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
@@ -149,6 +164,8 @@ if (isset($_REQUEST['speciality'])) {
 
     if (mysqli_query($conn, $insert)) {
         header('location:specialization.php');
+    } else {
+        echo mysqli_error($conn);
     }
 }
 
@@ -293,14 +310,21 @@ if (isset($_POST['specialization_update'])) {
 
     $target_dir = "./doctorimage/";
 
-    if (!file_exists($_FILES['file']['tmp_name'])) {
-        $imagepath = $rows['img'];
-    } else {
-        $imagePath = $target_dir . basename($_FILES['file']['name']);
-    }
-    $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
+    $select_data = "SELECT * FROM specialization WHERE specialization_id = $id";
+    $query = mysqli_query($conn, $select_data);
+    $fetch_array = mysqli_fetch_assoc($query);
 
-    $update = "UPDATE specialization SET specialization='$specialization',img='$imagePath' where specialization_id=$id";
+   
+    if (!file_exists($_FILES['img']['tmp_name'])) {
+        $imagepath = $fetch_array['img'];
+    } else {
+        $imagepath = $target_dir . basename($_FILES['img']['name']);
+    }
+     
+ 
+    $chkfile = move_uploaded_file($_FILES['img']['tmp_name'], $imagepath);
+
+    $update = "UPDATE specialization SET specialization='$specialization',img='$imagepath' where specialization_id=$id";
     $chk = mysqli_query($conn, $update);
     if ($chk) {
 
