@@ -47,9 +47,9 @@
                             <i class="fa-solid fa-bed me-2" style="font-size:large;"></i>
                             <span>Patients</span>
                         </a>
-                        <a href="users.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
+                        <a href="profile.php" class="block py-2.5 px-4 flex items-center space-x-2 text-white rounded">
                             <i class="fa-solid fa-user me-2" style="font-size:large;"></i>
-                            <span>Users</span>
+                            <span>Profile</span>
                         </a>
                         <a href="admin_logout.php" class="block py-2.5 px-4 flex items-center space-x-2  text-white rounded">
                             <i class="fas fa-project-diagram me-2" style="font-size:large;"></i>

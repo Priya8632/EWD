@@ -14,7 +14,7 @@ if (!isset($_SESSION['aid'])) {
 }
 
 $id = $_SESSION['aid'];
-$sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
+$sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
@@ -99,7 +99,7 @@ function FillComboBoxUpdate($query, $id)
         <div class="flex justify-between items-center border-b border-gray-300">
           <h1 class="text-2xl font-semibold pt-2">Appointments</h1>
           <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
+            <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['Email']; ?>
           </a>
         </div>
 

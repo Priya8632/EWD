@@ -9,30 +9,10 @@ if (!isset($_SESSION['aid'])) {
 }
 
 $id = $_SESSION['aid'];
-$sql =  "SELECT * FROM admin WHERE admin_id ='$id'";
+$sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-$per_page = 3;
-$start = 0;
-$current_page = 1;
-if (isset($_GET['start'])) {
-    $start = $_GET['start'];
-    if ($start <= 0) {
-        $start = 0;
-        $current_page = 1;
-    } else {
-        $current_page = $start;
-        $start--;
-        $start = $start * $per_page;
-    }
-}
-
-$record = mysqli_num_rows(mysqli_query($conn, "select * from users"));
-$pagi = ceil($record / $per_page);
-
-$query = "SELECT * FROM users limit $start ,$per_page";
-$result = mysqli_query($conn, $query);
 
 ?>
 <!DOCTYPE html>
@@ -75,7 +55,7 @@ $result = mysqli_query($conn, $query);
                 <div class="flex justify-between items-center border-b border-gray-300">
                     <h1 class="text-2xl font-semibold pt-2">Dashboard</h1>
                     <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['email']; ?>
+                        <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['Email']; ?>
                     </a>
                 </div>
 

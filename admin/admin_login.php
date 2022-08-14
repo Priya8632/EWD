@@ -9,22 +9,12 @@ if (isset($_COOKIE['aid'])) {
     header('location:dashboard.php');
 }
 
-$selectTable = "SELECT * FROM admin";
-$tblQuery = mysqli_query($conn, $selectTable);
-$fetch_array = mysqli_fetch_assoc($tblQuery);
-
-if (!$tblQuery) {
-    $createTable = "CREATE TABLE  admin ( admin_id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(50) NOT NULL, password VARCHAR(20) NOT NULL )";
-
-    if (!mysqli_query($conn, $createTable)) {
-        echo mysqli_errno($conn);
-    }
-}
-
-$passarr = $error = $emailarr = "";
+$passarr = $emailarr = "";
 
 if (isset($_POST['adsubmit'])) {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     if (empty($_POST['email'])) {
         $emailarr = "username required";
@@ -32,22 +22,23 @@ if (isset($_POST['adsubmit'])) {
         $passarr = "password required";
     } else {
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
 
-        if ($email == $fetch_array['email'] && $password == $fetch_array['password']) {
+        $sql = "SELECT * FROM profile WHERE Email='$email'";
+        $query = mysqli_query($conn, $sql);
+        $arr = mysqli_fetch_assoc($query);
+        $row = mysqli_num_rows($query);
 
-            $_SESSION['aid'] = $fetch_array['admin_id'];
-            setcookie('aid', $fetch_array['admin_id'], time() + 60 * 10);
+
+        if ($email == $arr['Email'] && base64_encode($password) == $arr['Password']) {
+            $_SESSION['aid'] = $arr['id'];
+            setcookie('aid', $arr['id'], time() + 60 * 10);
             header('location:dashboard.php');
-            
         } else {
 
-            $error = "username or password invalid";
+            echo "<script>alert('invalid password and email')</script>";
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +116,6 @@ if (isset($_POST['adsubmit'])) {
             <h3 class="p-2"><i class="fa-solid fa-user" style="font-size:30px;padding:10px;"></i>Admin</h3>
             <hr>
 
-            <span class="error">* <?php echo $error; ?></span>
             <div class="form-group">
                 <label for="">User name</label>
                 <div class="input-group">
@@ -152,7 +142,7 @@ if (isset($_POST['adsubmit'])) {
             </div>
 
             <div class="form-group">
-                <p class="login-register-text"><a href="#">Forgot Your Password</a></p>
+                <p class="login-register-text"><a href="register.php">Don't Have an Account</a></p>
                 <button type="submit" class="btn btn-success btn-block" name="adsubmit">SUBMIT</button>
             </div>
 
@@ -173,6 +163,7 @@ if (isset($_POST['adsubmit'])) {
             });
         });
     </script>
-   
+
 </body>
+
 </html>
