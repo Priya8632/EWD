@@ -2,10 +2,6 @@
 
 include 'config.php';
 
-// $query = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
-//  where p.doctor_id = d.doctor_id limit $start ,$per_page";
-// $result = mysqli_query($conn, $query);
-
 if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
@@ -70,7 +66,6 @@ function FillComboBoxUpdate($query, $id)
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
   <script src="../js/jquery.js"></script>
-  <script src="../js/code.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -111,7 +106,7 @@ function FillComboBoxUpdate($query, $id)
           <div class="row">
 
             <div class="col-md-6">
-              <!-- <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Patients</button> -->
+              <button class="btn btn-primary" data-bs-target="#add" data-bs-toggle="modal">+ Add Patients</button>
             </div>
 
             <div class="col-md-6 mb-4 d-flex">
@@ -146,7 +141,7 @@ function FillComboBoxUpdate($query, $id)
                     <td data-target='doctor_name'><?php echo $data['doctor_name']; ?></td>
 
                     <td>
-                      <!-- <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a> -->
+                      <a href="#" data-role="patientupdate" data-id="<?php echo $data['patient_id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                   </tr>
                 <?php }
@@ -207,8 +202,12 @@ function FillComboBoxUpdate($query, $id)
                   </div>
 
                   <div class="form-group p-2">
-                    <label>Doctor</label>
-                    <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
+                    <label for="">Doctor</label>
+                    <?php $query = "select doctor_id,doctor_name from doctor"; ?>
+                    <select name="doctor_id" id="editdoctorname" value="<?php echo $row[3] ?>">
+                      <?php  echo FillComboBoxUpdate($query,$row[5]);
+                      ?>
+                    </select>
                   </div>
 
                   <div class="form-group p-2">
@@ -264,7 +263,7 @@ function FillComboBoxUpdate($query, $id)
                     <label for="">Doctor</label>
                     <?php $query = "select doctor_id,doctor_name from doctor"; ?>
                     <select name="doctor_name" id="editdoctorname" value="<?php echo $row[3] ?>">
-                      <?php // echo FillComboBoxUpdate($query,$row[5]);
+                      <?php  echo FillComboBoxUpdate($query,$row[5]);
                       ?>
                     </select>
                   </div>

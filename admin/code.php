@@ -2,94 +2,29 @@
 
 include 'config.php';
 
-// insert user data
-$query = "SELECT * FROM users";
-if (isset($_REQUEST['add'])) {
 
-    if (!mysqli_query($conn, $query)) {
+// insert doctor data 
+$doctor = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
+          where d.specialization_id = s.specialization_id ";
+$doctorSelect = mysqli_query($conn, $doctor);
 
-        $createTable = "CREATE TABLE USERS(
-        id int(10) auto_increment primary key,
-        firstName text,
-        lastName text,
-        Email text,
-        Password varchar(30),
-        Confirm_Password varchar(30),
-        Mobile text,
-        Gender text,
-        img text
-    )";
+if (isset($_REQUEST['doctor'])) {
+
+    if (!$doctorSelect) {
+        $createTable = "CREATE TABLE doctor(
+            doctor_id int(10) auto_increment primary key,
+            doctor_name text,
+            email text,
+            mobile int(10),
+            gender text,
+            specialization_id int(10) references specialization(specialization_id)
+        )";
 
         $tblchk = mysqli_query($conn, $createTable);
         if (!$tblchk) {
             echo mysqli_error($conn);
         }
     }
-
-    if (empty($_POST['fname'])) {
-        $fnamearr = "fname is required";
-    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['fname'])) {
-        $fnamearr = "only character and letter ";
-    } elseif (empty($_POST['lname'])) {
-        $lnamearr = "lname is required";
-    } elseif (!preg_match("/^[a-zA-Z-' ]*$/", $_POST['lname'])) {
-        $lnamearr = "only character and letter ";
-    } elseif (empty($_POST['email'])) {
-        $emailarr = "email is required";
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = "invaild formet";
-    } elseif (empty($_POST['p_word'])) {
-        $pwarr = "password is required";
-    } elseif (!preg_match("/[a-z'@,!,#,$,%,^,&,*,+']+/", $_POST['p_word'])) {
-        $pwarr = "minimum 1 small";
-    } elseif (!preg_match("/[A-Z]+/", $_POST['p_word'])) {
-        $pwarr = "minum 1 capital";
-    } elseif (!preg_match("/[0-9]/", $_POST['p_word'])) {
-        $pwarr = "1 number";
-    } elseif (strlen($_POST['p_word']) > 8 || strlen($_POST['p_word']) < 8) {
-        $pwarr = "8 length is required";
-    } elseif ($_POST['c_word'] != $_POST['p_word']) {
-        $cwarr = "both password is not same..";
-    } elseif ($filesize > 1000000) {
-        $imgarr = "image file must be less than 1 mb";
-    } else {
-
-        $email = $_POST['email'];
-        $email01 = "SELECT * FROM users WHERE Email ='$email'";
-        $emailchk = mysqli_query($conn, $email01);
-        $result = mysqli_num_rows($emailchk);
-        $filesize = $_FILES['file']['size'];
-
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $email = $_POST['email'];
-        $pw = base64_encode($_POST['p_word']);
-        $cw = base64_encode($_POST['c_word']);
-        $mobile = $_POST['mob'];
-        $gender = $_POST['gender'];
-
-        $target_dir = "./userimage/";
-        $imagepath = $target_dir . basename($_FILES['file']['name']);
-        $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
-
-        $insert = "INSERT INTO users
-        (`firstName`,`lastName`,`Email`,`Password`,`Confirm_Password`,`Mobile`,`Gender`,`img`) VALUES 
-        ('$fname','$lname','$email','$pw','$cw','$mobile','$gender','$imagepath')";
-
-        if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
-            header('location:users.php');
-        }
-    }
-}
-
-// insert doctor data 
-$doctor = "SELECT d.Doctor_Id , d.Doctor_name , d.Email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-          where d.specialization_id = s.specialization_id ";
-
-if (isset($_REQUEST['doctor'])) {
-
 
     $fname = $_POST['fname'];
     $email = $_POST['email'];
@@ -109,8 +44,26 @@ if (isset($_REQUEST['doctor'])) {
 // insert patient data
 $patient = "SELECT p.patient_id,p.patient_name,p.email,p.mobile,p.gender,p.age,d.doctor_name FROM patient as p,doctor as d
             where p.doctor_id = d.doctor_id";
+$patientSelect = mysqli_query($conn, $patient);
 
 if (isset($_REQUEST['patient'])) {
+
+    if (!$patientSelect) {
+        $createTable = "CREATE TABLE patient(
+            patient_id int(10) auto_increment primary key,
+            patient_name text,
+            email text,
+            mobile int(10),
+            gender text,
+            age text,
+            doctor_id int(10) references doctor(doctor_id)
+        )";
+
+        $tblchk = mysqli_query($conn, $createTable);
+        if (!$tblchk) {
+            echo mysqli_error($conn);
+        }
+    }
 
     $fname = $_POST['fname'];
     $email = $_POST['email'];
@@ -153,11 +106,9 @@ if (isset($_REQUEST['speciality'])) {
     $specialization_id = $_POST['specialization_id'];
     $specialization = $_POST['specialization'];
 
-
     $target_dir = "./doctorimage/";
     $imagepath = $target_dir . basename($_FILES['file']['name']);
     $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
-
 
     $insert = "INSERT INTO specialization
         (`specialization_id`,`specialization`,`img`) VALUES ('$specialization_id','$specialization','$imagepath')";
@@ -169,11 +120,34 @@ if (isset($_REQUEST['speciality'])) {
     }
 }
 
+
 // insert appointment data
 $appointment = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
+$appointmentSelect = mysqli_query($conn, $appointment);
+
 
 if (isset($_REQUEST['appointment'])) {
+
+    if (!$appointmentSelect) {
+
+        $createTable = "CREATE TABLE appointment(
+            appointment_id int(10) auto_increment primary key,
+            app_number text,
+            patient_id int(10) references patient(patient_id),
+            doctor_id int(10) references doctor(doctor_id),
+            specialization_id int(10) references specialization(specialization_id),
+            fees int(10),
+            app_date date,
+            app_time time,
+            status text
+        )";
+
+        $tblchk = mysqli_query($conn, $createTable);
+        if (!$tblchk) {
+            echo mysqli_error($conn);
+        }
+    }
 
     $app_number = $_POST['app_number'];
     $patient_id = $_POST['patient_id'];
@@ -194,6 +168,8 @@ if (isset($_REQUEST['appointment'])) {
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // delete specialization data
 if (isset($_POST['specializationdelete'])) {
     $sid = $_POST['s_id'];
@@ -206,7 +182,7 @@ if (isset($_POST['specializationdelete'])) {
 
 // delete doctor data
 if (isset($_POST['doctordelete'])) {
-    $did = $_POST['doctor_id'];
+    $did = $_POST['delete_id'];
     $query = "DELETE FROM doctor WHERE doctor_id = $did";
     $result = mysqli_query($conn, $query);
     if ($result) {
@@ -236,17 +212,7 @@ if (isset($_POST['appdelete'])) {
     }
 }
 
-// delete users data
-if (isset($_POST['userdelete'])) {
-
-    $uid = $_POST['id'];
-    $query = "DELETE FROM users WHERE id = $uid";
-    $result = mysqli_query($conn, $query);
-    if ($result) {
-        header('location:users.php');
-    }
-}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // doctor update
 if (isset($_POST['doctor_update'])) {
@@ -255,8 +221,6 @@ if (isset($_POST['doctor_update'])) {
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
     $specialization = $_POST['specialization'];
-
-
 
     $update = "UPDATE doctor SET doctor_name='$doctor_name',email='$email',mobile='$mobile', specialization='$specialization' where doctor_id=$id";
     $chk = mysqli_query($conn, $update);
@@ -277,7 +241,6 @@ if (isset($_POST['appointment_update'])) {
     $app_date = $_POST['app_date'];
     $app_time = $_POST['app_time'];
     $status = $_POST['status'];
-
 
     $update = "UPDATE appointment SET app_number='$app_number',patient_id='$patient_id',doctor_id='$doctor_id', specialization_id='$specialization_id', fees='$fees',app_date='$app_date',app_time='$app_time', status ='$status'  where appointment_id=$id";
     $chk = mysqli_query($conn, $update);
@@ -305,37 +268,24 @@ if (isset($_POST['patient_update'])) {
 
 // specialization update
 if (isset($_POST['specialization_update'])) {
+
     $id = $_POST['s_id'];
     $specialization = $_POST['specialization'];
 
-    // $target_dir = "./doctorimage/";
-    // if (!file_exists($_FILES['file']['tmp_name'])) {
-    //     $imagepath = $rows['img'];  
-    # aa $rows variable su kare chhe?                                   
-    // } else {
-    //     $imagePath = $target_dir . basename($_FILES['file']['name']);
-    # aa $imagePath ma P capital chhe ane uper small chhe
-    // }
-    // $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
-
-    // $update = "UPDATE specialization SET specialization='$specialization',img='$imagePath' where specialization_id=$id";
-    # same aa query ma  $imagePath ma P capital chhe
-
-    
     # my code strats 
     $select_data = "SELECT * FROM specialization WHERE specialization_id = $id";
     $query = mysqli_query($conn, $select_data);
     $fetch_array = mysqli_fetch_assoc($query);
+
+    $target_dir = "./doctorimage/";
     if (!file_exists($_FILES['file']['tmp_name'])) {
         $imagepath = $fetch_array['img'];
     } else {
         $imagepath = $target_dir . basename($_FILES['file']['name']);
     }
     $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
-
     $update = "UPDATE specialization SET specialization='$specialization',img='$imagepath' where specialization_id=$id";
     # my code ends
-
 
     $chk = mysqli_query($conn, $update);
     if ($chk) {
@@ -344,28 +294,32 @@ if (isset($_POST['specialization_update'])) {
     }
 }
 
+// admin update
+if (isset($_POST['admin_update'])) {
 
-// user update
-if (isset($_POST['update'])) {
-    $id = $_POST['userId'];
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+    $aid = $_POST['admin_id'];
+    $full_name = $_POST['full_name'];
     $email = $_POST['email'];
-    $mobile = $_POST['mob'];
+    $mobile = $_POST['mobile'];
+    $city = $_POST['city'];
 
-    $target_dir = "./userimage/";
+    $select_data = "SELECT * FROM profile WHERE id = $aid";
+    $query = mysqli_query($conn, $select_data);
+    $rows = mysqli_fetch_assoc($query);
+
+    $target_dir = "./profile/";
 
     if (!file_exists($_FILES['file']['tmp_name'])) {
         $imagepath = $rows['img'];
     } else {
-        $imagePath = $target_dir . basename($_FILES['file']['name']);
+        $imagepath = $target_dir . basename($_FILES['file']['name']);
     }
     $chkfile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
 
-    $update = "UPDATE users SET firstName='$fname',lastName='$lname',Email ='$email',Mobile= '$mobile',img='$imagePath' where id=$id";
+    $update = "UPDATE profile SET fullName='$full_name',Email ='$email',Mobile= '$mobile',City='$city',img='$imagepath' where id=$aid";
     $chk = mysqli_query($conn, $update);
     if ($chk) {
 
-        header('location:users.php');
+        header('location:profile.php');
     }
 }

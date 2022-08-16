@@ -2,9 +2,6 @@
 
 include 'config.php';
 
-// $query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-//           where d.specialization_id = s.specialization_id ";
-// $result = mysqli_query($conn, $query);
 
 if (!isset($_SESSION['aid'])) {
     header('location:admin_login.php');
@@ -18,41 +15,6 @@ $sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-$per_page = 4;
-$start = 0;
-$current_page = 1;
-if (isset($_GET['start'])) {
-    $start = $_GET['start'];
-    if ($start <= 0) {
-        $start = 0;
-        $current_page = 1;
-    } else {
-        $current_page = $start;
-        $start--;
-        $start = $start * $per_page;
-    }
-}
-
-$record = mysqli_num_rows(mysqli_query($conn, "select * from doctor"));
-$pagi = ceil($record / $per_page);
-$query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-          where d.specialization_id = s.specialization_id limit $start ,$per_page ";
-$result = mysqli_query($conn, $query);
-
-function FillComboBoxUpdate($query, $id)
-{
-
-    global $conn;
-    $cmbStr = "<option value=\"select\">Select</option>";
-    $cmbRS = mysqli_query($conn, $query) or die(mysqli_error($conn));
-    while ($cmbRow = mysqli_fetch_array($cmbRS)) {
-        if ($cmbRow[0] == $id)
-            $cmbStr = $cmbStr . "<option selected=\"selected\" value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
-        else
-            $cmbStr = $cmbStr . "<option value=" . $cmbRow[0] . ">" . $cmbRow[1] . "</option>";
-    }
-    return $cmbStr;
-}
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +33,7 @@ function FillComboBoxUpdate($query, $id)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Appoinment</title>
+    <title>Admin Profile</title>
     <style>
         a {
             text-decoration: none;
@@ -100,7 +62,6 @@ function FillComboBoxUpdate($query, $id)
                     <a href="admin_logout.php" class="text-danger">Logout</a>
                 </div>
 
-
                 <!-- Doctors Table -->
                 <div class="table-responsive mx-auto shadow p-4 mt-5 bg-white">
 
@@ -126,7 +87,7 @@ function FillComboBoxUpdate($query, $id)
                                 <th>Gender</th>
                                 <td><?php echo $mydata['Gender']; ?> </td>
                             </tr>
-                            <tr>
+                            <tr id="<?php echo $mydata['id']; ?>">
                                 <th>Photo</th>
                                 <td><img src="<?php echo $mydata['img']; ?>" alt="Network Error" hright='100px' width='100px'></td>
                             </tr>
@@ -146,9 +107,7 @@ function FillComboBoxUpdate($query, $id)
 
     <!-- crud section end -->
 
-
     <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
 
     <!-- edit modal -->
     <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,7 +153,7 @@ function FillComboBoxUpdate($query, $id)
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-                                <button type="submit" name="doctor_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
+                                <button type="submit" name="admin_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
                             </div>
                         </form>
 

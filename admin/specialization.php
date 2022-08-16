@@ -2,9 +2,6 @@
 
 include 'config.php';
 
-// $query = "SELECT * FROM specialization";
-// $result = mysqli_query($conn, $query);
-
 if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
@@ -50,7 +47,6 @@ $result = mysqli_query($conn, $query);
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
-  <script src="../js/code.js"></script>
   <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />

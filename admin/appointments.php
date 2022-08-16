@@ -2,10 +2,6 @@
 
 include 'config.php';
 
-// $query = "SELECT a.appointment_id,a.app_number,p.patient_name,d.doctor_name,s.specialization,a.fees,a.app_date,a.app_time FROM appointment as a, doctor as d , patient as p, specialization as s
-//            where a.Doctor_Id = d.Doctor_Id and p.patient_id = a.patient_id and a.specialization_id = s.specialization_id ";
-// $result = mysqli_query($conn, $query);
-
 if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
@@ -67,7 +63,6 @@ function FillComboBoxUpdate($query, $id)
   <link href="../assets/css/tailwind.css" rel="stylesheet">
   <!-- ALPINE JS -->
   <script src="../assets/js/alpine.js" defer></script>
-  <!-- <script src="../js/code.js"></script> -->
   <script src="../js/jquery.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
@@ -183,18 +178,27 @@ function FillComboBoxUpdate($query, $id)
                 </div>
 
                 <div class="form-group p-2">
-                  <label>Patient</label>
-                  <input type="text" name="patient_id" class="form-control" placeholder="patient_id" value="">
+                  <label for="">Patient</label>
+                  <?php $query = "select patient_id,patient_name from patient"; ?>
+                  <select name="patient_id" id="editpatientname" value="<?php echo $row[3] ?>">
+                    <?php echo FillComboBoxUpdate($query, $row[5]); ?>
+                  </select>
                 </div>
 
                 <div class="form-group p-2">
-                  <label>Doctor</label>
-                  <input type="text" name="doctor_id" class="form-control" placeholder="doctor_id" value="">
+                  <label for="">Doctor</label>
+                  <?php $query = "select doctor_id,doctor_name from doctor"; ?>
+                  <select name="doctor_id" id="editdoctorname" value="<?php echo $row[3] ?>">
+                    <?php echo FillComboBoxUpdate($query, $row[5]); ?>
+                  </select>
                 </div>
 
                 <div class="form-group p-2">
-                  <label>Specialization</label>
-                  <input type="text" name="specialization_id" class="form-control" placeholder="specialization_id" value="">
+                  <label for="">Specialization</label>
+                  <?php $query = "select specialization_id,specialization from specialization"; ?>
+                  <select name="specialization_id" id="editspecialization" value="<?php echo $row[1]; ?>">
+                    <?php echo FillComboBoxUpdate($query, $row[1]); ?>
+                  </select>
                 </div>
 
                 <div class="form-group col-md-6 p-2">

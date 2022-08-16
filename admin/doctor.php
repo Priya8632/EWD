@@ -2,10 +2,6 @@
 
 include 'config.php';
 
-// $query = "SELECT d.doctor_id , d.doctor_name , d.email , d.mobile , d.gender , s.specialization  from doctor as d , specialization as s
-//           where d.specialization_id = s.specialization_id ";
-// $result = mysqli_query($conn, $query);
-
 if (!isset($_SESSION['aid'])) {
   header('location:admin_login.php');
 }
@@ -196,9 +192,13 @@ function FillComboBoxUpdate($query, $id)
                 </div>
 
                 <div class="form-group p-2">
-                  <label>Specialization</label>
-                  <input type="text" name="specialization_id" class="form-control" placeholder="specialization_id" value="">
+                  <label for="">Specialization</label>
+                  <?php $query = "select specialization_id,specialization from specialization"; ?>
+                  <select name="specialization_id" id="editspecialization" value="<?php echo $row[1]; ?>">
+                    <?php echo FillComboBoxUpdate($query, $row[1]); ?>
+                  </select>
                 </div>
+
 
                 <div class="form-group p-2">
                   <button type="submit" class="btn btn-success btn-block" name="doctor">Add</button>
@@ -277,7 +277,7 @@ function FillComboBoxUpdate($query, $id)
         </div>
         <form action="code.php" method="POST">
           <div class="modal-body">
-            <input type="hidden" id="delete_id">
+            <input type="text" id="delete_id">
             <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
@@ -337,8 +337,8 @@ function FillComboBoxUpdate($query, $id)
       $('.delete-btn').click(function(e) {
       e.preventDefault();
 
-      var sid = $(this).closest('tr').find('.doctorid').text();
-      $('#delete_id').val(sid);
+      var did = $(this).closest('tr').find('.doctorid').text();
+      $('#delete_id').val(did);
       $('#delete').modal('show');
 
     });
@@ -347,8 +347,6 @@ function FillComboBoxUpdate($query, $id)
   <!-- script section -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
 </body>
-
 </html>
