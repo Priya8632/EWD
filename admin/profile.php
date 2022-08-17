@@ -15,6 +15,16 @@ $sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
+// $id =$full_name= $email =$mobile = $city ="";
+// if($mydata >0)
+// {
+//     $aid = $row['id'];
+//     $full_name = $row['fullName'];
+//     $email = $row['Email'];
+//     $mobile = $row['Mobile'];
+//     $city = $row['City'];
+
+// }
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +81,7 @@ $mydata = mysqli_fetch_assoc($result1);
                                 <th>Full name</th>
                                 <td data-target="full_name"><?php echo $mydata['fullName']; ?> </td>
                             </tr>
-                            <tr id="<?php echo $mydata['id']; ?>">
+                            <tr>
                                 <th>Email</th>
                                 <td data-target="email"><?php echo $mydata['Email']; ?> </td>
                             </tr>
@@ -97,7 +107,7 @@ $mydata = mysqli_fetch_assoc($result1);
                                     <a href="#" data-role="update" data-id="<?php echo $mydata['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                                 </td>
                             </tr>
-
+m
                         </table>
                     </div>
 
@@ -164,12 +174,12 @@ $mydata = mysqli_fetch_assoc($result1);
     </div>
     <!-- end -->
 
-    
+
     </div>
     <script>
         $(document).ready(function() {
 
-           
+
 
             // edit value
             $(document).on('click', 'a[data-role=update]', function() {
@@ -190,7 +200,7 @@ $mydata = mysqli_fetch_assoc($result1);
 
             });
 
-            
+
         });
     </script>
     <!-- script section -->
