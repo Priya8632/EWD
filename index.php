@@ -21,12 +21,15 @@
       height: 300px;
       width: 300px;
     }
+    nav{
+      background-color: rgb(42, 153, 96);
+    }
   </style>
 </head>
 
 <body>
   <!-- navigation -->
-  <nav class="navbar bg-success  fixed-top shadow-sm p-3">
+  <nav class="navbar fixed-top shadow-sm p-3">
     <div class="container-lg">
 
       <a class="navbar-brand text-light" href="#">

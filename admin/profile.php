@@ -15,16 +15,7 @@ $sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-// $id =$full_name= $email =$mobile = $city ="";
-// if($mydata >0)
-// {
-//     $aid = $row['id'];
-//     $full_name = $row['fullName'];
-//     $email = $row['Email'];
-//     $mobile = $row['Mobile'];
-//     $city = $row['City'];
 
-// }
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +68,8 @@ $mydata = mysqli_fetch_assoc($result1);
 
                     <div class="table-responsive mx-auto">
                         <table class="table table-bordered mt-4 w-full bg-white">
-                            <tr id="<?php echo $mydata['id']; ?>">
+
+                            <tr>
                                 <th>Full name</th>
                                 <td data-target="full_name"><?php echo $mydata['fullName']; ?> </td>
                             </tr>
@@ -85,11 +77,11 @@ $mydata = mysqli_fetch_assoc($result1);
                                 <th>Email</th>
                                 <td data-target="email"><?php echo $mydata['Email']; ?> </td>
                             </tr>
-                            <tr id="<?php echo $mydata['id']; ?>">
+                            <tr>
                                 <th>City</th>
                                 <td data-target="city"><?php echo $mydata['City']; ?> </td>
                             </tr>
-                            <tr id="<?php echo $mydata['id']; ?>">
+                            <tr>
                                 <th>Mobile no</th>
                                 <td data-target="mobile"><?php echo $mydata['Mobile']; ?> </td>
                             </tr>
@@ -97,20 +89,20 @@ $mydata = mysqli_fetch_assoc($result1);
                                 <th>Gender</th>
                                 <td><?php echo $mydata['Gender']; ?> </td>
                             </tr>
-                            <tr id="<?php echo $mydata['id']; ?>">
+                            <tr>
                                 <th>Photo</th>
                                 <td><img src="<?php echo $mydata['img']; ?>" alt="Network Error" hright='100px' width='100px'></td>
                             </tr>
                             <tr>
                                 <th>Update</th>
                                 <td>
-                                    <a href="#" data-role="update" data-id="<?php echo $mydata['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                                    <a href="update.php"><i class="fa-solid fa-pen-to-square text-success" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                                 </td>
                             </tr>
-m
+
                         </table>
                     </div>
-
+                </div>
             </section>
         </main>
     </div>

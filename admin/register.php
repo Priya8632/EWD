@@ -21,7 +21,7 @@ if (isset($_REQUEST['submit'])) {
         Confirm_Password varchar(30),
         Mobile text,
         Gender text,
-        img text
+        img varchar(255)
     )";
 
         $tblchk = mysqli_query($conn, $createTable);

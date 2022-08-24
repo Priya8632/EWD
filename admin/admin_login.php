@@ -66,7 +66,7 @@ if (isset($_POST['adsubmit'])) {
         }
 
         body {
-            background-color: rgb(59, 173, 82);
+            background-color: rgb(42, 153, 96);
         }
 
         .container {
