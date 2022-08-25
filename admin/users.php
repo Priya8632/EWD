@@ -122,7 +122,6 @@ $result = mysqli_query($conn, $query);
                     <td data-target="Email"><?php echo $data['Email']; ?></td>
                     <td data-target="Mobile"><?php echo $data['Mobile']; ?></td>
                     <td><?php echo $data['Gender']; ?></td>
-                    <td><img src="<?php echo $data['img']; ?>" alt="Not found" width='80px'></td>
                     <td>
                       <a href="#" data-role="update" data-id="<?php echo $data['id']; ?>"><i class="fa-solid fa-pen-to-square text-success" data-bs-target="#edit" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
                       <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can text-danger" data-bs-target="#delete" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
@@ -195,11 +194,6 @@ $result = mysqli_query($conn, $query);
                     <input type="radio" name="gender" value="male">Female
                   </div>
 
-                  <div class="form-group col-md-6 p-2">
-                    <label>photo</label>
-                    <input type="file" name="file" value="">
-                  </div>
-
                   <div class="form-group p-2">
                     <button type="submit" class="btn btn-success btn-block" name="add">Add</button>
                   </div>
@@ -253,11 +247,6 @@ $result = mysqli_query($conn, $query);
                     <label>gender</label><br>
                     <input type="radio" name="gender" id="editgender" value="male">Male
                     <input type="radio" name="gender" id="editgender" value="male">Female
-                  </div>
-
-                  <div class="form-group col-md-6 p-2">
-                    <label>photo</label>
-                    <input type="file" name="file">
                   </div>
 
                 </div>

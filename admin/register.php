@@ -240,7 +240,7 @@ if (isset($_REQUEST['submit'])) {
                 </div>
 
                 <div class="form-group">
-                    <p class="login-register-text" style="text-align:center;">Alredy have an account?<a href="login.php">Login here</a></p>
+                    <p class="login-register-text" style="text-align:center;">Alredy have an account?<a href="admin_login.php">Login here</a></p>
                     <button type="submit" class="btn btn-success btn-block" name="submit">SUBMIT</button>
                 </div>
 

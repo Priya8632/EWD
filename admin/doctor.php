@@ -162,7 +162,7 @@ function FillComboBoxUpdate($query, $id)
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Doctor</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -218,7 +218,7 @@ function FillComboBoxUpdate($query, $id)
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -229,12 +229,12 @@ function FillComboBoxUpdate($query, $id)
 
                 <input type="hidden" id="doctor_id" name="doctor_id">
 
-                <div class="form-group col-md-6 p-2">
+                <div class="form-group p-2">
                   <label>doctor name</label>
                   <input type="text" name="doctor_name" id="editdoctorname" class="form-control" placeholder="doctor name" value="">
                 </div>
 
-                <div class="form-group col-md-6 p-2">
+                <div class="form-group p-2">
                   <label>email</label>
                   <input type="text" name="email" id="editemail" class="form-control" placeholder="email" value="">
                 </div>
@@ -242,6 +242,21 @@ function FillComboBoxUpdate($query, $id)
                 <div class="form-group p-2">
                   <label>mobile</label>
                   <input type="text" name="mobile" id="editmobile" class="form-control" placeholder="mobile" value="">
+                </div>
+
+                <div class="form-group col-md-6 p-2">
+                  <label for="">Gender
+                    <div class="form-check">
+                      <label for="" class="form-check-label">
+                        <input type="radio" value="male" class="form-check-input" name="gender" <?php if ($mydata['Gender'] == 'male') { ?> checked <?php } ?>> Male
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label for="" class="form-check-label">
+                        <input type="radio" value="female" class="form-check-input" name="gender" <?php if ($mydata['Gender'] == 'female') { ?> checked <?php } ?>> Female
+                      </label>
+                    </div>
+                  </label>
                 </div>
 
                 <div class="form-group p-2">
@@ -335,13 +350,13 @@ function FillComboBoxUpdate($query, $id)
       });
 
       $('.delete-btn').click(function(e) {
-      e.preventDefault();
+        e.preventDefault();
 
-      var did = $(this).closest('tr').find('.doctorid').text();
-      $('#doctor_id').val(did);
-      $('#delete').modal('show');
+        var did = $(this).closest('tr').find('.doctorid').text();
+        $('#doctor_id').val(did);
+        $('#delete').modal('show');
 
-    });
+      });
     });
   </script>
   <!-- script section -->
@@ -349,4 +364,5 @@ function FillComboBoxUpdate($query, $id)
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

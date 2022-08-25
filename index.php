@@ -89,7 +89,6 @@
   <!-- image -->
   <div class="container-fluid py-5">
     <div class="row justify-content-center mr-auto">
-
       <div class="col-md-4 p-3" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
         <div class="data bg-light">
           <i class="fa-solid fa-hand-holding-medical"></i>

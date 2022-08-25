@@ -198,7 +198,7 @@ function FillComboBoxUpdate($query, $id)
                   <div class="form-group p-2">
                     <label>Gender</label>
                     <input type="radio" name="gender" value="male">Male
-                    <input type="radio" name="gender" value="female">feMale
+                    <input type="radio" name="gender" value="female">Female
                   </div>
 
                   <div class="form-group p-2">
@@ -228,7 +228,7 @@ function FillComboBoxUpdate($query, $id)
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">edit data</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

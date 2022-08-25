@@ -60,7 +60,7 @@ $mydata = mysqli_fetch_assoc($result1);
                 </div>
 
                 <!-- STATISTICS -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-6">
                     <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Doctor</p>
@@ -91,7 +91,7 @@ $mydata = mysqli_fetch_assoc($result1);
                         <i class="fa-solid fa-clipboard-user me-2" style="font-size:xx-large;color:green;"></i>
                     </div>
 
-                    <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
+                    <!-- <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Users</p>
                             <div class="flex items-center space-x-2">
@@ -99,7 +99,7 @@ $mydata = mysqli_fetch_assoc($result1);
                             </div>
                         </div>
                         <i class="fa-solid fa-user me-2" style="font-size:xx-large;color:green;"></i>
-                    </div>
+                    </div> -->
                 </div>
             </section>
         </main>
