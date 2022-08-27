@@ -14,7 +14,7 @@ $sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
-$per_page = 4;
+$per_page = 3;
 $start = 0;
 $current_page = 1;
 if (isset($_GET['start'])) {

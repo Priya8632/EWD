@@ -25,30 +25,30 @@ if (isset($_POST['admin_update'])) {
 
     if (empty($_POST['full_name'])) {
         $fullnamearr = 'first name should be not empty';}
-    // } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['full_name'])) {
-    //     $fullnamearr = 'only enter alphabet';
-    // } elseif (empty($_POST['email'])) {
-    //     $emailarr = 'email should be not empty';
-    // } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    //     $emailarr = 'email invalid';
-    // } elseif (empty($_POST['pw'])) {
-    //     $pwarr = 'Password should be not empty';
-    // } elseif (!preg_match("/[A-Z]/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one Capital Letter';
-    // } elseif (!preg_match("/[a-z]/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one small Letter';
-    // } elseif (!preg_match("/\d/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one digit';
-    // } elseif (!preg_match("/\W/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one special character';
-    // } elseif (strlen($_POST['pw']) < 8) {
-    //     $pwarr = 'Password should be minimum 8 characters';
-    // } elseif (empty($_POST['cw'])) {
-    //     $cwarr = 'enter your confirm password';
-    // } elseif ($_POST['cw'] != $_POST['pw']) {
-    //     $cwarr = 'password and confirm password are not match';
-    // } elseif ($_FILES["file"]["size"] > 1000000) {
-        // $fileErr = 'image size should be less than 1 MB';
+    elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['full_name'])) {
+        $fullnamearr = 'only enter alphabet';
+    } elseif (empty($_POST['email'])) {
+        $emailarr = 'email should be not empty';
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailarr = 'email invalid';
+    } elseif (empty($_POST['pw'])) {
+        $pwarr = 'Password should be not empty';
+    } elseif (!preg_match("/[A-Z]/", $_POST['pw'])) {
+        $pwarr = 'Password should contain at least one Capital Letter';
+    } elseif (!preg_match("/[a-z]/", $_POST['pw'])) {
+        $pwarr = 'Password should contain at least one small Letter';
+    } elseif (!preg_match("/\d/", $_POST['pw'])) {
+        $pwarr = 'Password should contain at least one digit';
+    } elseif (!preg_match("/\W/", $_POST['pw'])) {
+        $pwarr = 'Password should contain at least one special character';
+    } elseif (strlen($_POST['pw']) < 8) {
+        $pwarr = 'Password should be minimum 8 characters';
+    } elseif (empty($_POST['cw'])) {
+        $cwarr = 'enter your confirm password';
+    } elseif ($_POST['cw'] != $_POST['pw']) {
+        $cwarr = 'password and confirm password are not match';
+    } elseif ($_FILES["file"]["size"] > 1000000) {
+        $fileErr = 'image size should be less than 1 MB';}
     else {
 
         $fullname = $_POST['full_name'];
@@ -61,8 +61,8 @@ if (isset($_POST['admin_update'])) {
 
         $target_dir = "./profile/";
 
-        if (!file_exists($_FILES["file"]["tmp_name"])) {
-            $imagepath = $mydata['img'];
+       if (!file_exists($_FILES["file"]["tmp_name"])) {
+           $imagepath = $mydata['img'];
         } else {
 
             $imagepath = $target_dir . basename($_FILES['file']['name']);
@@ -130,7 +130,7 @@ if (isset($_POST['admin_update'])) {
 
                 <!-- update form -->
                 <div class="container p-5 text-dark mx-auto bg-light">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
 
                         <div class="row">
 
