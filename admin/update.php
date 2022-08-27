@@ -24,52 +24,53 @@ if (isset($_POST['admin_update'])) {
 
 
     if (empty($_POST['full_name'])) {
-        $fullnamearr = 'first name should be not empty';
-    } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['full_name'])) {
-        $fullnamearr = 'only enter alphabet';
-    } elseif (empty($_POST['email'])) {
-        $emailarr = 'email should be not empty';
-    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $emailarr = 'email invalid';
-    } elseif (empty($_POST['pw'])) {
-        $pwarr = 'Password should be not empty';
-    } elseif (!preg_match("/[A-Z]/", $_POST['pw'])) {
-        $pwarr = 'Password should contain at least one Capital Letter';
-    } elseif (!preg_match("/[a-z]/", $_POST['pw'])) {
-        $pwarr = 'Password should contain at least one small Letter';
-    } elseif (!preg_match("/\d/", $_POST['pw'])) {
-        $pwarr = 'Password should contain at least one digit';
-    } elseif (!preg_match("/\W/", $_POST['pw'])) {
-        $pwarr = 'Password should contain at least one special character';
-    } elseif (strlen($_POST['pw']) < 8) {
-        $pwarr = 'Password should be minimum 8 characters';
-    } elseif (empty($_POST['cw'])) {
-        $cwarr = 'enter your confirm password';
-    } elseif ($_POST['cw'] != $_POST['pw']) {
-        $cwarr = 'password and confirm password are not match';
-    } elseif ($_FILES["file"]["size"] > 1000000) {
-        $fileErr = 'image size should be less than 1 MB';
-    } else {
+        $fullnamearr = 'first name should be not empty';}
+    // } elseif (!preg_match("/^[a-zA-Z]*$/", $_POST['full_name'])) {
+    //     $fullnamearr = 'only enter alphabet';
+    // } elseif (empty($_POST['email'])) {
+    //     $emailarr = 'email should be not empty';
+    // } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    //     $emailarr = 'email invalid';
+    // } elseif (empty($_POST['pw'])) {
+    //     $pwarr = 'Password should be not empty';
+    // } elseif (!preg_match("/[A-Z]/", $_POST['pw'])) {
+    //     $pwarr = 'Password should contain at least one Capital Letter';
+    // } elseif (!preg_match("/[a-z]/", $_POST['pw'])) {
+    //     $pwarr = 'Password should contain at least one small Letter';
+    // } elseif (!preg_match("/\d/", $_POST['pw'])) {
+    //     $pwarr = 'Password should contain at least one digit';
+    // } elseif (!preg_match("/\W/", $_POST['pw'])) {
+    //     $pwarr = 'Password should contain at least one special character';
+    // } elseif (strlen($_POST['pw']) < 8) {
+    //     $pwarr = 'Password should be minimum 8 characters';
+    // } elseif (empty($_POST['cw'])) {
+    //     $cwarr = 'enter your confirm password';
+    // } elseif ($_POST['cw'] != $_POST['pw']) {
+    //     $cwarr = 'password and confirm password are not match';
+    // } elseif ($_FILES["file"]["size"] > 1000000) {
+        // $fileErr = 'image size should be less than 1 MB';
+    else {
 
         $fullname = $_POST['full_name'];
         $email = $_POST['email'];
         $city = $_POST['city'];
         $mobile = $_POST['mobile'];
+        $gender = $_POST['gender'];
         $pw = base64_encode($_POST['pw']);
         $cw = base64_encode($_POST['cw']);
 
         $target_dir = "./profile/";
 
         if (!file_exists($_FILES["file"]["tmp_name"])) {
-            $imagePath = $mydata['img'];
+            $imagepath = $mydata['img'];
         } else {
 
-            $imagePath = $target_dir . basename($_FILES['file']['name']);
+            $imagepath = $target_dir . basename($_FILES['file']['name']);
         }
 
-        $movefile = move_uploaded_file($_FILES['file']['tmp_name'], $imagePath);
+        $movefile = move_uploaded_file($_FILES['file']['tmp_name'], $imagepath);
 
-        $updateQuery = "UPDATE profile SET fullName = '$fullname',Email = '$email',City = '$city', Mobile = '$mobile', Password = '$pw',Confirm_Password = '$cw' ,img = '$imagePath' WHERE id=$id";
+        $updateQuery = "UPDATE profile SET fullName = '$fullname',Email = '$email',City = '$city', Mobile = '$mobile',Gender = '$gender' ,Password = '$pw',Confirm_Password = '$cw' ,img = '$imagepath' WHERE id=$id";
 
         if (mysqli_query($conn, $updateQuery)) {
             header('location:profile.php');
@@ -152,13 +153,13 @@ if (isset($_POST['admin_update'])) {
 
                             <div class="form-group col-md-6 p-2">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="pw"  value=<?php echo base64_decode($mydata['Password']);?>>
+                                <input type="text" class="form-control" name="pw"  value=<?php echo base64_decode($mydata['Password']);?>>
                                 <small class="red"><?php echo $pwarr; ?></small>
                             </div>
 
                             <div class="form-group col-md-6 p-2">
                                 <label for="cPassword">Confirm Password</label>
-                                <input type="password" class="form-control" name="cw"  value=<?php echo base64_decode($mydata['Confirm_Password']);?>>
+                                <input type="text" class="form-control" name="cw"  value=<?php echo base64_decode($mydata['Confirm_Password']);?>>
                                 <small class="red"><?php echo $cwarr; ?></small>
                             </div>
 

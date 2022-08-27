@@ -35,7 +35,7 @@ if (isset($_POST['adsubmit'])) {
             header('location:dashboard.php');
         } else {
 
-            echo "<script>alert('invalid password and email')</script>";
+            echo "<script>alert('invalid password')</script>";
         }
     }
 }

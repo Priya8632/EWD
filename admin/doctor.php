@@ -292,7 +292,7 @@ function FillComboBoxUpdate($query, $id)
         </div>
         <form action="code.php" method="POST">
           <div class="modal-body">
-            <input type="text" id="doctor_id" name="doctor_id">
+            <input type="text" id="delete_id" name="doctor_id">
             <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">

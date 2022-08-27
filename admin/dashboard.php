@@ -13,6 +13,18 @@ $sql =  "SELECT * FROM profile WHERE id ='$id'";
 $result1 = mysqli_query($conn, $sql);
 $mydata = mysqli_fetch_assoc($result1);
 
+$sql =  "SELECT COUNT(doctor_id) FROM doctor";
+$result = mysqli_query($conn, $sql);
+$mydata1 = mysqli_fetch_assoc($result);
+
+$sql =  "SELECT COUNT(patient_id) FROM patient";
+$result2 = mysqli_query($conn, $sql);
+$mydata2 = mysqli_fetch_assoc($result2);
+
+$sql =  "SELECT COUNT(appointment_id) FROM appointment";
+$result3 = mysqli_query($conn, $sql);
+$mydata3 = mysqli_fetch_assoc($result3);
+
 
 ?>
 <!DOCTYPE html>
@@ -65,7 +77,13 @@ $mydata = mysqli_fetch_assoc($result1);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Doctor</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">44</h1>
+
+                                <h1 class="text-xl font-semibold">
+                                    <?php foreach ($mydata1 as $key => $value) {
+                                        echo $value;
+                                    } ?>
+
+                                </h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-user-doctor me-2" style="font-size:xx-large;color:green;"></i>
@@ -75,7 +93,13 @@ $mydata = mysqli_fetch_assoc($result1);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Patient</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">89</h1>
+                                <h1 class="text-xl font-semibold">
+
+                                <?php foreach ($mydata2 as $key => $value) {
+                                        echo $value;
+                                    } ?>
+
+                                </h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-bed" style="font-size:xx-large;color:green;"></i>
@@ -85,7 +109,12 @@ $mydata = mysqli_fetch_assoc($result1);
                         <div class="space-y-2">
                             <p class="text-xs text-gray-400 uppercase">Appointment</p>
                             <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">21</h1>
+                                <h1 class="text-xl font-semibold">
+
+                                <?php foreach ($mydata3 as $key => $value) {
+                                        echo $value;
+                                    } ?>
+                                </h1>
                             </div>
                         </div>
                         <i class="fa-solid fa-clipboard-user me-2" style="font-size:xx-large;color:green;"></i>
