@@ -330,6 +330,7 @@ function FillComboBoxUpdate($query, $id)
         });
 
       }
+      
       $('.delete-btn').click(function(e) {
         e.preventDefault();
 

@@ -26,8 +26,8 @@ if (isset($_POST['adsubmit'])) {
         $sql = "SELECT * FROM profile WHERE Email='$email'";
         $query = mysqli_query($conn, $sql);
         $arr = mysqli_fetch_assoc($query);
-        $row = mysqli_num_rows($query);
 
+        
 
         if ($email == $arr['Email'] && base64_encode($password) == $arr['Password']) {
             $_SESSION['aid'] = $arr['id'];

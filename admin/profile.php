@@ -96,7 +96,7 @@ $mydata = mysqli_fetch_assoc($result1);
                             <tr>
                                 <th>Update</th>
                                 <td>
-                                    <a href="update.php"><i class="fa-solid fa-pen-to-square text-success" data-bs-toggle="modal" style="font-size:20px;margin-right:30px;"></i></a>
+                                    <a href="update.php"><i class="fa-solid fa-pen-to-square text-success" style="font-size:20px;margin-right:30px;"></i></a>
                                 </td>
                             </tr>
 
