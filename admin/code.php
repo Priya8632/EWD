@@ -139,7 +139,7 @@ if (isset($_REQUEST['appointment'])) {
             specialization_id int(10) references specialization(specialization_id),
             fees int(10),
             app_date date,
-            app_time time,
+            app_time  text,
             status text
         )";
 

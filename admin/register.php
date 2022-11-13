@@ -67,10 +67,10 @@ if (isset($_REQUEST['submit'])) {
     //     $imgarr = "image file muat be required";}
     else {
 
-        $email = $_POST['email'];
-        $email01 = "SELECT * FROM profile WHERE Email ='$email'";
-        $emailchk = mysqli_query($conn, $email01);
-        $result = mysqli_num_rows($emailchk);
+        // $email = $_POST['email'];
+        // $email01 = "SELECT * FROM profile WHERE Email ='$email'";
+        // $emailchk = mysqli_query($conn, $email01);
+        // $result = mysqli_num_rows($emailchk);
         $filesize = $_FILES['file']['size'];
 
         $fname = $_POST['fname'];
@@ -91,8 +91,7 @@ if (isset($_REQUEST['submit'])) {
         ('$fname','$email','$city','$pw','$cw','$mobile','$gender','$imagepath')";
 
         if (mysqli_query($conn, $insert)) {
-            // $_SESSION['status'] = "registered successfully";
-            // $_SESSION['status_code'] = "success"; 
+       
             header('location:admin_login.php');
         }
     }
@@ -117,7 +116,6 @@ if (isset($_REQUEST['submit'])) {
     <style>
         h2 {
             color: rgb(59, 178, 82);
-            /* text-align: center; */
         }
 
         body {

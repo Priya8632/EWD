@@ -41,7 +41,7 @@ $mydata3 = mysqli_fetch_assoc($result3);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Better Code</title>
+    <title>Dashboard</title>
     <style>
         a {
             text-decoration: none;
@@ -120,15 +120,6 @@ $mydata3 = mysqli_fetch_assoc($result3);
                         <i class="fa-solid fa-clipboard-user me-2" style="font-size:xx-large;color:green;"></i>
                     </div>
 
-                    <!-- <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
-                        <div class="space-y-2">
-                            <p class="text-xs text-gray-400 uppercase">Users</p>
-                            <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-semibold">101</h1>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-user me-2" style="font-size:xx-large;color:green;"></i>
-                    </div> -->
                 </div>
             </section>
         </main>

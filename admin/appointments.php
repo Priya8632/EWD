@@ -213,7 +213,7 @@ function FillComboBoxUpdate($query, $id)
 
                 <div class="form-group p-2">
                   <label>Time</label>
-                  <input type="text" name="app_time" class="form-control" placeholder="appointment_time" value="">
+                  <input type="time" name="app_time" class="form-control" placeholder="appointment_time" value="">
                 </div>
 
                 <div class="form-group p-2">
