@@ -67,7 +67,7 @@ $mydata3 = mysqli_fetch_assoc($result3);
                 <div class="flex justify-between items-center border-b border-gray-300">
                     <h1 class="text-2xl font-semibold pt-2">Dashboard</h1>
                     <a class="nav-link second-text fw-bold d-flex p-3" style="color:black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../img/admin.png" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['Email']; ?>
+                        <img src="<?php echo $mydata['img']; ?>" alt="" class="rounded-circle mr-3" height="16px" width="40px"><?php echo $mydata['Email']; ?>
                     </a>
                 </div>
 
@@ -122,8 +122,14 @@ $mydata3 = mysqli_fetch_assoc($result3);
 
                 </div>
             </section>
+
+            <footer class="text-center bg-success text-light w-100 align-middle p-2" style="margin-top:410px;">
+                    Copyright © HealthCare Department Website
+            </footer>
         </main>
+        
     </div>
+    
 </body>
 
 </html>

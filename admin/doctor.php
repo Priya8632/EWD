@@ -149,6 +149,8 @@ function FillComboBoxUpdate($query, $id)
         </div>
 
       </section>
+      <?php include 'footer.php' ?>
+
     </main>
   </div>
 
@@ -292,7 +294,7 @@ function FillComboBoxUpdate($query, $id)
         </div>
         <form action="code.php" method="POST">
           <div class="modal-body">
-            <input type="text" id="delete_id" name="doctor_id">
+            <input type="hidden" id="delete_id" name="doctorid">
             <h4>Are you sure,you want to delete this data?</h4>
           </div>
           <div class="modal-footer">
@@ -353,14 +355,14 @@ function FillComboBoxUpdate($query, $id)
         e.preventDefault();
 
         var did = $(this).closest('tr').find('.doctorid').text();
-        $('#doctor_id').val(did);
+        $('#delete_id').val(did);
         $('#delete').modal('show');
 
       });
     });
   </script>
   <!-- script section -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>

@@ -67,10 +67,6 @@ if (isset($_REQUEST['submit'])) {
     //     $imgarr = "image file muat be required";}
     else {
 
-        // $email = $_POST['email'];
-        // $email01 = "SELECT * FROM profile WHERE Email ='$email'";
-        // $emailchk = mysqli_query($conn, $email01);
-        // $result = mysqli_num_rows($emailchk);
         $filesize = $_FILES['file']['size'];
 
         $fname = $_POST['fname'];
@@ -110,8 +106,6 @@ if (isset($_REQUEST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         h2 {
@@ -238,7 +232,7 @@ if (isset($_REQUEST['submit'])) {
                 </div>
 
                 <div class="form-group">
-                    <p class="login-register-text" style="text-align:center;">Alredy have an account?<a href="admin_login.php">Login here</a></p>
+                    <p class="login-register-text" style="text-align:center;">Alredy have an account?<a href="admin_login.php" style="">Login here</a></p>
                     <button type="submit" class="btn btn-success btn-block" name="submit">SUBMIT</button>
                 </div>
 

@@ -26,16 +26,22 @@ if (isset($_POST['adsubmit'])) {
         $sql = "SELECT * FROM profile WHERE Email='$email'";
         $query = mysqli_query($conn, $sql);
         $arr = mysqli_fetch_assoc($query);
+        $chkemail = mysqli_num_rows($query);
 
-        
+        if($chkemail)
+        {
 
-        if ($email == $arr['Email'] && base64_encode($password) == $arr['Password']) {
-            $_SESSION['aid'] = $arr['id'];
-            setcookie('aid', $arr['id'], time() + 60 * 10);
-            header('location:dashboard.php');
-        } else {
+            if (base64_encode($password) == $arr['Password']) {
+                $_SESSION['aid'] = $arr['id'];
+                setcookie('aid', $arr['id'], time() + 60 * 10);
+                header('location:dashboard.php');
+            } else {
 
-            echo "<script>alert('invalid password')</script>";
+                $passarr = "password invalid";
+            }
+        }else{
+
+            $emailarr =  "username is not exist";
         }
     }
 }
@@ -50,12 +56,10 @@ if (isset($_POST['adsubmit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>admin Login</title>
     <script src="../js/jquery.js"></script>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -142,13 +146,12 @@ if (isset($_POST['adsubmit'])) {
             </div>
 
             <div class="form-group">
-                <p class="login-register-text"><a href="register.php">Don't Have an Account</a></p>
+                <p class="login-register-text"><a href="register.php" style="text-decoration:none;">Don't Have an Account</a></p>
                 <button type="submit" class="btn btn-success btn-block" name="adsubmit">SUBMIT</button>
             </div>
 
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

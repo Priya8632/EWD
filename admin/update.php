@@ -33,14 +33,6 @@ if (isset($_POST['admin_update'])) {
     //     $emailarr = 'email invalid';
     // } elseif (empty($_POST['pw'])) {
     //     $pwarr = 'Password should be not empty';
-    // } elseif (!preg_match("/[A-Z]/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one Capital Letter';
-    // } elseif (!preg_match("/[a-z]/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one small Letter';
-    // } elseif (!preg_match("/\d/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one digit';
-    // } elseif (!preg_match("/\W/", $_POST['pw'])) {
-    //     $pwarr = 'Password should contain at least one special character';
     // } elseif (strlen($_POST['pw']) < 8) {
     //     $pwarr = 'Password should be minimum 8 characters';
     // } elseif (empty($_POST['cw'])) {
@@ -195,7 +187,8 @@ if (isset($_POST['admin_update'])) {
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                            <a href="profile.php" class="btn btn-secondary">Close</a>
+                            <!-- <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">close</button> -->
                             <button type="submit" name="admin_update" class="btn btn-success" data-bs-dismiss="modal">update</button>
                         </div>
                     </form>

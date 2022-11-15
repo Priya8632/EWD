@@ -182,7 +182,7 @@ if (isset($_POST['specializationdelete'])) {
 
 // delete doctor data
 if (isset($_POST['doctordelete'])) {
-    $did = $_POST['doctor_id'];
+    $did = $_POST['doctorid'];
     $query = "DELETE FROM doctor WHERE doctor_id = $did";
     $result = mysqli_query($conn, $query);
     if ($result) {
