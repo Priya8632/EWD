@@ -250,12 +250,12 @@ function FillComboBoxUpdate($query, $id)
                   <label for="">Gender
                     <div class="form-check">
                       <label for="" class="form-check-label">
-                        <input type="radio" value="male" class="form-check-input" name="gender" <?php if ($mydata['Gender'] == 'male') { ?> checked <?php } ?>> Male
+                        <input type="radio" value="male" class="form-check-input" id="editgender" name="gender" <?php if ($mydata['Gender'] == 'male') { ?> checked <?php } ?>> Male
                       </label>
                     </div>
                     <div class="form-check">
                       <label for="" class="form-check-label">
-                        <input type="radio" value="female" class="form-check-input" name="gender" <?php if ($mydata['Gender'] == 'female') { ?> checked <?php } ?>> Female
+                        <input type="radio" value="female" class="form-check-input" id="editgender"  name="gender" <?php if ($mydata['Gender'] == 'female') { ?> checked <?php } ?>> Female
                       </label>
                     </div>
                   </label>
@@ -340,12 +340,14 @@ function FillComboBoxUpdate($query, $id)
         var doctor_name = $('#' + did).children('td[data-target=doctor_name]').text();
         var email = $('#' + did).children('td[data-target=email]').text();
         var mobile = $('#' + did).children('td[data-target=mobile]').text();
+        var gender = $('#' + did).children('td[data-target=gender]').text();
         var specialization = $('#' + did).children('td[data-target=specialization]').text();
 
         $('#doctor_id').val(did);
         $('#editdoctorname').val(doctor_name);
         $('#editemail').val(email);
         $('#editmobile').val(mobile);
+        $('#editgender').val(gender);
         $('#editspecialization').val(specialization);
         $('#edit').modal('toggle');
 

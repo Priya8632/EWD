@@ -216,13 +216,15 @@ if (isset($_POST['appdelete'])) {
 
 // doctor update
 if (isset($_POST['doctor_update'])) {
+    
     $id = $_POST['doctor_id'];
     $doctor_name = $_POST['doctor_name'];
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
+    $gender = $_POST['gender'];
     $specialization = $_POST['specialization'];
 
-    $update = "UPDATE doctor SET doctor_name='$doctor_name',email='$email',mobile='$mobile', specialization='$specialization' where doctor_id=$id";
+    $update = "UPDATE doctor SET doctor_name='$doctor_name',email='$email',mobile='$mobile',gender='$gender', specialization='$specialization' where doctor_id=$id";
     $chk = mysqli_query($conn, $update);
     if ($chk) {
 
